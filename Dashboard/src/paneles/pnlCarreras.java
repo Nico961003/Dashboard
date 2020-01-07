@@ -144,7 +144,7 @@ public class pnlCarreras extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Clave", "Nombre carrera", "NRovoe", "Otro"
+                "Clave", "Nombre carrera", "NoRvoe", "Otro"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

@@ -121,7 +121,7 @@
               <Table columnCount="4" rowCount="14">
                 <Column editable="true" title="Clave" type="java.lang.Object"/>
                 <Column editable="true" title="Nombre carrera" type="java.lang.Object"/>
-                <Column editable="true" title="NRovoe" type="java.lang.Object"/>
+                <Column editable="true" title="NoRvoe" type="java.lang.Object"/>
                 <Column editable="true" title="Otro" type="java.lang.Object"/>
               </Table>
             </Property>
