@@ -125,7 +125,7 @@ public class Principal extends javax.swing.JFrame {
         tres.setBackground(new java.awt.Color(239, 238, 244));
         tres.setForeground(new java.awt.Color(128, 128, 131));
         tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chat.png"))); // NOI18N
-        tres.setText("Chat");
+        tres.setText("Alumnos");
         tres.setColorHover(new java.awt.Color(204, 204, 204));
         tres.setColorNormal(new java.awt.Color(239, 238, 244));
         tres.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -292,7 +292,7 @@ public class Principal extends javax.swing.JFrame {
         cuatro.setBackground(new java.awt.Color(239, 238, 244));
         cuatro.setForeground(new java.awt.Color(128, 128, 131));
         cuatro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/feeedback.png"))); // NOI18N
-        cuatro.setText("FeedBack");
+        cuatro.setText("Títulos");
         cuatro.setColorHover(new java.awt.Color(204, 204, 204));
         cuatro.setColorNormal(new java.awt.Color(239, 238, 244));
         cuatro.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -555,7 +555,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_unoMousePressed
 
     private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
-        new CambiaPanel(pnlPrincipal, new paneles.pnlChat());
+        new CambiaPanel(pnlPrincipal, new paneles.pnlProfesionista());
         if(this.tres.isSelected()){
             this.tres.setColorNormal(new Color(204,204,204));
             this.tres.setColorHover(new Color(204,204,204));
@@ -887,7 +887,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cuatroMousePressed
 
     private void cuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuatroActionPerformed
-        new CambiaPanel(pnlPrincipal, new paneles.pnlFeeBack());
+        new CambiaPanel(pnlPrincipal, new paneles.pnlTitulos());
         if(this.cuatro.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
