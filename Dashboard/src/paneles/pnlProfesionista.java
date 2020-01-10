@@ -43,7 +43,13 @@ public class pnlProfesionista extends javax.swing.JPanel {
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         btnBuscar.setEnabled(false);
         btnModificar.setEnabled(false);
-
+        btnBorrar.setEnabled(false);  
+        
+        tablaProfesionista();
+    }
+    
+    
+    public void tablaProfesionista(){
         try {
             int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
             for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
@@ -66,7 +72,10 @@ public class pnlProfesionista extends javax.swing.JPanel {
             System.out.println("Error: " + ex);
         }
     }
-
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,6 +101,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         btnGuardar = new rscomponentshade.RSButtonShade();
         btnLimpia = new rscomponentshade.RSButtonShade();
         jButton1 = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
         txtBuscar = new rscomponentshade.RSTextFieldShade();
@@ -125,6 +135,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(243, 242, 242));
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel2MouseMoved(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
@@ -199,6 +214,13 @@ public class pnlProfesionista extends javax.swing.JPanel {
             }
         });
 
+        btnBorrar.setText("Borra");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -212,6 +234,8 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBorrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +293,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
                     .addComponent(txtapellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +309,9 @@ public class pnlProfesionista extends javax.swing.JPanel {
                             .addComponent(btnLimpia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(btnBorrar))))
                 .addContainerGap())
         );
 
@@ -389,7 +414,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -437,6 +462,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         txtCURP.setText(String.valueOf(jTable1.getValueAt(seleccionada, 4)));
         txtCorreo.setText(String.valueOf(jTable1.getValueAt(seleccionada, 5)));
         btnModificar.setEnabled(true);
+        btnBorrar.setEnabled(true);
         btnGuardar.setEnabled(false);
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -458,6 +484,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         txtCURP.setText("");
         txtCorreo.setText("");
         btnModificar.setEnabled(false);
+        btnBorrar.setEnabled(false);
         btnGuardar.setEnabled(true);
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
@@ -513,7 +540,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
             }
 
         } catch (Exception e) {
@@ -527,10 +553,34 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 }
             }
         }
+        JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
+        tablaProfesionista();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+     try {
+            System.out.println("eliminar");
+            String salida = conector.eliminar("Delete from Profesionista where Matricula ='"+ txtMatricula.getText() +"'");
+            System.out.println(salida);
+            } 
+        catch (Exception e) {
+            System.out.println(e);
+        }
+     JOptionPane.showMessageDialog(null, "Registro eliminado :( ");
+     tablaProfesionista();
+     btnBorrar.setEnabled(false);  
+     btnModificar.setEnabled(false);  
+     btnGuardar.setEnabled(true);
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void jPanel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseMoved
+    
+    
+    }//GEN-LAST:event_jPanel2MouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
     private rscomponentshade.RSButtonShade btnBuscar;
     private rscomponentshade.RSButtonShade btnGuardar;
     private rscomponentshade.RSButtonShade btnLimpia;
@@ -580,6 +630,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                     .getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
+        tablaProfesionista();
     }
 
 }
