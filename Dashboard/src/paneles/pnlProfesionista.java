@@ -7,6 +7,8 @@ package paneles;
 
 import java.sql.SQLException;
 import CodeHelpers.ConexionesDB;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
@@ -39,13 +43,28 @@ public class pnlProfesionista extends javax.swing.JPanel {
     public static final String SEPARATOR = ",";
 
     public pnlProfesionista() {
+        
         initComponents();
+        
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         btnBuscar.setEnabled(false);
         btnModificar.setEnabled(false);
         btnBorrar.setEnabled(false);  
         
         tablaProfesionista();
+        
+        txtMatricula.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0')|| (caracter > '9'))&& (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                } 
+            }
+        });   
+
     }
     
     
@@ -135,11 +154,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jPanel2MouseMoved(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
@@ -190,6 +204,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
         btnGuardar.setBgHover(new java.awt.Color(153, 255, 153));
         btnGuardar.setBgShadeHover(new java.awt.Color(243, 242, 242));
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseMoved(evt);
+            }
+        });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -474,18 +493,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         capturarDatos();
         regitroBaseDatos();
+        limpiar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiaActionPerformed
-        txtMatricula.setText("");
-        txtNombre.setText("");
-        txtapellidoPaterno.setText("");
-        txtapellidoMaterno.setText("");
-        txtCURP.setText("");
-        txtCorreo.setText("");
-        btnModificar.setEnabled(false);
-        btnBorrar.setEnabled(false);
-        btnGuardar.setEnabled(true);
+       limpiar();
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -571,12 +583,28 @@ public class pnlProfesionista extends javax.swing.JPanel {
      btnBorrar.setEnabled(false);  
      btnModificar.setEnabled(false);  
      btnGuardar.setEnabled(true);
+     limpiar();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
-    private void jPanel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseMoved
-    
-    
-    }//GEN-LAST:event_jPanel2MouseMoved
+    private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
+     // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+        // El email a validar
+        String email = txtCorreo.getText();
+
+        Matcher mather = pattern.matcher(email);
+
+        if (mather.find() == true) {
+            btnGuardar.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "El email ingresado es inválido\nCorrija y vuelva a intentar");
+            txtCorreo.setText("");
+            btnGuardar.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnGuardarMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -612,10 +640,10 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
     public void capturarDatos() {
         Matricula = txtMatricula.getText();
-        Nombre = txtNombre.getText();
-        apellidoPaterno = txtapellidoPaterno.getText();
-        apellidoMaterno = txtapellidoMaterno.getText();
-        CURP = txtCURP.getText();
+        Nombre = txtNombre.getText().toUpperCase();
+        apellidoPaterno = txtapellidoPaterno.getText().toUpperCase();
+        apellidoMaterno = txtapellidoMaterno.getText().toUpperCase();
+        CURP = txtCURP.getText().toUpperCase();
         correo = txtCorreo.getText();
     }
 
@@ -631,6 +659,18 @@ public class pnlProfesionista extends javax.swing.JPanel {
         }
         JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
         tablaProfesionista();
+    }
+    
+    public void limpiar(){
+        txtMatricula.setText("");
+        txtNombre.setText("");
+        txtapellidoPaterno.setText("");
+        txtapellidoMaterno.setText("");
+        txtCURP.setText("");
+        txtCorreo.setText("");
+        btnModificar.setEnabled(false);
+        btnBorrar.setEnabled(false);
+        btnGuardar.setEnabled(true);
     }
 
 }
