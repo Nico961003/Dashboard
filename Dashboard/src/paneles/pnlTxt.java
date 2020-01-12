@@ -1,15 +1,16 @@
-
-
 package paneles;
 
 import java.sql.SQLException;
 import CodeHelpers.ConexionesDB;
+import java.awt.Desktop;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -29,25 +30,61 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableModel;
 
 public class pnlTxt extends javax.swing.JPanel {
 
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
     DefaultTableModel modeloTabla;
-    
-    public pnlTxt() {
+    DefaultTableModel modeloTabla2;
 
+    String curpResponsable = "";
+    String idCargo = "";
+    String cargo = "";
+    String abrTitulo = "";
+
+    String clave = "";
+    String nombreCarrera = "";
+    String numeroRvoe = "";
+    String clave_autorizacion = "";
+    String autorizacion_reconocimiento = "";
+
+    /**
+     * *****************************************
+     */
+    String nombre = "", aPaterno = "", aMaterno = "";
+    String matricula = "", correo = "", CURP = "";
+    String fechaCarreraInicio = "", fechaCarreraTermino = "";
+
+    String fechaAntInicio = "", institucionProcedencia = "";
+    String fechaAntTermino = "", tipodeEstudio = "", eFederativa = "";
+    String idModalidadTitulacion = "", idFundamentoLegalServicioSocial = "";
+    String idEntidadFederativa = "", noCedula = "", noRvoe = "";
+
+    /**
+     * *****************************************
+     */
+    String fechaExpedicion = "", modalidadTitulacion = "", fundamentoSS = "";
+    String fechaExamen = "", folioControl = "";
+    String sSocial = "";
+
+    String idTipoEstudioAntecedente = "";
+
+    public pnlTxt() {
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
+        tablaTxtA();
+    }
 
+    public void tablaTxtA() {
         try {
-            int filas = jTable1.getRowCount(); 
+            int filas = jTable1.getRowCount();
             for (int i = 1; i <= filas; i++) {
-                modeloTabla.removeRow(0); 
+                modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("SELECT matricula, nombre, aPaterno, aMaterno FROM txt");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT matricula, nombre, aPaterno, aMaterno FROM txt where estatus='A'");//establecimiento de sentencia aejecutar
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +114,7 @@ public class pnlTxt extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         rSButtonShade1 = new rscomponentshade.RSButtonShade();
         rSButtonShade2 = new rscomponentshade.RSButtonShade();
-        rSButtonShade3 = new rscomponentshade.RSButtonShade();
+        btnGenerar = new rscomponentshade.RSButtonShade();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
         jLabel7 = new javax.swing.JLabel();
@@ -129,29 +166,48 @@ public class pnlTxt extends javax.swing.JPanel {
 
         rSButtonShade2.setBackground(new java.awt.Color(124, 20, 52));
 
-        rSButtonShade3.setBackground(new java.awt.Color(124, 20, 52));
+        btnGenerar.setBackground(new java.awt.Color(124, 20, 52));
+        btnGenerar.setText("Generar");
+        btnGenerar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseMoved(evt);
+            }
+        });
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "e-mail"
+                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "Selecciona"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable1.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
         jTable1.setColorFilasBackgound2(new java.awt.Color(255, 204, 204));
         jTable1.setColorFilasForeground1(new java.awt.Color(124, 20, 52));
@@ -161,18 +217,13 @@ public class pnlTxt extends javax.swing.JPanel {
         jTable1.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jTable1.setSelectionBackground(new java.awt.Color(124, 20, 52));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,7 +244,7 @@ public class pnlTxt extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rSButtonShade2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rSButtonShade3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -214,10 +265,10 @@ public class pnlTxt extends javax.swing.JPanel {
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                .addGap(66, 66, 66)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rSButtonShade2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShade3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGenerar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSButtonShade1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -246,7 +297,7 @@ public class pnlTxt extends javax.swing.JPanel {
                 .addGap(0, 472, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 11, Short.MAX_VALUE)
+                    .addGap(0, 26, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -260,7 +311,7 @@ public class pnlTxt extends javax.swing.JPanel {
             }
             try {
                 resultadoConsulta = conector.consulta("select * from Profesionista where CURP like '%" + Buscar + "%' or Nombre like '%" + Buscar + "%' or apellidoPaterno like '%"
-                    + Buscar + "%' or apellidoMaterno like '%" + Buscar + "%' or Matricula like '%" + Buscar + "%' ");
+                        + Buscar + "%' or apellidoMaterno like '%" + Buscar + "%' or Matricula like '%" + Buscar + "%' ");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -285,23 +336,144 @@ public class pnlTxt extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        try {
+            TableModel model = jTable1.getModel();
+            String[] seleccionado = new String[100];
 
-        int seleccionada = jTable1.rowAtPoint((evt.getPoint()));
-        txtMatricula.setText(String.valueOf(jTable1.getValueAt(seleccionada, 0)));
-        txtNombre.setText(String.valueOf(jTable1.getValueAt(seleccionada, 1)));
-        txtapellidoPaterno.setText(String.valueOf(jTable1.getValueAt(seleccionada, 2)));
-        txtapellidoMaterno.setText(String.valueOf(jTable1.getValueAt(seleccionada, 3)));
-        txtCURP.setText(String.valueOf(jTable1.getValueAt(seleccionada, 4)));
-        txtCorreo.setText(String.valueOf(jTable1.getValueAt(seleccionada, 5)));
-        btnModificar.setEnabled(true);
-        btnBorrar.setEnabled(true);
-        btnGuardar.setEnabled(false);
-    }//GEN-LAST:event_jTable1MouseClicked
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                //System.out.println("prueba " + ((Boolean) model.getValueAt(i, 4) == true));
+                //Si la columna 4 está true añadimos el ID
+                if ((Boolean) model.getValueAt(i, 4) == true) {
+                    seleccionado[i] = ((String) model.getValueAt(i, 0));
+                }
+
+                System.out.println(seleccionado[i]);
+
+                if (seleccionado[i] != null || seleccionado[i] != "") {
+
+                    try {
+                        try {
+                            resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        while (resultadoConsulta.next()) {
+                            folioControl = resultadoConsulta.getString("folioControl");
+                            fechaExpedicion = resultadoConsulta.getString("fechaExpedicion");
+                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                            modalidadTitulacion = resultadoConsulta.getString("modalidadTitulacion");
+                            fechaExamen = resultadoConsulta.getString("fechaExamen");
+                            matricula = resultadoConsulta.getString("matricula");
+                            nombre = resultadoConsulta.getString("nombre");
+                            aPaterno = resultadoConsulta.getString("aPaterno");
+                            aMaterno = resultadoConsulta.getString("aMaterno");
+                            correo = resultadoConsulta.getString("correo");
+                            CURP = resultadoConsulta.getString("CURP");
+                            sSocial = resultadoConsulta.getString("sSocial");
+                            idFundamentoLegalServicioSocial = resultadoConsulta.getString("idFundamentoLegalServicioSocial");
+                            fundamentoSS = resultadoConsulta.getString("fundamentoSS");
+                            clave = resultadoConsulta.getString("clave");
+                            nombreCarrera = resultadoConsulta.getString("nombreCarrera");
+                            numeroRvoe = resultadoConsulta.getString("numeroRvoe");
+                            clave_autorizacion = resultadoConsulta.getString("clave_autorizacion");
+                            autorizacion_reconocimiento = resultadoConsulta.getString("autorizacion_reconocimiento");
+                            institucionProcedencia = resultadoConsulta.getString("institucionProcedencia");
+                            idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
+                            eFederativa = resultadoConsulta.getString("eFederativa");
+                            fechaAntInicio = resultadoConsulta.getString("fechaAntInicio");
+                            fechaAntTermino = resultadoConsulta.getString("fechaAntTermino");
+                            idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
+                            tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
+                            noCedula = resultadoConsulta.getString("noCedula");
+                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    try {
+                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
+                        String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
+                                + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
+                                + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "||" + CURP + "|"
+                                + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
+                                + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
+                                + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
+                                + idEntidadFederativa + "|" + eFederativa + "|" + fechaCarreraInicio + "|" + fechaCarreraTermino + "|" + noCedula + "|||";
+                        /*checar las fechas!!!!!*/
+                        System.out.println(contenido);
+
+                        File file = new File(ruta);
+                        // Si el archivo no existe es creado
+                        if (!file.exists()) {
+                            file.createNewFile();
+                            FileWriter fw = new FileWriter(file);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            bw.write(contenido);
+                            bw.close();
+                            /* temporal tm = new temporal();
+                            tm.setTexto(contenido.trim());
+                            tm.setMatricula(matricula.trim());
+                            final MECSignerClient client = new MECSignerClient();
+                            client.setVisible(true);*/
+                        } else if (file.exists()) {
+                            int reply = JOptionPane.showConfirmDialog(null, "El archivo ya existe\n desea sobrescribir?", "TituloElectronico_" + seleccionado[i] + ".txt", JOptionPane.YES_NO_OPTION);
+                            if (reply == JOptionPane.YES_OPTION) {
+                                FileWriter fw = new FileWriter(file);
+                                BufferedWriter bw = new BufferedWriter(fw);
+                                bw.write(contenido);
+                                bw.close();
+                                /* temporal tm = new temporal();
+                                tm.setTexto(contenido.trim());
+                                tm.setMatricula(matricula.trim());
+                                final MECSignerClient client = new MECSignerClient();
+                                client.setVisible(true);*/
+                            } else if (reply == JOptionPane.NO_OPTION) {
+                                //System.exit(0);
+                                //jTabbedPane1.setSelectedComponent(jPanel5);
+                                //txtMatricula.requestFocus();
+                            }
+                        }
+
+                        try {
+                            String cadena = "Update txt set estatus = 'B' where matricula='" + seleccionado[i] + "'";
+                            //System.out.println(cadena);
+                            String salida = conector.registrar(cadena);
+                            System.out.println(salida);
+
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
+            abrirarchivo("/home/genaro/Documentos/");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        tablaTxtA();
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
+        TableModel model = jTable1.getModel();
+        String[] seleccionado = new String[100];
+
+        if (jTable1.getRowCount() == 0) {
+            btnGenerar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Sin registros por generar");
+        }
+    }//GEN-LAST:event_btnGenerarMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rscomponentshade.RSButtonShade btnBuscar;
+    private rscomponentshade.RSButtonShade btnGenerar;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -311,8 +483,14 @@ public class pnlTxt extends javax.swing.JPanel {
     private rojerusan.RSTableMetro jTable1;
     private rscomponentshade.RSButtonShade rSButtonShade1;
     private rscomponentshade.RSButtonShade rSButtonShade2;
-    private rscomponentshade.RSButtonShade rSButtonShade3;
     private rscomponentshade.RSTextFieldShade txtBuscar;
     // End of variables declaration//GEN-END:variables
-
+    public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
 }

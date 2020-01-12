@@ -210,29 +210,7 @@ public class pnlCancelaciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-        String Buscar = txtBuscar.getText();
-        try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
-            }
-            try {
-                resultadoConsulta = conector.consulta("select * from Profesionista where CURP like '%" + Buscar + "%' or Nombre like '%" + Buscar + "%' or apellidoPaterno like '%"
-                    + Buscar + "%' or apellidoMaterno like '%" + Buscar + "%' or Matricula like '%" + Buscar + "%' ");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Object[] valores = new Object[6];//Crea un arreglo de objetos un objeto puede
-            while (resultadoConsulta.next()) {
-                for (int i = 0; i < 6; i++) {//El numero del for ebe ser igual al de la
-                    valores[i] = resultadoConsulta.getObject(i + 1); //
-                }
-                modeloTabla.addRow(valores);//añade una nueva fila con los datos que
-                //esten en cada psocion del arreglo de objetos
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
+
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -245,16 +223,7 @@ public class pnlCancelaciones extends javax.swing.JPanel {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        int seleccionada = jTable1.rowAtPoint((evt.getPoint()));
-        txtMatricula.setText(String.valueOf(jTable1.getValueAt(seleccionada, 0)));
-        txtNombre.setText(String.valueOf(jTable1.getValueAt(seleccionada, 1)));
-        txtapellidoPaterno.setText(String.valueOf(jTable1.getValueAt(seleccionada, 2)));
-        txtapellidoMaterno.setText(String.valueOf(jTable1.getValueAt(seleccionada, 3)));
-        txtCURP.setText(String.valueOf(jTable1.getValueAt(seleccionada, 4)));
-        txtCorreo.setText(String.valueOf(jTable1.getValueAt(seleccionada, 5)));
-        btnModificar.setEnabled(true);
-        btnBorrar.setEnabled(true);
-        btnGuardar.setEnabled(false);
+ 
     }//GEN-LAST:event_jTable1MouseClicked
 
 
