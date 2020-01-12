@@ -303,9 +303,9 @@
             <Component class="rsbuttom.RSButtonMetro" name="ocho">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/web.png"/>
+                  <Image iconType="3" name="/img/cancelaciones.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Web"/>
+                <Property name="text" type="java.lang.String" value="Cancelaciones"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="34" green="14" red="7c" type="rgb"/>
                 </Property>
@@ -330,9 +330,9 @@
             <Component class="rsbuttom.RSButtonMetro" name="siete">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/ios.png"/>
+                  <Image iconType="3" name="/img/xml.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="IOS"/>
+                <Property name="text" type="java.lang.String" value="Archivos XML"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="34" green="14" red="7c" type="rgb"/>
                 </Property>
@@ -357,9 +357,9 @@
             <Component class="rsbuttom.RSButtonMetro" name="seis">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/android.png"/>
+                  <Image iconType="3" name="/img/txt.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Android"/>
+                <Property name="text" type="java.lang.String" value="Archivos TXT"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="34" green="14" red="7c" type="rgb"/>
                 </Property>
