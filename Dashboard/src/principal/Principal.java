@@ -139,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Carrera_1.png"))); // NOI18N
+        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrera.png"))); // NOI18N
         dos.setText("Carreras");
         dos.setColorHover(new java.awt.Color(124, 20, 52));
         dos.setColorNormal(new java.awt.Color(245, 245, 245));
@@ -435,7 +435,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout pnlCentroLayout = new javax.swing.GroupLayout(pnlCentro);

@@ -326,6 +326,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         txtCorreo1.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtCorreo1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtCorreo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCorreo1.setPlaceholder("Folio de Título");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -398,6 +399,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         txtCURP.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtCURP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtCURP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCURP.setPlaceholder("CURP");
         txtCURP.setSelectionColor(new java.awt.Color(0, 0, 0));
 
@@ -414,6 +416,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         txtCorreo.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtCorreo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtCorreo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCorreo.setPlaceholder("Correo");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
