@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package paneles;
 
 import java.sql.SQLException;
 import CodeHelpers.ConexionesDB;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,61 +19,73 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author RojeruSan
- */
 public class pnlCarreras extends javax.swing.JPanel {
 
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
     DefaultTableModel modeloTabla;
 
+    String cveCarrera = "";
+    String nombreCarrera = "";
+    String noRvoe = "";
+
     public pnlCarreras() {
-        //  try {
         initComponents();
         //this.setLocationRelativeTo(null);
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         btnBuscar.setEnabled(false);
-        
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        tablaCarreras();
+
+        txtClavearrera.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                }
+            }
+        });
+
+        txtNoRvoe.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                }
+            }
+        });
+
+    }
+
+    public void tablaCarreras() {
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM Carreras");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT * FROM Carreras");
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[3];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[3];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 3; i++) {//El numero del for ebe ser igual al de la
-                    valores[i] = resultadoConsulta.getObject(i + 1); //
+                for (int i = 0; i < 3; i++) {
+                    valores[i] = resultadoConsulta.getObject(i + 1);
                 }
-                modeloTabla.addRow(valores);//añade una nueva fila con los datos que
-                //esten en cada psocion del arreglo de objetos
+                modeloTabla.addRow(valores);
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
         }
-        /*   DefaultTableModel modelo = new DefaultTableModel();
-            ResultSet rs = conector.consulta("select * from Carreras");
-            modelo.setColumnIdentifiers(new Object[]{"Nombres", "Apellidos"});
-            try {
-                while (rs.next()) {
-                    // añade los resultado a al modelo de tabla
-                    modelo.addRow(new Object[]{rs.getString("Carrera"), rs.getString("noRvoe")});
-                }
-                // asigna el modelo a la tabla
-                jTable1.setModel(modelo);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null,ex);
-        }*/
     }
 
     /**
@@ -96,21 +105,13 @@ public class pnlCarreras extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        DateExpedicion = new com.toedter.calendar.JDateChooser();
-        jLabel16 = new javax.swing.JLabel();
-        DateExamenP = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
-        CombomodalidadTit = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        txtCURP = new rscomponentshade.RSTextFieldShade();
-        txtCorreo = new rscomponentshade.RSTextFieldShade();
-        jLabel15 = new javax.swing.JLabel();
-        txtCURP1 = new rscomponentshade.RSTextFieldShade();
-        rSButtonShade3 = new rscomponentshade.RSButtonShade();
-        rSButtonShade2 = new rscomponentshade.RSButtonShade();
-        rSButtonShade1 = new rscomponentshade.RSButtonShade();
-        jLabel17 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        txtNombreCarrera = new rscomponentshade.RSTextFieldShade();
+        txtNoRvoe = new rscomponentshade.RSTextFieldShade();
+        txtClavearrera = new rscomponentshade.RSTextFieldShade();
+        btnBorrar = new rscomponentshade.RSButtonShade();
+        btnLimpiar = new rscomponentshade.RSButtonShade();
+        btnGuardar = new rscomponentshade.RSButtonShade();
         btnModificar = new rscomponentshade.RSButtonShade();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -145,29 +146,34 @@ public class pnlCarreras extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Clave de Carrera", "Nombre carrera", "NoRvoe", "Autorizacion / Reconocimiento", "Status"
+                "Clave de Carrera", "Nombre carrera", "NoRvoe"
             }
         ));
         jTable1.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
         jTable1.setColorFilasForeground1(new java.awt.Color(124, 20, 52));
         jTable1.setColorFilasForeground2(new java.awt.Color(124, 20, 52));
         jTable1.setColorSelBackgound(new java.awt.Color(124, 20, 52));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.setBackground(new java.awt.Color(243, 242, 242));
@@ -179,64 +185,49 @@ public class pnlCarreras extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nombre de Carrera:");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setText("Fecha Inicio Ciclo Escolar:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Autorización Reconocimiento:");
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Numéro de RVOE:");
 
-        txtCURP.setBgShadeHover(new java.awt.Color(0, 0, 0));
-        txtCURP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtCURP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtCURP.setPlaceholder("Nombre de Carrera");
-        txtCURP.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtNombreCarrera.setBgShadeHover(new java.awt.Color(0, 0, 0));
+        txtNombreCarrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNombreCarrera.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtNombreCarrera.setPlaceholder("Nombre de Carrera");
+        txtNombreCarrera.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        txtCorreo.setBgShadeHover(new java.awt.Color(0, 0, 0));
-        txtCorreo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtCorreo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtCorreo.setPlaceholder("Numéro de RVOE");
+        txtNoRvoe.setBgShadeHover(new java.awt.Color(0, 0, 0));
+        txtNoRvoe.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNoRvoe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtNoRvoe.setPlaceholder("Numéro de RVOE");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setText("Fecha Fin de Ciclo Escolar:");
+        txtClavearrera.setBgShadeHover(new java.awt.Color(0, 0, 0));
+        txtClavearrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtClavearrera.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtClavearrera.setPlaceholder("Clave de Carrera");
+        txtClavearrera.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        txtCURP1.setBgShadeHover(new java.awt.Color(0, 0, 0));
-        txtCURP1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtCURP1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtCURP1.setPlaceholder("Clave de Carrera");
-        txtCURP1.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        rSButtonShade3.setBackground(new java.awt.Color(255, 204, 204));
-        rSButtonShade3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/compartimiento.png"))); // NOI18N
-        rSButtonShade3.addActionListener(new java.awt.event.ActionListener() {
+        btnBorrar.setBackground(new java.awt.Color(255, 204, 204));
+        btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/compartimiento.png"))); // NOI18N
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade3ActionPerformed(evt);
+                btnBorrarActionPerformed(evt);
             }
         });
 
-        rSButtonShade2.setBackground(new java.awt.Color(255, 255, 153));
-        rSButtonShade2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/goma-de-borrar.png"))); // NOI18N
-        rSButtonShade2.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setBackground(new java.awt.Color(255, 255, 153));
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/goma-de-borrar.png"))); // NOI18N
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade2ActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
 
-        rSButtonShade1.setBackground(new java.awt.Color(204, 255, 204));
-        rSButtonShade1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salvar.png"))); // NOI18N
-        rSButtonShade1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(204, 255, 204));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salvar.png"))); // NOI18N
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Status:");
-
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton1.setText("Carrera Activa");
 
         btnModificar.setBackground(new java.awt.Color(204, 204, 255));
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/documento.png"))); // NOI18N
@@ -254,88 +245,53 @@ public class pnlCarreras extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel16))
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGap(79, 79, 79)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombreCarrera, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                    .addComponent(txtClavearrera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(177, 177, 177)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCURP, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                            .addComponent(DateExpedicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCURP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(90, 90, 90)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel15))
+                        .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                            .addComponent(CombomodalidadTit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DateExamenP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtNoRvoe, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonShade3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonShade2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(CombomodalidadTit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(txtNoRvoe, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtCURP1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
+                            .addComponent(txtClavearrera, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(31, 31, 31)))
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jLabel17))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 9, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rSButtonShade1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rSButtonShade2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rSButtonShade3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBorrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -348,7 +304,7 @@ public class pnlCarreras extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 697, Short.MAX_VALUE)
+                        .addGap(0, 731, Short.MAX_VALUE)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -357,7 +313,7 @@ public class pnlCarreras extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -386,7 +342,7 @@ public class pnlCarreras extends javax.swing.JPanel {
                 modeloTabla.removeRow(0); //metodo que elimina cada fila
             }
             try {
-                resultadoConsulta = conector.consulta("select * from Carreras where idCarrera like '%" + Buscar + "%' or noRvoe like '%" + Buscar +  "%' or Carrera like '%" + Buscar + "%' ");
+                resultadoConsulta = conector.consulta("select * from Carreras where IdCarrera like '%" + Buscar + "%' or noRvoe like '%" + Buscar + "%' or Carrera like '%" + Buscar + "%' ");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -403,49 +359,127 @@ public class pnlCarreras extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
-    private void rSButtonShade3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonShade3ActionPerformed
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        int reply = JOptionPane.showConfirmDialog(null, "¿Eliminar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            try {
+                System.out.println("eliminar");
+                String salida = conector.eliminar("Delete from Carreras where IdCarrera ='" + txtClavearrera.getText() + "'");
+                System.out.println(salida);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            JOptionPane.showMessageDialog(null, "Registro eliminado :( ");
+            tablaCarreras();
+            btnBorrar.setEnabled(false);
+            btnModificar.setEnabled(false);
+            btnGuardar.setEnabled(true);
+            limpiar();
+        } else {
 
-    private void rSButtonShade2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade2ActionPerformed
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiar();
-    }//GEN-LAST:event_rSButtonShade2ActionPerformed
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void rSButtonShade1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         capturarDatos();
         regitroBaseDatos();
-    }//GEN-LAST:event_rSButtonShade1ActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+
+        int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            try {
+
+                System.out.println("modificar");
+
+                String sql = "Update Carreras set IdCarrera=" + txtClavearrera.getText() + ", Carrera='" + txtNombreCarrera.getText().toUpperCase()
+                        + "', noRvoe='" + txtNoRvoe.getText().toUpperCase() + "' where IdCarrera='" + txtClavearrera.getText() + "'";
+
+                System.out.println(sql);
+                String salida = conector.registrar(sql);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            JOptionPane.showMessageDialog(null, "Registro modificado ");
+            btnBorrar.setEnabled(false);
+            btnModificar.setEnabled(false);
+            btnGuardar.setEnabled(true);
+            limpiar();
+        } else {
+
+        }
+        tablaCarreras();
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        txtClavearrera.setEnabled(false);
+        int seleccionada = jTable1.rowAtPoint((evt.getPoint()));
+        txtClavearrera.setText(String.valueOf(jTable1.getValueAt(seleccionada, 0)));
+        txtNombreCarrera.setText(String.valueOf(jTable1.getValueAt(seleccionada, 1)));
+        txtNoRvoe.setText(String.valueOf(jTable1.getValueAt(seleccionada, 2)));
+        btnModificar.setEnabled(true);
+        btnBorrar.setEnabled(true);
+        btnGuardar.setEnabled(false);
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CombomodalidadTit;
-    private com.toedter.calendar.JDateChooser DateExamenP;
-    private com.toedter.calendar.JDateChooser DateExpedicion;
+    private rscomponentshade.RSButtonShade btnBorrar;
     private rscomponentshade.RSButtonShade btnBuscar;
+    private rscomponentshade.RSButtonShade btnGuardar;
+    private rscomponentshade.RSButtonShade btnLimpiar;
     private rscomponentshade.RSButtonShade btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private rojerusan.RSTableMetro jTable1;
-    private rscomponentshade.RSButtonShade rSButtonShade1;
-    private rscomponentshade.RSButtonShade rSButtonShade2;
-    private rscomponentshade.RSButtonShade rSButtonShade3;
     private rscomponentshade.RSTextFieldShade txtBuscar;
-    private rscomponentshade.RSTextFieldShade txtCURP;
-    private rscomponentshade.RSTextFieldShade txtCURP1;
-    private rscomponentshade.RSTextFieldShade txtCorreo;
+    private rscomponentshade.RSTextFieldShade txtClavearrera;
+    private rscomponentshade.RSTextFieldShade txtNoRvoe;
+    private rscomponentshade.RSTextFieldShade txtNombreCarrera;
     // End of variables declaration//GEN-END:variables
+public void limpiar() {
+
+        txtClavearrera.setText("");
+        txtNombreCarrera.setText("");
+        txtNoRvoe.setText("");
+        txtClavearrera.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnBorrar.setEnabled(false);
+        btnModificar.setEnabled(false);
+
+    }
+
+    public void capturarDatos() {
+
+        cveCarrera = txtClavearrera.getText();
+        nombreCarrera = txtNombreCarrera.getText();
+        noRvoe = txtNoRvoe.getText();
+
+    }
+
+    public void regitroBaseDatos() {
+
+        try {
+            String sql = "INSERT INTO Carreras(IdCarrera, Carrera, noRvoe) VALUES ('" + cveCarrera + "','" + nombreCarrera + "','" + noRvoe + "')";
+            System.out.println(sql);
+            String salida = conector.registrar(sql);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
+        tablaCarreras();
+    }
 
 }

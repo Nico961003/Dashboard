@@ -363,33 +363,15 @@ public class pnlCancelaciones extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
-        // Patrón para validar el email
-        Pattern pattern = Pattern
-        .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-        // El email a validar
-        String email = txtCorreo.getText();
-
-        Matcher mather = pattern.matcher(email);
-
-        if (mather.find() == true) {
-            btnGuardar.setEnabled(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "El email ingresado es inválido\nCorrija y vuelva a intentar");
-            txtCorreo.setText("");
-            btnGuardar.setEnabled(false);
-        }
     }//GEN-LAST:event_btnGuardarMouseMoved
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        capturarDatos();
-        regitroBaseDatos();
-        limpiar();
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiaActionPerformed
-        limpiar();
+ 
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
     private void btnLimpia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpia1ActionPerformed
