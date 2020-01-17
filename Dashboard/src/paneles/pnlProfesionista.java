@@ -20,6 +20,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -43,7 +44,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
     String CURP = "", correo = "", Matricula = "";
     String fechaInicioAntecedente = "", institucionProcedencia = "";
     String fechaTerminoAntecedente = "", tipodeEstudio = "", eFederativa = "";
-    int idModalidadTitulacion = 0, idFundamentoLegalServicioSocial = 0;
+    String idTipoEstudioAntecedente = "";
     String idEntidadFederativa = "", noCedula = "", noRvoe = "";
     public static final String SEPARATOR = ",";
 
@@ -87,6 +88,18 @@ public class pnlProfesionista extends javax.swing.JPanel {
         }
 
         txtMatricula.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    e.consume();  // ignorar el evento de teclado
+                    JOptionPane.showMessageDialog(null, "Unicamente numeros");
+                }
+            }
+        });
+
+        txtNoCedula.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
 
@@ -159,7 +172,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         DateAntecTermino = new com.toedter.calendar.JDateChooser();
-        rSButtonShade1 = new rscomponentshade.RSButtonShade();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
@@ -169,6 +181,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         btnBorrar = new rscomponentshade.RSButtonShade();
         btnModificar = new rscomponentshade.RSButtonShade();
         txtBuscar = new rscomponentshade.RSTextFieldShade();
+        rSButtonShade1 = new rscomponentshade.RSButtonShade();
 
         setBackground(new java.awt.Color(243, 242, 242));
 
@@ -191,12 +204,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel5.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel5.setBorder(null);
 
         jPanel3.setBackground(new java.awt.Color(243, 242, 242));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Alumno"));
@@ -207,6 +219,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         txtCorreo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCorreo.setPlaceholder("e-mail");
 
+        txtMatricula.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMatricula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtMatricula.setPlaceholder("Matricula");
 
@@ -339,19 +352,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ComboTipoEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel29))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jRadioButton1)))
         );
-
-        rSButtonShade1.setBackground(new java.awt.Color(204, 204, 204));
-        rSButtonShade1.setText("Importar .csv");
-        rSButtonShade1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -387,14 +392,10 @@ public class pnlProfesionista extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 14, Short.MAX_VALUE))
+                        .addGap(0, 42, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rSButtonShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         jPanel3Layout.setVerticalGroup(
@@ -411,8 +412,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                                     .addComponent(jLabel6)))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel9))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -431,9 +431,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
 
         jPanel2.setBackground(new java.awt.Color(243, 242, 242));
@@ -457,7 +455,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "e-mail", "Detalles"
+                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "e-mail", "CURP", "Detalles"
             }
         ));
         jTable1.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
@@ -549,6 +547,14 @@ public class pnlProfesionista extends javax.swing.JPanel {
             }
         });
 
+        rSButtonShade1.setBackground(new java.awt.Color(204, 204, 204));
+        rSButtonShade1.setText("Importar .csv");
+        rSButtonShade1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonShade1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -556,9 +562,10 @@ public class pnlProfesionista extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1067, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(rSButtonShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -584,13 +591,14 @@ public class pnlProfesionista extends javax.swing.JPanel {
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnLimpia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rSButtonShade1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -600,7 +608,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1091, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
@@ -609,7 +617,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -617,7 +625,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1044, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1103, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -634,7 +642,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        txtMatricula.setEditable(false);
+        txtMatricula.setEnabled(false);
         int seleccionada = jTable1.rowAtPoint((evt.getPoint()));
         txtMatricula.setText(String.valueOf(jTable1.getValueAt(seleccionada, 0)));
         txtNombre.setText(String.valueOf(jTable1.getValueAt(seleccionada, 1)));
@@ -643,6 +651,26 @@ public class pnlProfesionista extends javax.swing.JPanel {
         txtCURP.setText(String.valueOf(jTable1.getValueAt(seleccionada, 4)));
         txtCorreo.setText(String.valueOf(jTable1.getValueAt(seleccionada, 5)));
 
+        Matricula = String.valueOf(jTable1.getValueAt(seleccionada, 0));
+
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT * FROM Profesionista where Matricula='" + Matricula + "'");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                txtProcedencia.setText(resultadoConsulta.getString("institucionProcedencia"));
+                DateAntecInicio.setDate(resultadoConsulta.getDate("fechaAntInicio"));
+                DateAntecTermino.setDate(resultadoConsulta.getDate("fechaAntTermino"));
+                ComboTipoEstudio.setSelectedItem(resultadoConsulta.getString("tipodeEstudio"));
+                ComboEFederativa.setSelectedItem(resultadoConsulta.getString("eFederativa"));
+                txtNoCedula.setText(resultadoConsulta.getString("noCedula"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         btnModificar.setEnabled(true);
         btnBorrar.setEnabled(true);
         btnGuardar.setEnabled(false);
@@ -650,7 +678,38 @@ public class pnlProfesionista extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+
+        int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            try {
+                
+                capturarDatos();
+                System.out.println("modificar");
+
+                String sql = "Update Profesionista set Matricula=" + Matricula + ", Nombre='" + Nombre
+                        + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
+                        + "', CURP='" + CURP + "', Correo='" + correo + "', institucionProcedencia='" + institucionProcedencia
+                        + "', idEntidadFederativa='" + idEntidadFederativa + "', fechaAntInicio='" + fechaInicioAntecedente + "', fechaAntTermino='" + fechaTerminoAntecedente
+                        + "', idTipoEstudioAntecedente='" + idTipoEstudioAntecedente + "',tipodeEstudio='" + tipodeEstudio + "', eFederativa='" + eFederativa 
+                        + "', noCedula='" + noCedula + "' where Matricula='" + txtMatricula.getText() + "'";
+
+                System.out.println(sql);
+                String salida = conector.registrar(sql);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            JOptionPane.showMessageDialog(null, "Registro modificado ");
+
+            btnBorrar.setEnabled(false);
+            btnModificar.setEnabled(false);
+            btnGuardar.setEnabled(true);
+            limpiar();
+        } else {
+
+        }
+        tablaProfesionista();
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -778,22 +837,27 @@ public class pnlProfesionista extends javax.swing.JPanel {
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount(); 
+            for (int i = 1; i <= filas; i++) { 
+                modeloTabla.removeRow(0); 
             }
             try {
-                resultadoConsulta = conector.consulta("select * from Carreras where IdCarrera like '%" + Buscar + "%' or noRvoe like '%" + Buscar + "%' or Carrera like '%" + Buscar + "%' ");
+                resultadoConsulta = conector.consulta("select * from Profesionista where Matricula like '%" 
+                        + Buscar + "%' or Nombre like '%" 
+                        + Buscar + "%' or apellidoPaterno like '%" 
+                        + Buscar + "%' or apellidoMaterno like '%" 
+                        + Buscar + "%' or CURP like '%" 
+                        + Buscar + "%' or Correo like '%" 
+                        + Buscar + "%' ");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[3];//Crea un arreglo de objetos un objeto puede
+            Object[] valores = new Object[6];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 3; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 6; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
-                modeloTabla.addRow(valores);//añade una nueva fila con los datos que
-                //esten en cada psocion del arreglo de objetos
+                modeloTabla.addRow(valores);
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
@@ -850,19 +914,70 @@ public class pnlProfesionista extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void capturarDatos() {
+
         Matricula = txtMatricula.getText();
         Nombre = txtNombre.getText().toUpperCase();
         apellidoPaterno = txtapellidoPaterno.getText().toUpperCase();
         apellidoMaterno = txtapellidoMaterno.getText().toUpperCase();
         CURP = txtCURP.getText().toUpperCase();
         correo = txtCorreo.getText();
+
+        institucionProcedencia = txtProcedencia.getText();
+        institucionProcedencia = institucionProcedencia.toUpperCase();
+        tipodeEstudio = (String) ComboTipoEstudio.getSelectedItem();
+
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente='" + tipodeEstudio + "'");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoAntecedente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        eFederativa = (String) ComboEFederativa.getSelectedItem();
+
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa + "'");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                idEntidadFederativa = resultadoConsulta.getString("id_EntidadF");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Date fecha5 = DateAntecInicio.getDate();
+        SimpleDateFormat sdf5 = new SimpleDateFormat("yyyy-MM-dd");
+        fechaInicioAntecedente = sdf5.format(fecha5);
+        Date fecha6 = DateAntecTermino.getDate();
+        SimpleDateFormat sdf6 = new SimpleDateFormat("yyyy-MM-dd");
+        fechaTerminoAntecedente = sdf6.format(fecha6);
+        noCedula = txtNoCedula.getText();
+
     }
 
     public void regitroBaseDatos() {
         try {
-            String salida = conector.registrar("INSERT INTO Profesionista(Matricula, Nombre, apellidoPaterno, apellidoMaterno, CURP, correo) VALUES ('" + Matricula + "','" + Nombre + "','" + apellidoPaterno
-                    + "','" + apellidoMaterno + "','" + CURP + "','" + correo + "')");
-            System.out.println(salida);
+
+            String sql = "INSERT INTO Profesionista(Matricula, Nombre, apellidoPaterno, "
+                    + "apellidoMaterno, CURP, correo, institucionProcedencia,idEntidadFederativa,eFederativa,"
+                    + "fechaAntInicio,fechaAntTermino,idTipoEstudioAntecedente,tipodeEstudio,"
+                    + "noCedula) VALUES ('" + Matricula + "','" + Nombre + "','" + apellidoPaterno + "','"
+                    + apellidoMaterno + "','" + correo + "','" + CURP + "','"
+                    + institucionProcedencia + "','" + idEntidadFederativa + "','"
+                    + eFederativa + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"
+                    + idTipoEstudioAntecedente + "','" + tipodeEstudio + "','" + noCedula + "')";
+
+            System.out.println(sql);
+            String salida = conector.registrar(sql);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(pnlProfesionista.class
