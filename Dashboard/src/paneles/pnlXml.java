@@ -80,8 +80,8 @@ public class pnlXml extends javax.swing.JPanel {
 
     String Llave = "", Certificado = "", pass = "";
     String Llave2 = "", Certificado2 = "", pass2 = "";
-
-    String archivo = "";
+    
+    String archivo= "";
 
     public pnlXml() {
 
@@ -410,28 +410,15 @@ public class pnlXml extends javax.swing.JPanel {
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        Object[] valor = new Object[2];
                         while (resultadoConsulta.next()) {
-                            for (int k = 0; k < 2; k++) {//El numero del for ebe ser igual al de la
-                                valor[k] = resultadoConsulta.getObject(k+1);
-                                System.out.println("valor : " + valor[k]);
-                                System.out.println("valor : " + valor[k++]);
-                            }  
-
-
-                               /* Llave = valor[1];
-                                Certificado = resultadoConsulta.getString(j + 2);
-                                pass = resultadoConsulta.getString(j + 3);
-
-                               / Llave2 = valor[2];
-                                Certificado2 = resultadoConsulta.getString(j + 2);
-                                pass2 = resultadoConsulta.getString(j + 3);*/
+                            Llave = resultadoConsulta.getString("Llave");
+                            Certificado = resultadoConsulta.getString("Certificado");
+                            pass = resultadoConsulta.getString("pass");
                             
-
-                            System.out.println("Llave : " + Llave);
-
-                            System.out.println("Llave 2 : " + Llave2);
-
+                            Llave2 = resultadoConsulta.getString("Llave");
+                            Certificado2 = resultadoConsulta.getString("Certificado");
+                            pass2 = resultadoConsulta.getString("pass");
+                            
                             try {
                                 String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
                                 String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -497,8 +484,8 @@ public class pnlXml extends javax.swing.JPanel {
             System.out.println(ex);
         }
     }
-
-    private static byte[] toByteArray(String filePath) throws Exception {
+   
+     private static byte[] toByteArray(String filePath) throws Exception {
         File f = new File(filePath);
 
         FileInputStream fis = new FileInputStream(f);
@@ -511,7 +498,7 @@ public class pnlXml extends javax.swing.JPanel {
         return fbytes;
     }
 
-    public static String sign(String keyPath, String password, String toSign) throws Exception {
+   public static String sign(String keyPath, String password, String toSign) throws Exception {
 
         final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
 
@@ -523,5 +510,7 @@ public class pnlXml extends javax.swing.JPanel {
 
         return Base64.encodeBase64String(signature.sign());
     }
+
+
 
 }

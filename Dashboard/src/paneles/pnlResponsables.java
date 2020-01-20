@@ -22,6 +22,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.ssl.PKCS8Key;
+import mx.com.mostrotouille.axolotl.CaptureException;
+import mx.com.mostrotouille.axolotl.swing.AxolotlSwingToolkit;
+import mx.com.mostrotouille.axolotl.swing.JAboutDialog;
 import mx.com.mostrotouille.axolotl.swing.util.AxolotlFileFilter;
 
 public class pnlResponsables extends javax.swing.JPanel {
@@ -657,8 +663,24 @@ public class pnlResponsables extends javax.swing.JPanel {
         CURP = txtCURP.getText().toUpperCase();
         Puesto = (String) ComboCargo.getSelectedItem();
         abr = (String) ComboAbr.getSelectedItem();
-        Certificado = ((txtFldCer.getText()));
-        Llave = txtFldKey.getText();
+
+        StringBuffer result = new StringBuffer();
+        try {
+            //(Base64.encodeBase64String(toByteArray(txtFldCer.getText())));
+            Certificado = (Base64.encodeBase64String(toByteArray(txtFldCer.getText())));
+            /*System.out.println("Byte : "+(toByteArray(txtFldCer.getText())));
+            System.out.println("certificado byte : "+Certificado);
+            System.out.println("prueba a base 64 : " + (Base64.encodeBase64String(Certificado)));*/
+        } catch (Exception ex) {
+            Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            Llave = sign(txtFldKey.getText(), new String(psswrdFldPass.getPassword()));
+        } catch (Exception ex) {
+            Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         pass = new String(psswrdFldPass.getPassword());
 
     }
@@ -746,8 +768,8 @@ public class pnlResponsables extends javax.swing.JPanel {
             currentDirectory = flchsr.getCurrentDirectory();
         }
     }
-    
-      private static String parseExtensionArrayToDescriptionMessage(String[] extensionArray) {
+
+    private static String parseExtensionArrayToDescriptionMessage(String[] extensionArray) {
         final StringBuffer result = new StringBuffer();
         result.append("Archivos (");
 
@@ -761,4 +783,30 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         return result.toString();
     }
+
+    public static String sign(String keyPath, String password) throws Exception {
+
+        final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
+
+        final PrivateKey privateKey = pkcs8Key.getPrivateKey();
+
+        final Signature signature = Signature.getInstance("SHA256withRSA");
+        signature.initSign(privateKey);
+
+        return Base64.encodeBase64String(signature.sign());
+    }
+
+    private static byte[] toByteArray(String filePath) throws Exception {
+        File f = new File(filePath);
+
+        FileInputStream fis = new FileInputStream(f);
+
+        byte[] fbytes = new byte[(int) f.length()];
+
+        fis.read(fbytes);
+        fis.close();
+
+        return fbytes;
+    }
+
 }
