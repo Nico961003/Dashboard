@@ -6,34 +6,93 @@
 package paneles;
 
 import CodeHelpers.ConexionesDB;
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import mx.com.mostrotouille.axolotl.swing.util.AxolotlFileFilter;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.ssl.PKCS8Key;
 
-/**
- *
- * @author RojeruSan
- */
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.ssl.PKCS8Key;
+import mx.com.mostrotouille.axolotl.CaptureException;
+import mx.com.mostrotouille.axolotl.swing.AxolotlSwingToolkit;
+import mx.com.mostrotouille.axolotl.swing.JAboutDialog;
+import mx.com.mostrotouille.axolotl.swing.util.AxolotlFileFilter;
+
 public class pnlXml extends javax.swing.JPanel {
 
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
     DefaultTableModel modeloTabla;
-    
+
+    private File currentDirectory;
+
+    String curpResponsable = "";
+    String idCargo = "";
+    String cargo = "";
+    String abrTitulo = "";
+
+    String clave = "";
+    String nombreCarrera = "";
+    String numeroRvoe = "";
+    String clave_autorizacion = "";
+    String autorizacion_reconocimiento = "";
+
+    /**
+     * *****************************************
+     */
+    String nombre = "", aPaterno = "", aMaterno = "";
+    String matricula = "", correo = "", CURP = "";
+    String fechaCarreraInicio = "", fechaCarreraTermino = "";
+
+    String fechaAntInicio = "", institucionProcedencia = "";
+    String fechaAntTermino = "", tipodeEstudio = "", eFederativa = "";
+    String idModalidadTitulacion = "", idFundamentoLegalServicioSocial = "";
+    String idEntidadFederativa = "", noCedula = "", noRvoe = "";
+
+    /**
+     * *****************************************
+     */
+    String fechaExpedicion = "", modalidadTitulacion = "", fundamentoSS = "";
+    String fechaExamen = "", folioControl = "";
+    String sSocial = "";
+
+    String idTipoEstudioAntecedente = "";
+
+    String Llave = "", Certificado = "", pass = "";
+    String Llave2 = "", Certificado2 = "", pass2 = "";
+
+    String archivo = "";
+
     public pnlXml() {
-        
+
         initComponents();
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         tablaTxtB();
-        
+
     }
 
-     public void tablaTxtB() {
+    public void tablaTxtB() {
         try {
             int filas = jTable1.getRowCount();
             for (int i = 1; i <= filas; i++) {
@@ -56,7 +115,7 @@ public class pnlXml extends javax.swing.JPanel {
             System.out.println("Error: " + ex);
         }
     }
-     
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,19 +126,10 @@ public class pnlXml extends javax.swing.JPanel {
         txtBuscar1 = new rscomponentshade.RSTextFieldShade();
         btnBuscar1 = new rscomponentshade.RSButtonShade();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new rojerusan.RSTableMetro();
+        jTable1 = new rojerusan.RSTableMetro();
         rSButtonShade4 = new rscomponentshade.RSButtonShade();
         rSButtonShade5 = new rscomponentshade.RSButtonShade();
         rSButtonShade6 = new rscomponentshade.RSButtonShade();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        txtapellidoMaterno = new rscomponentshade.RSTextFieldShade();
-        txtNombre = new rscomponentshade.RSTextFieldShade();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        ComboEFederativa1 = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -116,15 +166,8 @@ public class pnlXml extends javax.swing.JPanel {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -145,26 +188,31 @@ public class pnlXml extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable2.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
-        jTable2.setColorFilasBackgound2(new java.awt.Color(255, 204, 204));
-        jTable2.setColorFilasForeground1(new java.awt.Color(124, 20, 52));
-        jTable2.setColorFilasForeground2(new java.awt.Color(124, 20, 52));
-        jTable2.setColorSelBackgound(new java.awt.Color(124, 20, 52));
-        jTable2.setFuenteFilas(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable2.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable2.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable2.setSelectionBackground(new java.awt.Color(124, 20, 52));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable1.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
+        jTable1.setColorFilasBackgound2(new java.awt.Color(255, 204, 204));
+        jTable1.setColorFilasForeground1(new java.awt.Color(124, 20, 52));
+        jTable1.setColorFilasForeground2(new java.awt.Color(124, 20, 52));
+        jTable1.setColorSelBackgound(new java.awt.Color(124, 20, 52));
+        jTable1.setFuenteFilas(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTable1.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.setSelectionBackground(new java.awt.Color(124, 20, 52));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                jTable1MouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable1);
 
         rSButtonShade4.setBackground(new java.awt.Color(124, 20, 52));
         rSButtonShade4.setText("Firmar");
         rSButtonShade4.setBgHover(new java.awt.Color(255, 204, 204));
         rSButtonShade4.setBgShadeHover(new java.awt.Color(124, 20, 52));
+        rSButtonShade4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonShade4ActionPerformed(evt);
+            }
+        });
 
         rSButtonShade5.setBackground(new java.awt.Color(124, 20, 52));
         rSButtonShade5.setText("Devolver");
@@ -181,73 +229,6 @@ public class pnlXml extends javax.swing.JPanel {
         rSButtonShade6.setBgHover(new java.awt.Color(255, 204, 204));
         rSButtonShade6.setBgShadeHover(new java.awt.Color(124, 20, 52));
 
-        jPanel6.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta de Archivos XML"));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Status:");
-
-        txtapellidoMaterno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtapellidoMaterno.setPlaceholder("Carrera");
-
-        txtNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNombre.setPlaceholder("Número de Folio de Título");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Carrera:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Folio:");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Estudiante:");
-
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton1.setText("Título Activo");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboEFederativa1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ComboEFederativa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtapellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jRadioButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -255,7 +236,6 @@ public class pnlXml extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,18 +255,17 @@ public class pnlXml extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rSButtonShade6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(162, 162, 162))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -299,10 +278,9 @@ public class pnlXml extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -323,46 +301,227 @@ public class pnlXml extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscar1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscar1CaretUpdate
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscar1CaretUpdate
+    private void rSButtonShade5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade5ActionPerformed
+        TableModel model2 = jTable1.getModel();
+        String[] seleccionado = new String[100];
 
-    private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            //System.out.println("prueba " + ((Boolean) model.getValueAt(i, 4) == true));
+            //Si la columna 4 está true añadimos el ID
+            if ((Boolean) model2.getValueAt(i, 4) == true) {
+                seleccionado[i] = ((String) model2.getValueAt(i, 0));
+            }
+
+            System.out.println(seleccionado[i]);
+
+            if (seleccionado[i] != null || seleccionado[i] != "") {
+                try {
+                    String cadena = "Update txt set estatus = 'A' where matricula='" + seleccionado[i] + "'";
+                    //System.out.println(cadena);
+                    String salida = conector.registrar(cadena);
+                    System.out.println(salida);
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Logrado");
+        tablaTxtB();
+    }//GEN-LAST:event_rSButtonShade5ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscar1ActionPerformed
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MouseClicked
+    }//GEN-LAST:event_txtBuscar1ActionPerformed
 
-    private void rSButtonShade5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade5ActionPerformed
+    private void txtBuscar1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscar1CaretUpdate
         // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonShade5ActionPerformed
+    }//GEN-LAST:event_txtBuscar1CaretUpdate
+
+    private void rSButtonShade4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade4ActionPerformed
+        try {
+            TableModel model = jTable1.getModel();
+            String[] seleccionado = new String[100];
+
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                //System.out.println("prueba " + ((Boolean) model.getValueAt(i, 4) == true));
+                //Si la columna 4 está true añadimos el ID
+                if ((Boolean) model.getValueAt(i, 4) == true) {
+                    seleccionado[i] = ((String) model.getValueAt(i, 0));
+                }
+
+                System.out.println(seleccionado[i]);
+
+                if (seleccionado[i] != null || seleccionado[i] != "") {
+
+                    try {
+                        try {
+                            resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        while (resultadoConsulta.next()) {
+
+                            folioControl = resultadoConsulta.getString("folioControl");
+                            fechaExpedicion = resultadoConsulta.getString("fechaExpedicion");
+                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                            modalidadTitulacion = resultadoConsulta.getString("modalidadTitulacion");
+                            fechaExamen = resultadoConsulta.getString("fechaExamen");
+                            matricula = resultadoConsulta.getString("matricula");
+                            nombre = resultadoConsulta.getString("nombre");
+                            aPaterno = resultadoConsulta.getString("aPaterno");
+                            aMaterno = resultadoConsulta.getString("aMaterno");
+                            correo = resultadoConsulta.getString("correo");
+                            CURP = resultadoConsulta.getString("CURP");
+                            sSocial = resultadoConsulta.getString("sSocial");
+                            idFundamentoLegalServicioSocial = resultadoConsulta.getString("idFundamentoLegalServicioSocial");
+                            fundamentoSS = resultadoConsulta.getString("fundamentoSS");
+                            clave = resultadoConsulta.getString("clave");
+                            nombreCarrera = resultadoConsulta.getString("nombreCarrera");
+                            numeroRvoe = resultadoConsulta.getString("numeroRvoe");
+                            clave_autorizacion = resultadoConsulta.getString("clave_autorizacion");
+                            autorizacion_reconocimiento = resultadoConsulta.getString("autorizacion_reconocimiento");
+                            institucionProcedencia = resultadoConsulta.getString("institucionProcedencia");
+                            idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
+                            eFederativa = resultadoConsulta.getString("eFederativa");
+                            fechaAntInicio = resultadoConsulta.getString("fechaAntInicio");
+                            fechaAntTermino = resultadoConsulta.getString("fechaAntTermino");
+                            idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
+                            tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
+                            noCedula = resultadoConsulta.getString("noCedula");
+                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                            archivo = resultadoConsulta.getString("archivo");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    try {
+                        try {
+                            resultadoConsulta = conector.consulta("SELECT Llave, Certificado, pass FROM Responsable");//establecimiento de sentencia aejecutar
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Object[] valor = new Object[2];
+                        while (resultadoConsulta.next()) {
+                            for (int k = 0; k < 2; k++) {//El numero del for ebe ser igual al de la
+                                valor[k] = resultadoConsulta.getObject(k+1);
+                                System.out.println("valor : " + valor[k]);
+                                System.out.println("valor : " + valor[k++]);
+                            }  
+
+
+                               /* Llave = valor[1];
+                                Certificado = resultadoConsulta.getString(j + 2);
+                                pass = resultadoConsulta.getString(j + 3);
+
+                               / Llave2 = valor[2];
+                                Certificado2 = resultadoConsulta.getString(j + 2);
+                                pass2 = resultadoConsulta.getString(j + 3);*/
+                            
+
+                            System.out.println("Llave : " + Llave);
+
+                            System.out.println("Llave 2 : " + Llave2);
+
+                            try {
+                                String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                                String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                        + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
+                                        + "  <FirmaResponsables>\n"
+                                        + "    <FirmaResponsable nombre=\"MIGUEL\" primerApellido=\"OSORIO\" segundoApellido=\"RAMOS\" curp=\"OORM631231HDFSMG03\" idCargo=\"1\" cargo=\"DIRECTOR\" abrTitulo=\"LIC.\" sello=\"" + sign(Llave, pass, archivo) + "\" certificadoResponsable=\"" + Base64.encodeBase64String(toByteArray(Certificado)) + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
+                                        + "    <FirmaResponsable nombre=\"JORGE\" primerApellido=\"BERRUETA\" segundoApellido=\"VIDEGARAY\" curp=\"BEVJ691029HGTRDR09\" idCargo=\"3\" cargo=\"RECTOR\" abrTitulo=\"ING.\" sello=\"" + sign(Llave2, pass2, archivo) + "\" certificadoResponsable=\"" + Base64.encodeBase64String(toByteArray(Certificado2)) + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
+                                        + "  </FirmaResponsables>\n"
+                                        + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
+                                        + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
+                                        + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
+                                        + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + idEntidadFederativa + "\"/>\n"
+                                        + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
+                                        + "</TituloElectronico>";
+
+                                System.out.println(contenido);
+
+                                File file = new File(ruta);
+                                // Si el archivo no existe es creado
+                                if (!file.exists()) {
+                                    file.createNewFile();
+                                }
+                                FileWriter fw = new FileWriter(file);
+                                BufferedWriter bw = new BufferedWriter(fw);
+                                bw.write(contenido);
+                                bw.close();
+                                JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
+            abrirarchivo("/home/genaro/Documentos/");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        tablaTxtB();
+    }//GEN-LAST:event_rSButtonShade4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboEFederativa1;
     private rscomponentshade.RSButtonShade btnBuscar1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane2;
-    private rojerusan.RSTableMetro jTable2;
+    private rojerusan.RSTableMetro jTable1;
     private rscomponentshade.RSButtonShade rSButtonShade4;
     private rscomponentshade.RSButtonShade rSButtonShade5;
     private rscomponentshade.RSButtonShade rSButtonShade6;
     private rscomponentshade.RSTextFieldShade txtBuscar1;
-    private rscomponentshade.RSTextFieldShade txtNombre;
-    private rscomponentshade.RSTextFieldShade txtapellidoMaterno;
     // End of variables declaration//GEN-END:variables
+   public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    private static byte[] toByteArray(String filePath) throws Exception {
+        File f = new File(filePath);
+
+        FileInputStream fis = new FileInputStream(f);
+
+        byte[] fbytes = new byte[(int) f.length()];
+
+        fis.read(fbytes);
+        fis.close();
+
+        return fbytes;
+    }
+
+    public static String sign(String keyPath, String password, String toSign) throws Exception {
+
+        final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
+
+        final PrivateKey privateKey = pkcs8Key.getPrivateKey();
+
+        final Signature signature = Signature.getInstance("SHA256withRSA");
+        signature.initSign(privateKey);
+        signature.update(toSign.getBytes("UTF-8"));
+
+        return Base64.encodeBase64String(signature.sign());
+    }
+
 }

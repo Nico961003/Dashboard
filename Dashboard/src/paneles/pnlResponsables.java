@@ -22,12 +22,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.ssl.PKCS8Key;
-import mx.com.mostrotouille.axolotl.CaptureException;
-import mx.com.mostrotouille.axolotl.swing.AxolotlSwingToolkit;
-import mx.com.mostrotouille.axolotl.swing.JAboutDialog;
 import mx.com.mostrotouille.axolotl.swing.util.AxolotlFileFilter;
 
 public class pnlResponsables extends javax.swing.JPanel {
@@ -42,7 +36,8 @@ public class pnlResponsables extends javax.swing.JPanel {
     String Puesto = "";
     String abr = "";
     String Llave = "";
-    byte[] Certificado;
+    String Certificado = "";
+    String pass = "";
 
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
@@ -540,7 +535,7 @@ public class pnlResponsables extends javax.swing.JPanel {
                 String sql = "Update Responsable set Clave=" + (String) ComboClave.getSelectedItem() + ", Nombre='" + txtNombre.getText().toUpperCase()
                         + "', apellidoPaterno='" + txtapellidoPaterno.getText().toUpperCase() + "', apellidoMaterno='" + txtapellidoMaterno.getText().toUpperCase()
                         + "', CURP='" + txtCURP.getText().toUpperCase() + "', Puesto='" + (String) ComboCargo.getSelectedItem() + "', abr='" + (String) ComboAbr.getSelectedItem()
-                        + "', Llave='" + txtFldKey.getText() + "', Certificado='" + txtFldCer.getText() + "' where Clave='" + (String) ComboClave.getSelectedItem() + "'";
+                        + "', Llave='" + txtFldKey.getText() + "', Certificado='" + txtFldCer.getText() + "', pass='" + psswrdFldPass.getPassword() + "' where Clave='" + (String) ComboClave.getSelectedItem() + "'";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
@@ -662,24 +657,9 @@ public class pnlResponsables extends javax.swing.JPanel {
         CURP = txtCURP.getText().toUpperCase();
         Puesto = (String) ComboCargo.getSelectedItem();
         abr = (String) ComboAbr.getSelectedItem();
-
-        StringBuffer result = new StringBuffer();
-        try {
-            //(Base64.encodeBase64String(toByteArray(txtFldCer.getText())));
-            Certificado = (toByteArray(txtFldCer.getText()));
-            /*System.out.println("Byte : "+(toByteArray(txtFldCer.getText())));
-            System.out.println("certificado byte : "+Certificado);
-            System.out.println("prueba a base 64 : " + (Base64.encodeBase64String(Certificado)));*/
-        } catch (Exception ex) {
-            Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            Llave = sign(txtFldKey.getText(), new String(psswrdFldPass.getPassword()));
-        } catch (Exception ex) {
-            Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Llave : " + Llave);
+        Certificado = ((txtFldCer.getText()));
+        Llave = txtFldKey.getText();
+        pass = new String(psswrdFldPass.getPassword());
 
     }
 
@@ -687,8 +667,8 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
 
-            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abr, Llave, Certificado) VALUES (" + Clave + ",'" + Nombre + "','" + apellidoPaterno
-                    + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "')";
+            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, pass) VALUES (" + Clave + ",'" + Nombre + "','" + apellidoPaterno
+                    + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
 
             System.out.println(sql);
             String salida = conector.registrar(sql);
@@ -753,72 +733,6 @@ public class pnlResponsables extends javax.swing.JPanel {
     private rscomponentshade.RSTextFieldShade txtapellidoMaterno;
     private rscomponentshade.RSTextFieldShade txtapellidoPaterno;
     // End of variables declaration//GEN-END:variables
-  private static String parseExtensionArrayToDescriptionMessage(String[] extensionArray) {
-        final StringBuffer result = new StringBuffer();
-        result.append("Archivos (");
-
-        for (int i = 0; i < extensionArray.length; i++) {
-            result.append("*.");
-            result.append(extensionArray[i]);
-            result.append(i < (extensionArray.length - 1) ? ", " : "");
-        }
-
-        result.append(")");
-
-        return result.toString();
-    }
-
-    public static String sign(String keyPath, String password) throws Exception {
-
-        final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
-
-        final PrivateKey privateKey = pkcs8Key.getPrivateKey();
-
-        final Signature signature = Signature.getInstance("SHA256withRSA");
-        signature.initSign(privateKey);
-
-        return Base64.encodeBase64String(signature.sign());
-    }
-
-    public static String verifySign(String cerPath, String toVerify, String sign) {
-
-        String resultado = null;
-        Boolean blnResultado = false;
-        try (InputStream cer = new FileInputStream(new File(cerPath))) {
-            CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            Certificate cert = (X509Certificate) cf.generateCertificates(cer).iterator().next();
-
-            final Signature signature = Signature.getInstance("SHA256withRSA");
-            signature.initVerify(cert.getPublicKey());
-            signature.update(toVerify.getBytes("UTF-8"));
-
-            blnResultado = signature.verify(Base64.decodeBase64(sign.getBytes("UTF-8")));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        if (blnResultado.equals(Boolean.FALSE)) {
-            resultado = new String("Firma Incorrecta");
-        } else {
-            resultado = new String("Firma Correcta");
-        }
-        return resultado;
-    }
-
-    private static byte[] toByteArray(String filePath) throws Exception {
-        File f = new File(filePath);
-
-        FileInputStream fis = new FileInputStream(f);
-
-        byte[] fbytes = new byte[(int) f.length()];
-
-        fis.read(fbytes);
-        fis.close();
-
-        return fbytes;
-    }
-
     private void selectFile(JTextField txtfld, String[] extensionArray) {
         final JFileChooser flchsr = new JFileChooser(currentDirectory);
         flchsr.setFileFilter(
@@ -832,5 +746,19 @@ public class pnlResponsables extends javax.swing.JPanel {
             currentDirectory = flchsr.getCurrentDirectory();
         }
     }
+    
+      private static String parseExtensionArrayToDescriptionMessage(String[] extensionArray) {
+        final StringBuffer result = new StringBuffer();
+        result.append("Archivos (");
 
+        for (int i = 0; i < extensionArray.length; i++) {
+            result.append("*.");
+            result.append(extensionArray[i]);
+            result.append(i < (extensionArray.length - 1) ? ", " : "");
+        }
+
+        result.append(")");
+
+        return result.toString();
+    }
 }

@@ -119,6 +119,7 @@ public class pnlCarreras extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setDoubleBuffered(false);
         setEnabled(false);
+        setPreferredSize(new java.awt.Dimension(976, 668));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
@@ -172,7 +173,7 @@ public class pnlCarreras extends javax.swing.JPanel {
                         .addGap(297, 297, 297)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtClavearrera, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                        .addComponent(txtClavearrera, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(291, 291, 291)
                         .addComponent(jLabel13)
@@ -193,16 +194,13 @@ public class pnlCarreras extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNoRvoe, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                .addGap(26, 26, 26))
+                    .addComponent(txtNoRvoe, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
         );
 
         jPanel9.setBackground(new java.awt.Color(243, 242, 242));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -335,8 +333,8 @@ public class pnlCarreras extends javax.swing.JPanel {
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -353,10 +351,9 @@ public class pnlCarreras extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -371,7 +368,8 @@ public class pnlCarreras extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -480,88 +478,24 @@ public class pnlCarreras extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboEFederativa;
-    private javax.swing.JComboBox<String> ComboEFederativa1;
-    private javax.swing.JComboBox<String> ComboTipoEstudio;
-    private javax.swing.JComboBox<String> ComboTipoEstudio1;
-    private com.toedter.calendar.JDateChooser DateAntecInicio;
-    private com.toedter.calendar.JDateChooser DateAntecInicio1;
-    private com.toedter.calendar.JDateChooser DateAntecTermino;
-    private com.toedter.calendar.JDateChooser DateAntecTermino1;
     private rscomponentshade.RSButtonShade btnBorrar;
-    private rscomponentshade.RSButtonShade btnBorrar1;
-    private rscomponentshade.RSButtonShade btnBorrar2;
     private rscomponentshade.RSButtonShade btnBuscar;
     private rscomponentshade.RSButtonShade btnGuardar;
     private rscomponentshade.RSButtonShade btnLimpiar;
     private rscomponentshade.RSButtonShade btnModificar;
-    private rscomponentshade.RSButtonShade btnModificar1;
-    private rscomponentshade.RSButtonShade btnModificar2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private rojerusan.RSTableMetro jTable1;
     private rscomponentshade.RSTextFieldShade txtBuscar;
-    private rscomponentshade.RSTextFieldShade txtCURP;
-    private rscomponentshade.RSTextFieldShade txtCURP1;
     private rscomponentshade.RSTextFieldShade txtClavearrera;
-    private rscomponentshade.RSTextFieldShade txtCorreo;
-    private rscomponentshade.RSTextFieldShade txtCorreo1;
-    private rscomponentshade.RSTextFieldShade txtMatricula;
-    private rscomponentshade.RSTextFieldShade txtMatricula1;
-    private rscomponentshade.RSTextFieldShade txtNoCedula;
-    private rscomponentshade.RSTextFieldShade txtNoCedula1;
     private rscomponentshade.RSTextFieldShade txtNoRvoe;
-    private rscomponentshade.RSTextFieldShade txtNombre;
-    private rscomponentshade.RSTextFieldShade txtNombre1;
     private rscomponentshade.RSTextFieldShade txtNombreCarrera;
-    private rscomponentshade.RSTextFieldShade txtProcedencia;
-    private rscomponentshade.RSTextFieldShade txtProcedencia1;
-    private rscomponentshade.RSTextFieldShade txtapellidoMaterno;
-    private rscomponentshade.RSTextFieldShade txtapellidoMaterno1;
-    private rscomponentshade.RSTextFieldShade txtapellidoPaterno;
-    private rscomponentshade.RSTextFieldShade txtapellidoPaterno1;
     // End of variables declaration//GEN-END:variables
 public void limpiar() {
 
