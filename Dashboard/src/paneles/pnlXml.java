@@ -27,12 +27,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import mx.com.mostrotouille.axolotl.swing.util.AxolotlFileFilter;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.ssl.PKCS8Key;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.ssl.PKCS8Key;
+
 import mx.com.mostrotouille.axolotl.CaptureException;
 import mx.com.mostrotouille.axolotl.swing.AxolotlSwingToolkit;
 import mx.com.mostrotouille.axolotl.swing.JAboutDialog;
@@ -80,8 +78,9 @@ public class pnlXml extends javax.swing.JPanel {
 
     String Llave = "", Certificado = "", pass = "";
     String Llave2 = "", Certificado2 = "", pass2 = "";
-    
-    String archivo= "";
+
+    String archivo = "";
+    String archivo2 = "";
 
     public pnlXml() {
 
@@ -358,8 +357,7 @@ public class pnlXml extends javax.swing.JPanel {
                     seleccionado[i] = ((String) model.getValueAt(i, 0));
                 }
 
-                System.out.println(seleccionado[i]);
-
+                //System.out.println(seleccionado[i]);
                 if (seleccionado[i] != null || seleccionado[i] != "") {
 
                     try {
@@ -399,14 +397,16 @@ public class pnlXml extends javax.swing.JPanel {
                             noCedula = resultadoConsulta.getString("noCedula");
                             idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
                             archivo = resultadoConsulta.getString("archivo");
+                            archivo2 = resultadoConsulta.getString("archivo");
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     try {
+
                         try {
-                            resultadoConsulta = conector.consulta("SELECT Llave, Certificado, pass FROM Responsable");//establecimiento de sentencia aejecutar
+                            resultadoConsulta = conector.consulta("SELECT Llave, Certificado, pass FROM Responsable where Clave=1");//establecimiento de sentencia aejecutar
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -414,42 +414,64 @@ public class pnlXml extends javax.swing.JPanel {
                             Llave = resultadoConsulta.getString("Llave");
                             Certificado = resultadoConsulta.getString("Certificado");
                             pass = resultadoConsulta.getString("pass");
-                            
+                            System.out.println("password  " + pass);
+                        }
+
+                        try {
+                            resultadoConsulta = conector.consulta("SELECT Llave, Certificado, pass FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        while (resultadoConsulta.next()) {
                             Llave2 = resultadoConsulta.getString("Llave");
                             Certificado2 = resultadoConsulta.getString("Certificado");
                             pass2 = resultadoConsulta.getString("pass");
-                            
-                            try {
-                                String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                                String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                        + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
-                                        + "  <FirmaResponsables>\n"
-                                        + "    <FirmaResponsable nombre=\"MIGUEL\" primerApellido=\"OSORIO\" segundoApellido=\"RAMOS\" curp=\"OORM631231HDFSMG03\" idCargo=\"1\" cargo=\"DIRECTOR\" abrTitulo=\"LIC.\" sello=\"" + sign(Llave, pass, archivo) + "\" certificadoResponsable=\"" + Base64.encodeBase64String(toByteArray(Certificado)) + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                                        + "    <FirmaResponsable nombre=\"JORGE\" primerApellido=\"BERRUETA\" segundoApellido=\"VIDEGARAY\" curp=\"BEVJ691029HGTRDR09\" idCargo=\"3\" cargo=\"RECTOR\" abrTitulo=\"ING.\" sello=\"" + sign(Llave2, pass2, archivo) + "\" certificadoResponsable=\"" + Base64.encodeBase64String(toByteArray(Certificado2)) + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
-                                        + "  </FirmaResponsables>\n"
-                                        + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
-                                        + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
-                                        + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
-                                        + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + idEntidadFederativa + "\"/>\n"
-                                        + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
-                                        + "</TituloElectronico>";
-
-                                System.out.println(contenido);
-
-                                File file = new File(ruta);
-                                // Si el archivo no existe es creado
-                                if (!file.exists()) {
-                                    file.createNewFile();
-                                }
-                                FileWriter fw = new FileWriter(file);
-                                BufferedWriter bw = new BufferedWriter(fw);
-                                bw.write(contenido);
-                                bw.close();
-                                JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            System.out.println("password 2 " + pass2);
                         }
+
+                        try {
+                            Llave = sign(Llave, pass, archivo);
+                            Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+                            System.out.println("llave " + Llave);
+
+                            Llave2 = sign2(Llave2, pass2, archivo2);
+                            System.out.println("llave2 " + Llave2);
+                            Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                            String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                    + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
+                                    + "  <FirmaResponsables>\n"
+                                    + "    <FirmaResponsable nombre=\"MIGUEL\" primerApellido=\"OSORIO\" segundoApellido=\"RAMOS\" curp=\"OORM631231HDFSMG03\" idCargo=\"1\" cargo=\"DIRECTOR\" abrTitulo=\"LIC.\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
+                                    + "    <FirmaResponsable nombre=\"JORGE\" primerApellido=\"BERRUETA\" segundoApellido=\"VIDEGARAY\" curp=\"BEVJ691029HGTRDR09\" idCargo=\"3\" cargo=\"RECTOR\" abrTitulo=\"ING.\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
+                                    + "  </FirmaResponsables>\n"
+                                    + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
+                                    + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
+                                    + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
+                                    + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + idEntidadFederativa + "\"/>\n"
+                                    + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
+                                    + "</TituloElectronico>";
+
+                            //System.out.println(contenido);
+                            File file = new File(ruta);
+                            // Si el archivo no existe es creado
+                            if (!file.exists()) {
+                                file.createNewFile();
+                            }
+                            FileWriter fw = new FileWriter(file);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            bw.write(contenido);
+                            bw.close();
+                            JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        // }
                     } catch (SQLException ex) {
                         Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -476,16 +498,47 @@ public class pnlXml extends javax.swing.JPanel {
     private rscomponentshade.RSButtonShade rSButtonShade6;
     private rscomponentshade.RSTextFieldShade txtBuscar1;
     // End of variables declaration//GEN-END:variables
-   public void abrirarchivo(String archivo) {
-        try {
-            File objetofile = new File(archivo);
-            Desktop.getDesktop().open(objetofile);
-        } catch (IOException ex) {
-            System.out.println(ex);
+   private static String parseExtensionArrayToDescriptionMessage(String[] extensionArray) {
+        final StringBuffer result = new StringBuffer();
+        result.append("Archivos (");
+
+        for (int i = 0; i < extensionArray.length; i++) {
+            result.append("*.");
+            result.append(extensionArray[i]);
+            result.append(i < (extensionArray.length - 1) ? ", " : "");
         }
+
+        result.append(")");
+
+        return result.toString();
     }
-   
-     private static byte[] toByteArray(String filePath) throws Exception {
+
+    public static String sign(String keyPath, String password, String toSign) throws Exception {
+        System.out.println("filepath : " + keyPath);
+        final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
+        final PrivateKey privateKey = pkcs8Key.getPrivateKey();
+        System.out.println("private " + privateKey);
+        final Signature signature = Signature.getInstance("SHA256withRSA");
+        signature.initSign(privateKey);
+        signature.update(toSign.getBytes("UTF-8"));
+
+        return Base64.encodeBase64String(signature.sign());
+    }
+
+    public static String sign2(String keyPath2, String password2, String toSign2) throws Exception {
+        //System.out.println("filepath : " + keyPath2);
+        final PKCS8Key pkcs8Key2 = new PKCS8Key(toByteArray2(keyPath2), password2.toCharArray());
+        final PrivateKey privateKey2 = pkcs8Key2.getPrivateKey();
+        //System.out.println("private " + privateKey2);
+        final Signature signature2 = Signature.getInstance("SHA256withRSA");
+        signature2.initSign(privateKey2);
+        signature2.update(toSign2.getBytes("UTF-8"));
+
+        return Base64.encodeBase64String(signature2.sign());
+    }
+
+    private static byte[] toByteArray(String filePath) throws Exception {
+
         File f = new File(filePath);
 
         FileInputStream fis = new FileInputStream(f);
@@ -498,19 +551,55 @@ public class pnlXml extends javax.swing.JPanel {
         return fbytes;
     }
 
-   public static String sign(String keyPath, String password, String toSign) throws Exception {
+    private static byte[] toByteArray2(String filePath2) throws Exception {
 
-        final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
+        File f2 = new File(filePath2);
 
-        final PrivateKey privateKey = pkcs8Key.getPrivateKey();
+        FileInputStream fis2 = new FileInputStream(f2);
 
-        final Signature signature = Signature.getInstance("SHA256withRSA");
-        signature.initSign(privateKey);
-        signature.update(toSign.getBytes("UTF-8"));
+        byte[] fbytes2 = new byte[(int) f2.length()];
 
-        return Base64.encodeBase64String(signature.sign());
+        fis2.read(fbytes2);
+        fis2.close();
+
+        return fbytes2;
     }
 
+    private void selectFile(JTextField txtfld, String[] extensionArray) {
+        final JFileChooser flchsr = new JFileChooser(currentDirectory);
+        flchsr.setFileFilter(
+                new AxolotlFileFilter(extensionArray, parseExtensionArrayToDescriptionMessage(extensionArray)));
 
+        final int option = flchsr.showOpenDialog(this);
+
+        if (option == JFileChooser.APPROVE_OPTION) {
+            txtfld.setText(flchsr.getSelectedFile().getAbsolutePath());
+
+            currentDirectory = flchsr.getCurrentDirectory();
+        }
+    }
+
+    private void selectFile2(JTextField txtfld, String[] extensionArray) {
+        final JFileChooser flchsr = new JFileChooser(currentDirectory);
+        flchsr.setFileFilter(
+                new AxolotlFileFilter(extensionArray, parseExtensionArrayToDescriptionMessage(extensionArray)));
+
+        final int option = flchsr.showOpenDialog(this);
+
+        if (option == JFileChooser.APPROVE_OPTION) {
+            txtfld.setText(flchsr.getSelectedFile().getAbsolutePath());
+
+            currentDirectory = flchsr.getCurrentDirectory();
+        }
+    }
+
+    public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            // System.out.println(ex);
+        }
+    }
 
 }
