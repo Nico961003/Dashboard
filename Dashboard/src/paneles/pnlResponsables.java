@@ -665,9 +665,11 @@ public class pnlResponsables extends javax.swing.JPanel {
         abr = (String) ComboAbr.getSelectedItem();
 
         StringBuffer result = new StringBuffer();
-        Certificado = txtFldCer.getText();
-        Llave = txtFldKey.getText();
+        Certificado = txtFldCer.getText().toString();
+        Llave = txtFldKey.getText().toString();
         pass = new String(psswrdFldPass.getPassword());
+        System.out.println("Certificado " + Certificado);
+        System.out.println("Llave " + Llave);
 
     }
 
@@ -675,10 +677,10 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
 
-            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, pass) VALUES (" + Clave + ",'" + Nombre + "','" + apellidoPaterno
+            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, pass) VALUES ('" + Clave + "','" + Nombre + "','" + apellidoPaterno
                     + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
 
-            //System.out.println(sql);
+            System.out.println(sql);
             String salida = conector.registrar(sql);
 
         } catch (ClassNotFoundException ex) {

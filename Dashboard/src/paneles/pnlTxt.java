@@ -311,13 +311,16 @@ public class pnlTxt extends javax.swing.JPanel {
                             tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
                             noCedula = resultadoConsulta.getString("noCedula");
                             idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                            fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
+                            fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
+                            noRvoe = resultadoConsulta.getString("numeroRvoe");
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     try {
-                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
+                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
                         String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                                 + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "||" + CURP + "|"
@@ -325,7 +328,7 @@ public class pnlTxt extends javax.swing.JPanel {
                                 + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                                 + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
                                 + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
-                                + idEntidadFederativa + "|" + eFederativa + "|" + fechaCarreraInicio + "|" + fechaCarreraTermino + "|" + noCedula + "|||";
+                                + idEntidadFederativa + "|" + eFederativa + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "|||";
                         /*checar las fechas!!!!!*/
                         System.out.println(contenido);
 
@@ -373,7 +376,7 @@ public class pnlTxt extends javax.swing.JPanel {
                 }
             }
             JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-            abrirarchivo("/home/genaro/Documentos/");
+            abrirarchivo("C:\\Users\\JLIMON\\Documents");
         } catch (Exception e) {
             System.out.println(e);
         }

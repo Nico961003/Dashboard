@@ -412,9 +412,11 @@ public class pnlXml extends javax.swing.JPanel {
                         }
                         while (resultadoConsulta.next()) {
                             Llave = resultadoConsulta.getString("Llave");
+                            System.out.println("llave "+Llave);
                             Certificado = resultadoConsulta.getString("Certificado");
                             pass = resultadoConsulta.getString("pass");
-                            System.out.println("password  " + pass);
+                            System.out.println("pass " + pass);
+                            
                         }
 
                         try {
@@ -426,7 +428,7 @@ public class pnlXml extends javax.swing.JPanel {
                             Llave2 = resultadoConsulta.getString("Llave");
                             Certificado2 = resultadoConsulta.getString("Certificado");
                             pass2 = resultadoConsulta.getString("pass");
-                            System.out.println("password 2 " + pass2);
+                          
                         }
 
                         try {
