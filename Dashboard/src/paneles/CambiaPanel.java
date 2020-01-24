@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package paneles;
-
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
 /**
  *
  * @author RojeruSan

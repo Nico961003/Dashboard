@@ -31,6 +31,7 @@ public class pnlPrincipal extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setAutoscrolls(true);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 

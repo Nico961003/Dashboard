@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import paneles.CambiaPanel;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
 
 /**
  *
@@ -21,6 +24,7 @@ import paneles.CambiaPanel;
 public class Principal extends javax.swing.JFrame {
 
     int x, y;
+ 
     /**
      * Creates new form Principal
      */
@@ -28,9 +32,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(null);
         this.uno.setSelected(true);
-        
+        //this.setLayout((LayoutManager) new Dimension (980,650));
+        this.setMinimumSize(new Dimension(200, 200)); 
         new CambiaPanel(pnlPrincipal, new paneles.pnlPrincipal());
     }
 
@@ -71,6 +76,7 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setAutoscrolls(true);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         pnlMenu.setBackground(new java.awt.Color(243, 242, 242));
@@ -411,12 +417,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Sistema de Genearación de Títulos Electrónicos de la Universidad Victoria.");
+        jLabel4.setText("Sistema de Generación de Títulos Electrónicos de la Universidad Victoria.");
 
         jScrollPane1.setBorder(null);
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setForeground(new java.awt.Color(255, 253, 253));
+        pnlPrincipal.setAutoscrolls(true);
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(pnlPrincipal);
 
@@ -435,7 +442,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout pnlCentroLayout = new javax.swing.GroupLayout(pnlCentro);
@@ -468,7 +475,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -974,4 +981,8 @@ public class Principal extends javax.swing.JFrame {
     private rsbuttom.RSButtonMetro tres;
     private rsbuttom.RSButtonMetro uno;
     // End of variables declaration//GEN-END:variables
+
+    private void setLayout(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
