@@ -668,6 +668,8 @@ public class pnlResponsables extends javax.swing.JPanel {
         Certificado = txtFldCer.getText().toString();
         Llave = txtFldKey.getText().toString();
         pass = new String(psswrdFldPass.getPassword());
+        Certificado= Certificado.replace("\\", "\\\\");
+        Llave = Llave.replace("\\", "\\\\");
         System.out.println("Certificado " + Certificado);
         System.out.println("Llave " + Llave);
 

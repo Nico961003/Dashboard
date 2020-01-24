@@ -398,6 +398,10 @@ public class pnlXml extends javax.swing.JPanel {
                             idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
                             archivo = resultadoConsulta.getString("archivo");
                             archivo2 = resultadoConsulta.getString("archivo");
+                            fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
+                            fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
+                            noRvoe = resultadoConsulta.getString("numeroRvoe");
+                            
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
@@ -435,17 +439,20 @@ public class pnlXml extends javax.swing.JPanel {
                             Llave = sign(Llave, pass, archivo);
                             Certificado = Base64.encodeBase64String(toByteArray(Certificado));
                             System.out.println("llave " + Llave);
-
-                            Llave2 = sign2(Llave2, pass2, archivo2);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        
+                         try {
+                            Llave2 = sign(Llave2, pass2, archivo2);
                             System.out.println("llave2 " + Llave2);
-                            Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
-
+                            Certificado2 = Base64.encodeBase64String(toByteArray(Certificado2));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
 
                         try {
-                            String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                            String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
                             String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                     + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                     + "  <FirmaResponsables>\n"
@@ -480,7 +487,7 @@ public class pnlXml extends javax.swing.JPanel {
                 }
             }
             JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-            abrirarchivo("/home/genaro/Documentos/");
+            abrirarchivo("C:\\Users\\JLIMON\\Documents");
         } catch (Exception e) {
             System.out.println(e);
         }

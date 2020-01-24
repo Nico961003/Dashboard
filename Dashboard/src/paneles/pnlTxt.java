@@ -323,13 +323,13 @@ public class pnlTxt extends javax.swing.JPanel {
                         String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
                         String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                                 + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
-                                + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "||" + CURP + "|"
+                                + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                 + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
-                                + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                + modalidadTitulacion + "|" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                                 + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
                                 + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
-                                + idEntidadFederativa + "|" + eFederativa + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "|||";
-                        /*checar las fechas!!!!!*/
+                                + idEntidadFederativa + "|" + eFederativa + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
+                       
                         System.out.println(contenido);
 
                         try {
