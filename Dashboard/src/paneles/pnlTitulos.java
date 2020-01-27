@@ -59,9 +59,10 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     String idTipoEstudioAntecedente = "";
 
+
     public pnlTitulos() {
         initComponents();
-        Llamado();
+//        Llamado();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         tablaTitulos();
         txtCURP.setEnabled(false);
@@ -473,6 +474,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(243, 242, 242));
 
+        jTable1.setBorder(null);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

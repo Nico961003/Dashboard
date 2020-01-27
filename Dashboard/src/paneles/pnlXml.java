@@ -178,6 +178,7 @@ public class pnlXml extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setBorder(null);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
