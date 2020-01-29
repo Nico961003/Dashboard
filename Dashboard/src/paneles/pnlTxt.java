@@ -84,7 +84,9 @@ public class pnlTxt extends javax.swing.JPanel {
     public pnlTxt() {
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
+        modeloTabla2 = (DefaultTableModel) jTable2.getModel();
         tablaTxtA();
+        tablaResponsable();
     }
 
     public void tablaTxtA() {
@@ -110,6 +112,30 @@ public class pnlTxt extends javax.swing.JPanel {
         }
 
     }
+    
+     public void tablaResponsable() {
+        try {
+            int filas = jTable2.getRowCount(); //Obtiene la catidad de filas
+            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
+                modeloTabla2.removeRow(0); //metodo que elimina cada fila
+            }
+            try {
+                resultadoConsulta = conector.consulta("SELECT Clave, Nombre, apellidoPaterno, apellidoMaterno FROM Responsable");//establecimiento de sentencia aejecutar
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Object[] valores = new Object[4];//Crea un arreglo de objetos un objeto puede 
+            while (resultadoConsulta.next()) {
+                for (int i = 0; i < 4; i++) {//El numero del for ebe ser igual al de la
+                    valores[i] = resultadoConsulta.getObject(i + 1);
+                }
+                modeloTabla2.addRow(valores);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,7 +154,7 @@ public class pnlTxt extends javax.swing.JPanel {
         btnGenerar = new rscomponentshade.RSButtonShade();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        rSTableMetro2 = new rojerusan.RSTableMetro();
+        jTable2 = new rojerusan.RSTableMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -258,13 +284,13 @@ public class pnlTxt extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnLimpia1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,10 +301,8 @@ public class pnlTxt extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -323,7 +347,7 @@ public class pnlTxt extends javax.swing.JPanel {
         jLabel7.setText("Archivos TXT");
         jLabel7.setIconTextGap(10);
 
-        rSTableMetro2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -342,7 +366,7 @@ public class pnlTxt extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(rSTableMetro2);
+        jScrollPane3.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -426,7 +450,8 @@ public class pnlTxt extends javax.swing.JPanel {
                     }
 
                     try {
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
+                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
+                        //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
                         String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                                 + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
@@ -482,7 +507,7 @@ public class pnlTxt extends javax.swing.JPanel {
                 }
             }
             JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-            abrirarchivo("C:\\Users\\JLIMON\\Documents");
+            abrirarchivo("/home/genaro/Documentos/");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -567,7 +592,7 @@ public class pnlTxt extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private rojerusan.RSTableMetro jTable1;
-    private rojerusan.RSTableMetro rSTableMetro2;
+    private rojerusan.RSTableMetro jTable2;
     private rscomponentshade.RSTextFieldShade txtBuscar;
     // End of variables declaration//GEN-END:variables
     public void abrirarchivo(String archivo) {

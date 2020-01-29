@@ -1096,7 +1096,9 @@ public class pnlTitulos extends javax.swing.JPanel {
         btnDetalles.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnAgregar.setEnabled(true);
+        ComboProfesionista.removeAllItems();
         ComboProfesionista.setEnabled(true);
+        Llamado();
     }
 
 }
