@@ -100,15 +100,15 @@ public class pnlResponsables extends javax.swing.JPanel {
             while (resultadoConsulta.next()) {
                 comparaClave = resultadoConsulta.getInt("Clave");
                 if (comparaClave == combo1) {
-                    ComboClave.removeItem("1");
+                    ComboClave.removeItem(""+ combo1 + "");
                 } else if (comparaClave == combo2) {
-                    ComboClave.removeItem("2");
+                    ComboClave.removeItem(""+ combo2 + "");
                 } else if (comparaClave == combo3) {
-                    ComboClave.removeItem("3");
+                    ComboClave.removeItem(""+ combo3 + "");
                 } else if (comparaClave == combo4) {
-                    ComboClave.removeItem("4");
+                    ComboClave.removeItem(""+ combo4 + "");
                 } else if (comparaClave == combo5) {
-                    ComboClave.removeItem("5");
+                    ComboClave.removeItem(""+ combo5 + "");
                 }
             }
         } catch (SQLException ex) {
@@ -209,7 +209,6 @@ public class pnlResponsables extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setBorder(null);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -219,7 +218,7 @@ public class pnlResponsables extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "Cargo", "Status"
+                "Clave", "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "Puesto"
             }
         ));
         jTable1.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
@@ -496,7 +495,7 @@ public class pnlResponsables extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.getAccessibleContext().setAccessibleName("");
@@ -550,7 +549,6 @@ public class pnlResponsables extends javax.swing.JPanel {
         } else {
 
         }
-        comboClave();
         tablaReponsables();
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -568,6 +566,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
     private void btnLimpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiaActionPerformed
         limpiar();
+        comboClave();
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -613,6 +612,7 @@ public class pnlResponsables extends javax.swing.JPanel {
             while (resultadoConsulta.next()) {
                 combo = resultadoConsulta.getString("Clave");
                 ComboClave.addItem(combo);
+                ComboClave.setSelectedItem(combo);
                 txtFldCer.setText(resultadoConsulta.getString("Certificado"));
                 txtFldKey.setText(resultadoConsulta.getString("Llave"));
                 ComboAbr.setSelectedItem(resultadoConsulta.getString("abr"));
@@ -620,7 +620,6 @@ public class pnlResponsables extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ComboClave.setSelectedItem(combo);
         txtFldCer.setEnabled(false);
         txtFldKey.setEnabled(false);
         btnModificar.setEnabled(true);

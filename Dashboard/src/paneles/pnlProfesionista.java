@@ -177,7 +177,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
         btnBorrar = new rscomponentshade.RSButtonShade();
         btnModificar = new rscomponentshade.RSButtonShade();
         txtBuscar = new rscomponentshade.RSTextFieldShade();
-        rSButtonShade1 = new rscomponentshade.RSButtonShade();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
 
@@ -202,12 +201,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel5.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel5.setBorder(null);
 
         jPanel3.setBackground(new java.awt.Color(243, 242, 242));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Alumno"));
@@ -345,7 +343,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jRadioButton1)
-                                    .addComponent(txtNoCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))))))
+                                    .addComponent(txtNoCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -413,7 +411,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel2.setBorder(null);
         jPanel2.setPreferredSize(new java.awt.Dimension(997, 2319));
 
         btnBuscar.setBackground(new java.awt.Color(124, 20, 52));
@@ -486,15 +483,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
             }
         });
 
-        rSButtonShade1.setBackground(new java.awt.Color(204, 204, 204));
-        rSButtonShade1.setText("Importar .csv");
-        rSButtonShade1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade1ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setBorder(null);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -513,7 +501,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "e-mail", "CURP"
+                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "e-mail"
             }
         ));
         jTable1.setAutoscrolls(false);
@@ -540,9 +528,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(428, Short.MAX_VALUE)
-                .addComponent(rSButtonShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -562,7 +548,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(rSButtonShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
@@ -581,7 +566,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -600,7 +585,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -743,75 +728,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnBorrarActionPerformed
 
-    private void rSButtonShade1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade1ActionPerformed
-        String ruta = "";
-        Scanner entrada = null;
-        //Se crea el JFileChooser. Se le indica que la ventana se abra en el directorio actual
-        JFileChooser fileChooser = new JFileChooser(".");
-        //Se crea el filtro. El primer parámetro es el mensaje que se muestra,
-        //el segundo es la extensión de los ficheros que se van a mostrar      
-        FileFilter filtro = new FileNameExtensionFilter("Archivos csv (.csv)", "csv");
-        //Se le asigna al JFileChooser el filtro
-        fileChooser.setFileFilter(filtro);
-        //se muestra la ventana
-        int valor = fileChooser.showOpenDialog(fileChooser);
-        if (valor == JFileChooser.APPROVE_OPTION) {
-            ruta = fileChooser.getSelectedFile().getAbsolutePath();
-            try {
-                File f = new File(ruta);
-                entrada = new Scanner(f);
-                while (entrada.hasNext()) {
-                    entrada.nextLine();//sout
-                }
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                if (entrada != null) {
-                    entrada.close();
-                }
-            }
-            System.out.println(ruta);
-        } else {
-            System.out.println("No se ha seleccionado ningún fichero");
-        }
-
-        BufferedReader br = null;
-
-        try {
-
-            br = new BufferedReader(new FileReader(ruta));
-            String line = br.readLine();
-            while (null != line) {
-
-                String[] fields = line.split(SEPARATOR);
-                String listString = String.join("' , '", fields);
-                line = br.readLine();
-                System.out.println(listString);
-
-                try {
-                    String salida = conector.registrar("INSERT INTO Profesionista(Matricula, Nombre, apellidoPaterno, apellidoMaterno, CURP, correo) VALUES ('" + listString + "')");
-                    System.out.println(salida);
-
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        } catch (Exception e) {
-
-        } finally {
-            if (null != br) {
-                try {
-                    br.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
-        tablaProfesionista();
-    }//GEN-LAST:event_rSButtonShade1ActionPerformed
-
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
@@ -878,7 +794,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private rojerusan.RSTableMetro jTable1;
-    private rscomponentshade.RSButtonShade rSButtonShade1;
     private rscomponentshade.RSTextFieldShade txtBuscar;
     private rscomponentshade.RSTextFieldShade txtCURP;
     private rscomponentshade.RSTextFieldShade txtCorreo;
