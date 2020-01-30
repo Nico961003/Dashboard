@@ -68,9 +68,9 @@ public class pnlTxt extends javax.swing.JPanel {
     String fechaCarreraInicio = "", fechaCarreraTermino = "";
 
     String fechaAntInicio = "", institucionProcedencia = "";
-    String fechaAntTermino = "", tipodeEstudio = "", eFederativa = "";
+    String fechaAntTermino = "", tipodeEstudio = "", eFederativa = "", eFederativa2 = "";
     String idModalidadTitulacion = "", idFundamentoLegalServicioSocial = "";
-    String idEntidadFederativa = "", noCedula = "", noRvoe = "";
+    String idEntidadFederativa = "", idEntidadFederativa2 = "", noCedula = "", noRvoe = "";
 
     /**
      * *****************************************
@@ -112,8 +112,8 @@ public class pnlTxt extends javax.swing.JPanel {
         }
 
     }
-    
-     public void tablaResponsable() {
+
+    public void tablaResponsable() {
         try {
             int filas = jTable2.getRowCount(); //Obtiene la catidad de filas
             for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
@@ -143,10 +143,6 @@ public class pnlTxt extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnModificar = new rscomponentshade.RSButtonShade();
-        btnLimpia1 = new rscomponentshade.RSButtonShade();
-        btnLimpia = new rscomponentshade.RSButtonShade();
-        btnGuardar = new rscomponentshade.RSButtonShade();
         txtBuscar = new rscomponentshade.RSTextFieldShade();
         btnBuscar = new rscomponentshade.RSButtonShade();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -161,54 +157,6 @@ public class pnlTxt extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(243, 242, 242));
 
         jPanel2.setBackground(new java.awt.Color(243, 242, 242));
-
-        btnModificar.setBackground(new java.awt.Color(204, 204, 255));
-        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/documento.png"))); // NOI18N
-        btnModificar.setBgHover(new java.awt.Color(255, 255, 255));
-        btnModificar.setBgShadeHover(new java.awt.Color(51, 51, 255));
-        btnModificar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-
-        btnLimpia1.setBackground(new java.awt.Color(255, 102, 102));
-        btnLimpia1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/compartimiento.png"))); // NOI18N
-        btnLimpia1.setBgHover(new java.awt.Color(255, 255, 255));
-        btnLimpia1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnLimpia1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpia1ActionPerformed(evt);
-            }
-        });
-
-        btnLimpia.setBackground(new java.awt.Color(255, 255, 153));
-        btnLimpia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/goma-de-borrar.png"))); // NOI18N
-        btnLimpia.setBgHover(new java.awt.Color(255, 255, 255));
-        btnLimpia.setBgShadeHover(new java.awt.Color(255, 255, 102));
-        btnLimpia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnLimpia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiaActionPerformed(evt);
-            }
-        });
-
-        btnGuardar.setBackground(new java.awt.Color(204, 255, 204));
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salvar.png"))); // NOI18N
-        btnGuardar.setBgHover(new java.awt.Color(255, 255, 255));
-        btnGuardar.setBgShadeHover(new java.awt.Color(153, 255, 153));
-        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnGuardar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseMoved(evt);
-            }
-        });
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         txtBuscar.setPlaceholder("Buscar . . .");
         txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
@@ -288,17 +236,9 @@ public class pnlTxt extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 705, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpia1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpia, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,13 +251,8 @@ public class pnlTxt extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimpia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimpia1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,10 +309,10 @@ public class pnlTxt extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,22 +326,19 @@ public class pnlTxt extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-      
 
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                  try {
-            TableModel model = jTable1.getModel();
-            String[] seleccionado = new String[100];
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            try {
+                TableModel model = jTable1.getModel();
+                String[] seleccionado = new String[100];
                 //System.out.println("prueba " + ((Boolean) model.getValueAt(i, 4) == true));
                 //Si la columna 4 está true añadimos el ID
                 if ((Boolean) model.getValueAt(i, 4) == true) {
-                seleccionado[i] = ((String) model.getValueAt(i, 0));
-                
+                    seleccionado[i] = ((String) model.getValueAt(i, 0));
 
-                System.out.println(seleccionado[i]);
+                    System.out.println(seleccionado[i]);
 
-              //  if (seleccionado[i] != null || seleccionado[i] != "") {
-
+                    //  if (seleccionado[i] != null || seleccionado[i] != "") {
                     try {
                         try {
                             resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
@@ -434,8 +366,18 @@ public class pnlTxt extends javax.swing.JPanel {
                             clave_autorizacion = resultadoConsulta.getString("clave_autorizacion");
                             autorizacion_reconocimiento = resultadoConsulta.getString("autorizacion_reconocimiento");
                             institucionProcedencia = resultadoConsulta.getString("institucionProcedencia");
-                            idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
+                            if (resultadoConsulta.getInt("idEntidadFederativa") < 10) {
+                                idEntidadFederativa = "0" + resultadoConsulta.getString("idEntidadFederativa");
+                            } else {
+                                idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
+                            }
+                            if (resultadoConsulta.getInt("idEntidadFederativa2") < 10) {
+                                idEntidadFederativa2 = "0" + resultadoConsulta.getString("idEntidadFederativa2");
+                            } else {
+                                idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa2");
+                            }
                             eFederativa = resultadoConsulta.getString("eFederativa");
+                            eFederativa2 = resultadoConsulta.getString("eFederativa2");
                             fechaAntInicio = resultadoConsulta.getString("fechaAntInicio");
                             fechaAntTermino = resultadoConsulta.getString("fechaAntTermino");
                             idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
@@ -451,8 +393,8 @@ public class pnlTxt extends javax.swing.JPanel {
                     }
 
                     try {
-                        //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
+                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
+                        //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
                         String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                                 + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
@@ -460,8 +402,8 @@ public class pnlTxt extends javax.swing.JPanel {
                                 + modalidadTitulacion + "|" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                                 + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
                                 + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
-                                + idEntidadFederativa + "|" + eFederativa + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
-                       
+                                + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
+
                         System.out.println(contenido);
 
                         try {
@@ -505,16 +447,16 @@ public class pnlTxt extends javax.swing.JPanel {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-              // }
+
+                }
+
+                JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
+                abrirarchivo("/home/genaro/Documentos/");
+                //abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
+            } catch (Exception e) {
+                System.out.println(e);
             }
-           
-            JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-            //abrirarchivo("/home/genaro/Documentos/");
-            abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
-        } catch (Exception e) {
-            System.out.println(e);
         }
-            }
         tablaTxtA();
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -544,14 +486,15 @@ public class pnlTxt extends javax.swing.JPanel {
                 modeloTabla.removeRow(0); //metodo que elimina cada fila
             }
             try {
-                resultadoConsulta = conector.consulta("select * from Profesionista where CURP like '%" + Buscar + "%' or Nombre like '%" + Buscar + "%' or apellidoPaterno like '%"
-                        + Buscar + "%' or apellidoMaterno like '%" + Buscar + "%' or Matricula like '%" + Buscar + "%' ");
+                resultadoConsulta = conector.consulta("select * from txt where nombre like '%" + Buscar + "%' or aPaterno like '%"
+                        + Buscar + "%' or aMaterno like '%" + Buscar + "%' or matricula like '%" + Buscar + "%' where estatus='A'");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(pnlCarreras.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[6];//Crea un arreglo de objetos un objeto puede
+            Object[] valores = new Object[4];//Crea un arreglo de objetos un objeto puede
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 6; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 4; i++) {//El numero del for ebe ser igual al de la
                     valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
                 modeloTabla.addRow(valores);//añade una nueva fila con los datos que
@@ -562,34 +505,10 @@ public class pnlTxt extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnLimpia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpia1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpia1ActionPerformed
-
-    private void btnLimpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiaActionPerformed
-
-    }//GEN-LAST:event_btnLimpiaActionPerformed
-
-    private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
-
-    }//GEN-LAST:event_btnGuardarMouseMoved
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rscomponentshade.RSButtonShade btnBuscar;
     private rscomponentshade.RSButtonShade btnGenerar;
-    private rscomponentshade.RSButtonShade btnGuardar;
-    private rscomponentshade.RSButtonShade btnLimpia;
-    private rscomponentshade.RSButtonShade btnLimpia1;
-    private rscomponentshade.RSButtonShade btnModificar;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -566,7 +566,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
     private void btnLimpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiaActionPerformed
         limpiar();
-        comboClave();
+
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -701,6 +701,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         btnAgregar.setEnabled(true);
+        comboClave();
 
     }
 

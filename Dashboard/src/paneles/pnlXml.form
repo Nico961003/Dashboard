@@ -94,14 +94,12 @@
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtBuscar1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBuscar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnBuscar1" min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="rSButtonShade6" min="-2" pref="119" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="rSButtonShade5" min="-2" pref="119" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rSButtonShade4" min="-2" pref="119" max="-2" attributes="0"/>
@@ -116,14 +114,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtBuscar1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="txtBuscar" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnBuscar1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="rSButtonShade6" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="rSButtonShade5" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="rSButtonShade4" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
@@ -133,13 +130,13 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="rscomponentshade.RSTextFieldShade" name="txtBuscar1">
+            <Component class="rscomponentshade.RSTextFieldShade" name="txtBuscar">
               <Properties>
                 <Property name="placeholder" type="java.lang.String" value="Buscar . . ."/>
               </Properties>
               <Events>
-                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtBuscar1CaretUpdate"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscar1ActionPerformed"/>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtBuscarCaretUpdate"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarActionPerformed"/>
               </Events>
             </Component>
             <Component class="rscomponentshade.RSButtonShade" name="btnBuscar1">
@@ -261,20 +258,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShade5ActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="rscomponentshade.RSButtonShade" name="rSButtonShade6">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="34" green="14" red="7c" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Eliminar"/>
-                <Property name="bgHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
-                </Property>
-                <Property name="bgShadeHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="34" green="14" red="7c" type="rgb"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="rscomponentshade.RSButtonShade" name="rSButtonShade4">
               <Properties>

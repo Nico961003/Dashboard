@@ -48,7 +48,7 @@ public class pnlTitulos extends javax.swing.JPanel {
     String fechaInicioCarrera = "", fechaFinCarrera = "";
     int idModalidadTitulacion = 0;
     int idFundamentoLegalServicioSocial = 0;
-    String idEntidadFederativa = "", noCedula = "", noRvoe = "";
+    String idEntidadFederativa = "", idEntidadFederativa2 = "", eFederativa2 = "", noCedula = "", noRvoe = "";
 
     /**
      * *****************************************
@@ -166,6 +166,21 @@ public class pnlTitulos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+         try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT * FROM entidadFederativa");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                ComboEFederativa.addItem(resultadoConsulta.getString("nombreEntidad"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
         try {
             try {
@@ -231,6 +246,8 @@ public class pnlTitulos extends javax.swing.JPanel {
         jLabel24 = new javax.swing.JLabel();
         ComboautReconocimiento = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        ComboEFederativa = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
@@ -329,6 +346,9 @@ public class pnlTitulos extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Datos del Alumno");
 
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setText("Entidad Federativa");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -358,22 +378,20 @@ public class pnlTitulos extends javax.swing.JPanel {
                                         .addComponent(ComboCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(DateExamenP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFolio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                            .addComponent(DateExpedicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CombomodalidadTit, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel18)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel16)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ComboEFederativa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DateExamenP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFolio, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                    .addComponent(DateExpedicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CombomodalidadTit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -393,12 +411,14 @@ public class pnlTitulos extends javax.swing.JPanel {
                             .addComponent(ComboSSocial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ComboProfesionista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(145, 145, 145))))
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ComboautReconocimiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(ComboFLegal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboautReconocimiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(145, 145, 145))
         );
         jPanel5Layout.setVerticalGroup(
@@ -426,8 +446,11 @@ public class pnlTitulos extends javax.swing.JPanel {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel18))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel19)
+                            .addComponent(ComboEFederativa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -446,9 +469,10 @@ public class pnlTitulos extends javax.swing.JPanel {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -858,6 +882,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboCarrera;
+    private javax.swing.JComboBox<String> ComboEFederativa;
     private javax.swing.JComboBox<String> ComboFLegal;
     private javax.swing.JComboBox<String> ComboProfesionista;
     private javax.swing.JComboBox<String> ComboSSocial;
@@ -879,6 +904,7 @@ public class pnlTitulos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -923,7 +949,7 @@ public class pnlTitulos extends javax.swing.JPanel {
         } else {
             sSocial = 1;
         }
-
+        eFederativa = (String) ComboEFederativa.getSelectedItem();
         fundamentoSS = (String) ComboFLegal.getSelectedItem();
         Date fecha3 = DateExpedicion.getDate();
         SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
@@ -947,8 +973,8 @@ public class pnlTitulos extends javax.swing.JPanel {
             }
             while (resultadoConsulta.next()) {
                 institucionProcedencia = resultadoConsulta.getString("institucionProcedencia");
-                idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
-                eFederativa = resultadoConsulta.getString("eFederativa");
+                idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa");
+                eFederativa2 = resultadoConsulta.getString("eFederativa");
                 fechaInicioAntecedente = resultadoConsulta.getString("fechaAntInicio");
                 fechaTerminoAntecedente = resultadoConsulta.getString("fechaAntTermino");
                 idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
@@ -998,6 +1024,20 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
+                resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa + "'");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                    idEntidadFederativa = resultadoConsulta.getString("id_EntidadF");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        try {
+            try {
                 resultadoConsulta = conector.consulta("SELECT ID_FUNDAMENTO_LEGAL_SERVICIO_SOCIAL FROM fundamentoSSocial where FUNDAMENTO_LEGAL_SERVICIO_SOCIAL='" + fundamentoSS + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
@@ -1022,19 +1062,16 @@ public class pnlTitulos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT idEntidadFederativa, eFederativa FROM Profesionista where eFederativa='" + eFederativa2 + "'");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                if (resultadoConsulta.getInt("id_EntidadF") < 10) {
-                    idEntidadFederativa = "0" + resultadoConsulta.getInt("id_EntidadF");
-                } else {
-                    idEntidadFederativa = resultadoConsulta.getString("id_EntidadF");
-                }
+                    idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa");
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
@@ -1059,16 +1096,16 @@ public class pnlTitulos extends javax.swing.JPanel {
         try {
             String cadena = "INSERT INTO txt(folioControl,fechaExpedicion,idModalidadTitulacion, \n"
                     + "modalidadTitulacion,fechaExamen,matricula,nombre,aPaterno,aMaterno,correo,CURP,sSocial, \n"
-                    + "idFundamentoLegalServicioSocial,fundamentoSS,clave,nombreCarrera,numeroRvoe,fechaInicioCarrera,"
-                    + "fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento, \n"
-                    + "institucionProcedencia,idEntidadFederativa,eFederativa,fechaAntInicio,fechaAntTermino,\n"
+                    + "idFundamentoLegalServicioSocial,idEntidadFederativa,eFederativa,fundamentoSS,clave,nombreCarrera,\n"
+                    + "numeroRvoe,fechaInicioCarrera,fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento, \n"
+                    + "institucionProcedencia,idEntidadFederativa2,eFederativa2,fechaAntInicio,fechaAntTermino,\n"
                     + "idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo) VALUES ('" + folioControl + "','" + fechaExpedicion + "','"
                     + idModalidadTitulacion + "','" + modalidadTitulacion + "','" + fechaExamen + "','"
                     + matricula + "','" + nombre + "','" + aPaterno + "','" + aMaterno + "','" + correo + "','"
-                    + CURP + "','" + sSocial + "','" + idFundamentoLegalServicioSocial + "','" + fundamentoSS + "','"
-                    + clave + "','" + nombreCarrera + "','" + noRvoe + "','" + fechaInicioCarrera + "','" + fechaFinCarrera + "','"
+                    + CURP + "','" + sSocial + "','" + idFundamentoLegalServicioSocial + "','" + idEntidadFederativa + "','" + eFederativa + "','" 
+                    + fundamentoSS + "','" + clave + "','" + nombreCarrera + "','" + noRvoe + "','" + fechaInicioCarrera + "','" + fechaFinCarrera + "','"
                     + clave_autorizacion + "','" + autorizacion_reconocimiento + "','" + institucionProcedencia + "','"
-                    + idEntidadFederativa + "','" + eFederativa + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"
+                    + idEntidadFederativa2 + "','" + eFederativa2 + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"
                     + idTipoEstudioAntecedente + "','" + tipodeEstudio + "','" + noCedula + "','A','Pendiente')";
 
             System.out.println(cadena);
