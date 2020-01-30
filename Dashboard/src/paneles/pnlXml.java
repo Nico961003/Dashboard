@@ -331,7 +331,7 @@ public class pnlXml extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
-       String Buscar = txtBuscar.getText();
+        String Buscar = txtBuscar.getText();
         try {
             int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
             for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
@@ -428,21 +428,20 @@ public class pnlXml extends javax.swing.JPanel {
                 }
 
                 try {
-                    resultadoConsulta = conector.consulta("SELECT Llave, Certificado, pass FROM Responsable where Clave=1");//establecimiento de sentencia aejecutar
+                    resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=1");//establecimiento de sentencia aejecutar
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 while (resultadoConsulta.next()) {
+                    
                     Llave = resultadoConsulta.getString("Llave");
-                    System.out.println("llave " + Llave);
                     Certificado = resultadoConsulta.getString("Certificado");
                     pass = resultadoConsulta.getString("pass");
-                    System.out.println("pass " + pass);
 
                 }
 
                 try {
-                    resultadoConsulta = conector.consulta("SELECT Llave, Certificado, pass FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
+                    resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -469,9 +468,10 @@ public class pnlXml extends javax.swing.JPanel {
                     e.printStackTrace();
                 }
 
+
                 try {
-                    String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                    //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
+                    //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                    String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
                     String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                             + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                             + "  <FirmaResponsables>\n"
@@ -504,8 +504,8 @@ public class pnlXml extends javax.swing.JPanel {
             }
         }
         JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
-        abrirarchivo("/home/genaro/Documentos/");
-        //abrirarchivo("C:\\Users\\JLIMON\\Documents");
+        //abrirarchivo("/home/genaro/Documentos/");
+        abrirarchivo("C:\\Users\\JLIMON\\Documents");
         tablaTxtB();
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 

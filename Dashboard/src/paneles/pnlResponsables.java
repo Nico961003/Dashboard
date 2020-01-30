@@ -525,14 +525,15 @@ public class pnlResponsables extends javax.swing.JPanel {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
+            capturarDatos();
             try {
 
                 System.out.println("modificar");
 
-                String sql = "Update Responsable set Clave=" + (String) ComboClave.getSelectedItem() + ", Nombre='" + txtNombre.getText().toUpperCase()
-                        + "', apellidoPaterno='" + txtapellidoPaterno.getText().toUpperCase() + "', apellidoMaterno='" + txtapellidoMaterno.getText().toUpperCase()
-                        + "', CURP='" + txtCURP.getText().toUpperCase() + "', Puesto='" + (String) ComboCargo.getSelectedItem() + "', abr='" + (String) ComboAbr.getSelectedItem()
-                        + "', Llave='" + txtFldKey.getText() + "', Certificado='" + txtFldCer.getText() + "', pass='" + psswrdFldPass.getPassword() + "' where Clave='" + (String) ComboClave.getSelectedItem() + "'";
+                String sql = "Update Responsable set Clave=" + Clave + ", Nombre='" + Nombre
+                        + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
+                        + "', CURP='" + CURP + "', Puesto='" + Puesto + "', abr='" + abr
+                        + "', Llave='" + Llave + "', Certificado='" + Certificado + "', pass='" + pass + "' where Clave='" + Clave + "'";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
