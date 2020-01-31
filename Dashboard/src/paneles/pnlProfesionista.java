@@ -625,7 +625,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             try {
-                
+
                 capturarDatos();
                 System.out.println("modificar");
 
@@ -633,7 +633,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                         + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
                         + "', CURP='" + CURP + "', Correo='" + correo + "', institucionProcedencia='" + institucionProcedencia
                         + "', idEntidadFederativa='" + idEntidadFederativa + "', fechaAntInicio='" + fechaInicioAntecedente + "', fechaAntTermino='" + fechaTerminoAntecedente
-                        + "', idTipoEstudioAntecedente='" + idTipoEstudioAntecedente + "',tipodeEstudio='" + tipodeEstudio + "', eFederativa='" + eFederativa 
+                        + "', idTipoEstudioAntecedente='" + idTipoEstudioAntecedente + "',tipodeEstudio='" + tipodeEstudio + "', eFederativa='" + eFederativa
                         + "', noCedula='" + noCedula + "' where Matricula='" + txtMatricula.getText() + "'";
 
                 System.out.println(sql);
@@ -683,6 +683,29 @@ public class pnlProfesionista extends javax.swing.JPanel {
             txtCorreo.setText("");
             btnGuardar.setEnabled(false);
         }
+
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT Matricula FROM Profesionista where Matricula = " + txtMatricula.getText());//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+
+                if (resultadoConsulta.getString("Matricula") != null || resultadoConsulta.getString("Matricula") != "") {
+                    JOptionPane.showMessageDialog(null, "La matricula ya fue registrada\nCorrija y vuelva a intentar");
+                    txtMatricula.setText("");
+                    btnGuardar.setEnabled(false);
+                } else {
+                    btnGuardar.setEnabled(true);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("local " + Matricula);
+
+
     }//GEN-LAST:event_btnGuardarMouseMoved
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -711,17 +734,17 @@ public class pnlProfesionista extends javax.swing.JPanel {
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
-            int filas = jTable1.getRowCount(); 
-            for (int i = 1; i <= filas; i++) { 
-                modeloTabla.removeRow(0); 
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("select * from Profesionista where Matricula like '%" 
-                        + Buscar + "%' or Nombre like '%" 
-                        + Buscar + "%' or apellidoPaterno like '%" 
-                        + Buscar + "%' or apellidoMaterno like '%" 
-                        + Buscar + "%' or CURP like '%" 
-                        + Buscar + "%' or Correo like '%" 
+                resultadoConsulta = conector.consulta("select * from Profesionista where Matricula like '%"
+                        + Buscar + "%' or Nombre like '%"
+                        + Buscar + "%' or apellidoPaterno like '%"
+                        + Buscar + "%' or apellidoMaterno like '%"
+                        + Buscar + "%' or CURP like '%"
+                        + Buscar + "%' or Correo like '%"
                         + Buscar + "%' ");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);

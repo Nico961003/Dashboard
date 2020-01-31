@@ -470,8 +470,8 @@ public class pnlXml extends javax.swing.JPanel {
 
 
                 try {
-                    //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                    String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
+                    String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                    //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
                     String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                             + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                             + "  <FirmaResponsables>\n"
@@ -504,8 +504,8 @@ public class pnlXml extends javax.swing.JPanel {
             }
         }
         JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
-        //abrirarchivo("/home/genaro/Documentos/");
-        abrirarchivo("C:\\Users\\JLIMON\\Documents");
+        abrirarchivo("/home/genaro/Documentos/");
+       // abrirarchivo("C:\\Users\\JLIMON\\Documents");
         tablaTxtB();
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 

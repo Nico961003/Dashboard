@@ -393,8 +393,8 @@ public class pnlTxt extends javax.swing.JPanel {
                     }
 
                     try {
-                        //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
+                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
+                        //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
                         String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
                                 + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
@@ -451,8 +451,8 @@ public class pnlTxt extends javax.swing.JPanel {
                 }
 
                 JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-                //abrirarchivo("/home/genaro/Documentos/");
-                abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
+                abrirarchivo("/home/genaro/Documentos/");
+                //abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
             } catch (Exception e) {
                 System.out.println(e);
             }

@@ -945,9 +945,9 @@ public class pnlTitulos extends javax.swing.JPanel {
         fechaExamen = sdf4.format(fecha4);
 
         if ((String) ComboSSocial.getSelectedItem() == "Si") {
-            sSocial = 0;
-        } else {
             sSocial = 1;
+        } else {
+            sSocial = 0;
         }
         eFederativa = (String) ComboEFederativa.getSelectedItem();
         fundamentoSS = (String) ComboFLegal.getSelectedItem();
