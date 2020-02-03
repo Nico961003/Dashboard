@@ -53,6 +53,8 @@ public class pnlTxt extends javax.swing.JPanel {
     String idCargo = "";
     String cargo = "";
     String abrTitulo = "";
+    String puesto = "";
+    String[] firmantes = new String[5];
 
     String clave = "";
     String nombreCarrera = "";
@@ -216,11 +218,6 @@ public class pnlTxt extends javax.swing.JPanel {
         btnGenerar.setText("Generar");
         btnGenerar.setBgHover(new java.awt.Color(255, 204, 204));
         btnGenerar.setBgShadeHover(new java.awt.Color(124, 20, 52));
-        btnGenerar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnGenerarMouseMoved(evt);
-            }
-        });
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);
@@ -236,7 +233,7 @@ public class pnlTxt extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 705, Short.MAX_VALUE)
+                        .addGap(0, 657, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,11 +305,14 @@ public class pnlTxt extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
                 .addGap(31, 31, 31))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,9 +336,7 @@ public class pnlTxt extends javax.swing.JPanel {
                 if ((Boolean) model.getValueAt(i, 4) == true) {
                     seleccionado[i] = ((String) model.getValueAt(i, 0));
 
-                    System.out.println(seleccionado[i]);
-
-                    //  if (seleccionado[i] != null || seleccionado[i] != "") {
+                    //System.out.println(seleccionado[i]);
                     try {
                         try {
                             resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
@@ -395,8 +393,16 @@ public class pnlTxt extends javax.swing.JPanel {
                     try {
                         String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
                         //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
-                        String contenido = "||1.0|" + folioControl + "|OORM631231HDFSMG03|1|DIRECTOR|LIC.|BEVJ691029HGTRDR09|3|RECTOR|ING."
-                                + "|090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
+                        obtenFirmantes();
+
+                        for (int j = 0; j < 5; j++) {
+                            if (firmantes[j] == null) {
+                                firmantes[j] = "";
+                            }
+                        }
+
+                        String contenido = "||1.0|" + folioControl + "|" + firmantes[0] + firmantes[1] + firmantes[2] + firmantes[3] + firmantes[4]
+                                + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                 + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                                 + modalidadTitulacion + "|" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
@@ -404,8 +410,7 @@ public class pnlTxt extends javax.swing.JPanel {
                                 + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
                                 + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
 
-                        System.out.println(contenido);
-
+                        //System.out.println(contenido);
                         try {
                             String salida = conector.registrar("UPDATE txt set archivo='" + contenido + "' where folioControl='" + folioControl + "'");
                         } catch (ClassNotFoundException ex) {
@@ -432,22 +437,20 @@ public class pnlTxt extends javax.swing.JPanel {
                             } else if (reply == JOptionPane.NO_OPTION) {
 
                             }
+
                         }
-
-                        try {
-                            String cadena = "Update txt set estatus = 'B' where matricula='" + seleccionado[i] + "'";
-                            //System.out.println(cadena);
-                            String salida = conector.registrar(cadena);
-                            System.out.println(salida);
-
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    try {
+                        String cadena = "Update txt set estatus = 'B' where matricula='" + seleccionado[i] + "'";
+                        //System.out.println(cadena);
+                        String salida = conector.registrar(cadena);
+                        System.out.println(salida);
 
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
                 JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
@@ -457,18 +460,15 @@ public class pnlTxt extends javax.swing.JPanel {
                 System.out.println(e);
             }
         }
+        
         tablaTxtA();
-    }//GEN-LAST:event_btnGenerarActionPerformed
-
-    private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
-        TableModel model = jTable1.getModel();
-        String[] seleccionado = new String[100];
-
-        if (jTable1.getRowCount() == 0) {
-            btnGenerar.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Sin registros por generar");
+        tablaResponsable();
+        
+        for (int i = 0; i < 5; i++) {
+            firmantes[i] = null;
         }
-    }//GEN-LAST:event_btnGenerarMouseMoved
+
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
@@ -481,9 +481,9 @@ public class pnlTxt extends javax.swing.JPanel {
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0);
             }
             try {
                 resultadoConsulta = conector.consulta("select * from txt where nombre like '%" + Buscar + "%' or aPaterno like '%"
@@ -492,13 +492,12 @@ public class pnlTxt extends javax.swing.JPanel {
                 Logger.getLogger(pnlCarreras.class
                         .getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[4];//Crea un arreglo de objetos un objeto puede
+            Object[] valores = new Object[4];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 4; i++) {//El numero del for ebe ser igual al de la
-                    valores[i] = resultadoConsulta.getObject(i + 1); //
+                for (int i = 0; i < 4; i++) {
+                    valores[i] = resultadoConsulta.getObject(i + 1);
                 }
-                modeloTabla.addRow(valores);//añade una nueva fila con los datos que
-                //esten en cada psocion del arreglo de objetos
+                modeloTabla.addRow(valores);
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
@@ -518,6 +517,7 @@ public class pnlTxt extends javax.swing.JPanel {
     private rojerusan.RSTableMetro jTable2;
     private rscomponentshade.RSTextFieldShade txtBuscar;
     // End of variables declaration//GEN-END:variables
+    
     public void abrirarchivo(String archivo) {
         try {
             File objetofile = new File(archivo);
@@ -526,4 +526,49 @@ public class pnlTxt extends javax.swing.JPanel {
             System.out.println(ex);
         }
     }
+
+    public void obtenFirmantes() {
+        int i = 0;
+        int j = 0;
+        int valorTabla = jTable2.getRowCount();
+        Integer[] seleccionado = new Integer[5];
+
+        for (i = 0; i < jTable2.getRowCount(); i++) {
+            try {
+                TableModel model2 = jTable2.getModel();
+                if ((model2.getValueAt(i, 4)) != null) {
+                    seleccionado[i] = ((Integer) model2.getValueAt(i, 0));
+                    System.out.println(seleccionado[i]);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        for (i = 0; i < 5; i++) {
+            if (seleccionado[i] != null) {
+                try {
+                    try {
+                        resultadoConsulta = conector.consulta("SELECT Clave, CURP, Puesto, abrev FROM Responsable where Clave=" + seleccionado[i]);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    while (resultadoConsulta.next()) {
+                        clave = resultadoConsulta.getString("Clave");
+                        curpResponsable = resultadoConsulta.getString("CURP");
+                        puesto = resultadoConsulta.getString("Puesto");
+                        abrTitulo = resultadoConsulta.getString("abrev");
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                firmantes[i] = "" + curpResponsable + "|" + clave + "|" + puesto + "|" + abrTitulo + "|";
+                System.out.println(firmantes[i]);
+
+            } else {
+            }
+        }    
+    }
+
 }

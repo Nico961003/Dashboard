@@ -82,13 +82,18 @@ public class pnlXml extends javax.swing.JPanel {
     String archivo = "";
     String archivo2 = "";
 
-    public pnlXml() {
+    ////////////////////////////////////////////////////////////////////
+    String nombreResponsable1 = "", nombreResponsable2 = "";
+    String aPaternoResponsable1 = "", aPaternoResponsable2 = "";
+    String aMaternoResponsable1 = "", aMaternoResponsable2 = "";
+    String curpResponsable1 = "", curpResponsable2 = "";
+    String puesto1 = "", puesto2 = "";
+    String abr1 = "", abr2 = "";
 
-        initComponents();
+    public pnlXml() {
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         tablaTxtB();
-
     }
 
     public void tablaTxtB() {
@@ -113,6 +118,7 @@ public class pnlXml extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -121,13 +127,12 @@ public class pnlXml extends javax.swing.JPanel {
 
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        txtBuscar = new rscomponentshade.RSTextFieldShade();
-        btnBuscar1 = new rscomponentshade.RSButtonShade();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
-        rSButtonShade5 = new rscomponentshade.RSButtonShade();
         rSButtonShade4 = new rscomponentshade.RSButtonShade();
+        rSButtonShade5 = new rscomponentshade.RSButtonShade();
+        txtBuscar = new rscomponentshade.RSTextFieldShade();
+        btnBuscar1 = new rscomponentshade.RSButtonShade();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -139,30 +144,6 @@ public class pnlXml extends javax.swing.JPanel {
         jLabel7.setIconTextGap(10);
 
         jPanel3.setBackground(new java.awt.Color(243, 242, 242));
-
-        jPanel4.setBackground(new java.awt.Color(243, 242, 242));
-
-        txtBuscar.setPlaceholder("Buscar . . .");
-        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtBuscarCaretUpdate(evt);
-            }
-        });
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
-
-        btnBuscar1.setBackground(new java.awt.Color(124, 20, 52));
-        btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lupa.png"))); // NOI18N
-        btnBuscar1.setBgHover(new java.awt.Color(124, 20, 52));
-        btnBuscar1.setBgShadeHover(new java.awt.Color(255, 204, 204));
-        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscar1ActionPerformed(evt);
-            }
-        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,16 +183,6 @@ public class pnlXml extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        rSButtonShade5.setBackground(new java.awt.Color(124, 20, 52));
-        rSButtonShade5.setText("Devolver");
-        rSButtonShade5.setBgHover(new java.awt.Color(255, 204, 204));
-        rSButtonShade5.setBgShadeHover(new java.awt.Color(124, 20, 52));
-        rSButtonShade5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade5ActionPerformed(evt);
-            }
-        });
-
         rSButtonShade4.setBackground(new java.awt.Color(124, 20, 52));
         rSButtonShade4.setText("Firmar");
         rSButtonShade4.setBgHover(new java.awt.Color(255, 204, 204));
@@ -222,40 +193,37 @@ public class pnlXml extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(162, 162, 162))
-        );
+        rSButtonShade5.setBackground(new java.awt.Color(124, 20, 52));
+        rSButtonShade5.setText("Devolver");
+        rSButtonShade5.setBgHover(new java.awt.Color(255, 204, 204));
+        rSButtonShade5.setBgShadeHover(new java.awt.Color(124, 20, 52));
+        rSButtonShade5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonShade5ActionPerformed(evt);
+            }
+        });
+
+        txtBuscar.setPlaceholder("Buscar . . .");
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+
+        btnBuscar1.setBackground(new java.awt.Color(124, 20, 52));
+        btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lupa.png"))); // NOI18N
+        btnBuscar1.setBgHover(new java.awt.Color(124, 20, 52));
+        btnBuscar1.setBgShadeHover(new java.awt.Color(255, 204, 204));
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -263,21 +231,45 @@ public class pnlXml extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 462, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(94, 94, 94))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -285,7 +277,8 @@ public class pnlXml extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -310,7 +303,8 @@ public class pnlXml extends javax.swing.JPanel {
                     System.out.println(salida);
 
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(pnlTitulos.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -373,7 +367,8 @@ public class pnlXml extends javax.swing.JPanel {
                     try {
                         resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(pnlTxt.class
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
                     while (resultadoConsulta.next()) {
 
@@ -424,16 +419,23 @@ public class pnlXml extends javax.swing.JPanel {
 
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(pnlXml.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
 
                 try {
                     resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=1");//establecimiento de sentencia aejecutar
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(pnlXml.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 while (resultadoConsulta.next()) {
-                    
+                    nombreResponsable1 = resultadoConsulta.getString("Nombre");
+                    aPaternoResponsable1 = resultadoConsulta.getString("apellidoPaterno");
+                    aMaternoResponsable1 = resultadoConsulta.getString("apellidoMaterno");
+                    curpResponsable1 = resultadoConsulta.getString("CURP");
+                    puesto1 = resultadoConsulta.getString("Puesto");
+                    abr1 = resultadoConsulta.getString("abr");
                     Llave = resultadoConsulta.getString("Llave");
                     Certificado = resultadoConsulta.getString("Certificado");
                     pass = resultadoConsulta.getString("pass");
@@ -443,9 +445,16 @@ public class pnlXml extends javax.swing.JPanel {
                 try {
                     resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(pnlXml.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 while (resultadoConsulta.next()) {
+                    nombreResponsable2 = resultadoConsulta.getString("Nombre");
+                    aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
+                    aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
+                    curpResponsable2 = resultadoConsulta.getString("CURP");
+                    puesto2 = resultadoConsulta.getString("Puesto");
+                    abr2 = resultadoConsulta.getString("abr");
                     Llave2 = resultadoConsulta.getString("Llave");
                     Certificado2 = resultadoConsulta.getString("Certificado");
                     pass2 = resultadoConsulta.getString("pass");
@@ -461,22 +470,22 @@ public class pnlXml extends javax.swing.JPanel {
                 }
 
                 try {
-                    Llave2 = sign2(Llave2, pass2, archivo2);
+                    Llave2 = sign(Llave2, pass2, archivo2);
                     System.out.println("llave2 " + Llave2);
-                    Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
+                    Certificado2 = Base64.encodeBase64String(toByteArray(Certificado2));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-
                 try {
+
                     String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
                     //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
                     String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                             + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                             + "  <FirmaResponsables>\n"
-                            + "    <FirmaResponsable nombre=\"MIGUEL\" primerApellido=\"OSORIO\" segundoApellido=\"RAMOS\" curp=\"OORM631231HDFSMG03\" idCargo=\"1\" cargo=\"DIRECTOR\" abrTitulo=\"LIC.\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                            + "    <FirmaResponsable nombre=\"JORGE\" primerApellido=\"BERRUETA\" segundoApellido=\"VIDEGARAY\" curp=\"BEVJ691029HGTRDR09\" idCargo=\"3\" cargo=\"RECTOR\" abrTitulo=\"ING.\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
+                            + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"1\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abr1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
+                            + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abr2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
                             + "  </FirmaResponsables>\n"
                             + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                             + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -496,6 +505,7 @@ public class pnlXml extends javax.swing.JPanel {
                     bw.write(contenido);
                     bw.close();
                     JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -505,7 +515,7 @@ public class pnlXml extends javax.swing.JPanel {
         }
         JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
         abrirarchivo("/home/genaro/Documentos/");
-       // abrirarchivo("C:\\Users\\JLIMON\\Documents");
+        // abrirarchivo("C:\\Users\\JLIMON\\Documents");
         tablaTxtB();
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 
@@ -514,7 +524,6 @@ public class pnlXml extends javax.swing.JPanel {
     private rscomponentshade.RSButtonShade btnBuscar1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private rojerusan.RSTableMetro jTable1;
     private rscomponentshade.RSButtonShade rSButtonShade4;
@@ -548,18 +557,6 @@ public class pnlXml extends javax.swing.JPanel {
         return Base64.encodeBase64String(signature.sign());
     }
 
-    public static String sign2(String keyPath2, String password2, String toSign2) throws Exception {
-        //System.out.println("filepath : " + keyPath2);
-        final PKCS8Key pkcs8Key2 = new PKCS8Key(toByteArray2(keyPath2), password2.toCharArray());
-        final PrivateKey privateKey2 = pkcs8Key2.getPrivateKey();
-        //System.out.println("private " + privateKey2);
-        final Signature signature2 = Signature.getInstance("SHA256withRSA");
-        signature2.initSign(privateKey2);
-        signature2.update(toSign2.getBytes("UTF-8"));
-
-        return Base64.encodeBase64String(signature2.sign());
-    }
-
     private static byte[] toByteArray(String filePath) throws Exception {
 
         File f = new File(filePath);
@@ -572,20 +569,6 @@ public class pnlXml extends javax.swing.JPanel {
         fis.close();
 
         return fbytes;
-    }
-
-    private static byte[] toByteArray2(String filePath2) throws Exception {
-
-        File f2 = new File(filePath2);
-
-        FileInputStream fis2 = new FileInputStream(f2);
-
-        byte[] fbytes2 = new byte[(int) f2.length()];
-
-        fis2.read(fbytes2);
-        fis2.close();
-
-        return fbytes2;
     }
 
     private void selectFile(JTextField txtfld, String[] extensionArray) {

@@ -80,41 +80,68 @@ public class pnlResponsables extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
         }
+
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT CARGO_FIRMANTE FROM cargos");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                ComboCargo.addItem(resultadoConsulta.getString("CARGO_FIRMANTE"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void comboClave() {
 
         int comparaClave = 0;
-        int combo1 = ((Integer) Integer.parseInt(ComboClave.getItemAt(0)));
-        int combo2 = ((Integer) Integer.parseInt(ComboClave.getItemAt(1)));
-        int combo3 = ((Integer) Integer.parseInt(ComboClave.getItemAt(2)));
-        int combo4 = ((Integer) Integer.parseInt(ComboClave.getItemAt(3)));
-        int combo5 = ((Integer) Integer.parseInt(ComboClave.getItemAt(4)));
-
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT Clave FROM Responsable");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            while (resultadoConsulta.next()) {
-                comparaClave = resultadoConsulta.getInt("Clave");
-                if (comparaClave == combo1) {
-                    ComboClave.removeItem(""+ combo1 + "");
-                } else if (comparaClave == combo2) {
-                    ComboClave.removeItem(""+ combo2 + "");
-                } else if (comparaClave == combo3) {
-                    ComboClave.removeItem(""+ combo3 + "");
-                } else if (comparaClave == combo4) {
-                    ComboClave.removeItem(""+ combo4 + "");
-                } else if (comparaClave == combo5) {
-                    ComboClave.removeItem(""+ combo5 + "");
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+        Integer[] valores = new Integer[5];
+        for (int i = 0; i < 5; i++) {
+            valores[i] = ((Integer) Integer.parseInt(ComboClave.getItemAt(i)));
         }
 
+        for (int i = 0; i < 5; i++) {
+            try {
+                try {
+                    resultadoConsulta = conector.consulta("SELECT Clave FROM Responsable where Clave = " + valores[i]);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                while (resultadoConsulta.next()) {
+                    valores[i] = resultadoConsulta.getInt("Clave");
+                    ComboClave.removeItem(valores[i].toString());
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void prueba(){
+        int comparaClave = 0;
+        String prueba = (String) ComboClave.getSelectedItem();
+
+        for (int i = 0; i < 5; i++) {
+            try {
+                try {
+                    resultadoConsulta = conector.consulta("SELECT Clave FROM Responsable where Clave = " + prueba );
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                while (resultadoConsulta.next()) {
+                    prueba = resultadoConsulta.getString("Clave");
+                    System.out.println("valores " + prueba);
+                    ComboClave.removeItem(prueba);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -233,6 +260,9 @@ public class pnlResponsables extends javax.swing.JPanel {
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jTable1.setSelectionBackground(new java.awt.Color(124, 20, 52));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
@@ -334,7 +364,6 @@ public class pnlResponsables extends javax.swing.JPanel {
             }
         });
 
-        ComboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DIRECTOR", "RECTOR" }));
         ComboCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboCargoActionPerformed(evt);
@@ -532,7 +561,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
                 String sql = "Update Responsable set Clave=" + Clave + ", Nombre='" + Nombre
                         + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
-                        + "', CURP='" + CURP + "', Puesto='" + Puesto + "', abr='" + abr
+                        + "', CURP='" + CURP + "', Puesto='" + Puesto + "', abrev='" + abr
                         + "', Llave='" + Llave + "', Certificado='" + Certificado + "', pass='" + pass + "' where Clave='" + Clave + "'";
 
                 System.out.println(sql);
@@ -567,7 +596,6 @@ public class pnlResponsables extends javax.swing.JPanel {
 
     private void btnLimpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiaActionPerformed
         limpiar();
-
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -595,6 +623,8 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+
         ComboClave.setEnabled(false);
         int seleccionada = jTable1.rowAtPoint((evt.getPoint()));
         String combo = "";
@@ -626,6 +656,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnAgregar.setEnabled(false);
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void ComboCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCargoActionPerformed
@@ -650,6 +681,10 @@ public class pnlResponsables extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboAbrActionPerformed
 
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        prueba();
+    }//GEN-LAST:event_jTable1MousePressed
+
     public void capturarDatos() {
 
         Clave = (String) ComboClave.getSelectedItem();
@@ -664,7 +699,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         Certificado = txtFldCer.getText().toString();
         Llave = txtFldKey.getText().toString();
         pass = new String(psswrdFldPass.getPassword());
-        Certificado= Certificado.replace("\\", "\\\\");
+        Certificado = Certificado.replace("\\", "\\\\");
         Llave = Llave.replace("\\", "\\\\");
         System.out.println("Certificado " + Certificado);
         System.out.println("Llave " + Llave);
@@ -675,7 +710,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
 
-            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, pass) VALUES ('" + Clave + "','" + Nombre + "','" + apellidoPaterno
+            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass) VALUES ('" + Clave + "','" + Nombre + "','" + apellidoPaterno
                     + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
 
             System.out.println(sql);
@@ -691,7 +726,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
     public void limpiar() {
 
-        ComboClave.setEnabled(true);
+        prueba();
         txtNombre.setText("");
         txtapellidoPaterno.setText("");
         txtapellidoMaterno.setText("");
@@ -702,7 +737,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         btnAgregar.setEnabled(true);
-        comboClave();
+        ComboClave.setEnabled(true);
 
     }
 
