@@ -772,7 +772,7 @@ public class pnlTitulos extends javax.swing.JPanel {
             }
             while (resultadoConsulta.next()) {
                 String combo = "";
-                if (resultadoConsulta.getInt("sSocial") == 0) {
+                if (resultadoConsulta.getInt("sSocial") == 1) {
                     combo = "Si";
                 } else {
                     combo = "No";
@@ -827,7 +827,7 @@ public class pnlTitulos extends javax.swing.JPanel {
                 DateFechaTermino.setDate(resultadoConsulta.getDate("fechaFinCarrera"));
                 DateExpedicion.setDate(resultadoConsulta.getDate("fechaExpedicion"));
                 DateExamenP.setDate(resultadoConsulta.getDate("fechaExamen"));
-                if (resultadoConsulta.getInt("sSocial") == 0) {
+                if (resultadoConsulta.getInt("sSocial") == 1) {
                     ComboSSocial.setSelectedItem("Si");
                 } else {
                     ComboSSocial.setSelectedItem("No");

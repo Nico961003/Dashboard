@@ -79,15 +79,9 @@ idTipoEstudioAntecedente,tipodeEstudio,noCedula ) VALUES ('123','2020-01-18','1'
 
 
 
-
-
-select * from txt
-    --curpResponsable 
-    --idCargo 
-    --cargo 
-    --abrTitulo 
-
-
-
 create user root@localhost identified by'Supervi$or123'
 GRANT ALL PRIVILEGES ON tituloProfesional.* TO 'root'@'localhost';
+
+
+
+

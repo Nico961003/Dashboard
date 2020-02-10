@@ -56,11 +56,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
         btnModificar.setEnabled(false);
         btnBorrar.setEnabled(false);
 
-        tablaProfesionista();
+        //tablaProfesionista();
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM entidadFederativa");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT nombreEntidad FROM entidadFederativa");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -405,7 +405,7 @@ public class pnlTxt extends javax.swing.JPanel {
                                 + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                 + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
-                                + modalidadTitulacion + "|" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                + modalidadTitulacion + "||" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                                 + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
                                 + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
                                 + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
