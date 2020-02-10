@@ -52,7 +52,7 @@ public class pnlResponsables extends javax.swing.JPanel {
     public pnlResponsables() {
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
-        //tablaReponsables();
+        tablaReponsables();
         comboClave();
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
