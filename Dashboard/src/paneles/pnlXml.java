@@ -88,7 +88,7 @@ public class pnlXml extends javax.swing.JPanel {
     String aMaternoResponsable1 = "", aMaternoResponsable2 = "";
     String curpResponsable1 = "", curpResponsable2 = "";
     String puesto1 = "", puesto2 = "";
-    String abr1 = "", abr2 = "";
+    String abrev1 = "", abrev2 = "";
 
     public pnlXml() {
         initComponents();
@@ -435,7 +435,7 @@ public class pnlXml extends javax.swing.JPanel {
                     aMaternoResponsable1 = resultadoConsulta.getString("apellidoMaterno");
                     curpResponsable1 = resultadoConsulta.getString("CURP");
                     puesto1 = resultadoConsulta.getString("Puesto");
-                    abr1 = resultadoConsulta.getString("abr");
+                    abrev1 = resultadoConsulta.getString("abrev");
                     Llave = resultadoConsulta.getString("Llave");
                     Certificado = resultadoConsulta.getString("Certificado");
                     pass = resultadoConsulta.getString("pass");
@@ -454,7 +454,7 @@ public class pnlXml extends javax.swing.JPanel {
                     aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
                     curpResponsable2 = resultadoConsulta.getString("CURP");
                     puesto2 = resultadoConsulta.getString("Puesto");
-                    abr2 = resultadoConsulta.getString("abr");
+                    abrev2 = resultadoConsulta.getString("abrev");
                     Llave2 = resultadoConsulta.getString("Llave");
                     Certificado2 = resultadoConsulta.getString("Certificado");
                     pass2 = resultadoConsulta.getString("pass");
@@ -484,8 +484,8 @@ public class pnlXml extends javax.swing.JPanel {
                     String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                             + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                             + "  <FirmaResponsables>\n"
-                            + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"1\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abr1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                          //  + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abr2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
+                            + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"1\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
+                            + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
                             + "  </FirmaResponsables>\n"
                             + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                             + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -515,7 +515,7 @@ public class pnlXml extends javax.swing.JPanel {
         }
         JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
         abrirarchivo("/home/genaro/Documentos/");
-        // abrirarchivo("C:\\Users\\JLIMON\\Documents");
+         //abrirarchivo("C:\\Users\\JLIMON\\Documents");
         tablaTxtB();
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 

@@ -392,7 +392,7 @@ public class pnlTxt extends javax.swing.JPanel {
 
                     try {
                         String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".txt";
-                        //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
+                       // String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
                         obtenFirmantes();
 
                         for (int j = 0; j < 5; j++) {

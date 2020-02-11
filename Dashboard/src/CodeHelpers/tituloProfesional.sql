@@ -34,6 +34,7 @@ noCertificadoResponsable   varchar(50)
     estatus						varchar(1)
    )
  
+
 create table txt(
 	folioControl					varchar(50), 
     fechaExpedicion 				varchar(50),
@@ -49,26 +50,32 @@ create table txt(
     CURP 							varchar(50),
 	sSocial 						varchar(50),
     idFundamentoLegalServicioSocial	varchar(50),
-    fundamentoSS 					varchar(50),
+    idEntidadFederativa 			varchar(50),
+	eFederativa						varchar(50),
+    fundamentoSS 					varchar(200),
     
 	clave 							varchar(50),
-    nombreCarrera 					varchar(50),
+    nombreCarrera 					varchar(70),
     numeroRvoe 						varchar(50),
+    fechaInicioCarrera				varchar(50),
+    fechaFinCarrera					varchar(50),
     clave_autorizacion 				varchar(50),
     autorizacion_reconocimiento		varchar(50),
     
     institucionProcedencia			varchar(50),
-    idEntidadFederativa 			varchar(50),
-	eFederativa						varchar(50),
+    idEntidadFederativa2 			varchar(50),
+	eFederativa2					varchar(50),
     fechaAntInicio 					varchar(50),
     fechaAntTermino					varchar(50),
     idTipoEstudioAntecedente		varchar(50),
 	tipodeEstudio 					varchar(50),
     noCedula  						varchar(50),
-    
-    estatus							varchar(1)
+
+    estatus							varchar(1),
+    archivo							text(65535)
     
 )
+
 
 create table Carreras (
 IdCarrera   int primary key not null,
@@ -100,15 +107,11 @@ create table Responsable(
 	apellidoMaterno 			varchar(50),
 	CURP 						varchar(50),
 	Puesto 						varchar(50),
-    abr							varchar(50),
+    abrev						varchar(50),
 	Llave 						varchar(500),
 	Certificado 				varchar(500),
     pass						varchar(100)
 )
-
-
-
-
 
 
 
