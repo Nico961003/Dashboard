@@ -82,6 +82,7 @@ public class Principal extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(243, 242, 242));
         pnlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 5, 0, 0, new java.awt.Color(239, 238, 244)));
 
+        uno.setBackground(new java.awt.Color(243, 242, 242));
         uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
         uno.setText("Principal");
         uno.setColorHover(new java.awt.Color(124, 20, 52));
@@ -125,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
+        tres.setBackground(new java.awt.Color(243, 242, 242));
         tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Estudiantes.png"))); // NOI18N
         tres.setText("Alumnos");
         tres.setColorHover(new java.awt.Color(124, 20, 52));
@@ -145,6 +147,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        dos.setBackground(new java.awt.Color(243, 242, 242));
         dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrera.png"))); // NOI18N
         dos.setText("Carreras");
         dos.setColorHover(new java.awt.Color(124, 20, 52));
@@ -165,6 +168,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        cinco.setBackground(new java.awt.Color(243, 242, 242));
         cinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Responsable.png"))); // NOI18N
         cinco.setText("Responsables");
         cinco.setColorHover(new java.awt.Color(124, 20, 52));
@@ -207,6 +211,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        ocho.setBackground(new java.awt.Color(243, 242, 242));
         ocho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelaciones.png"))); // NOI18N
         ocho.setText("Cancelaciones");
         ocho.setColorHover(new java.awt.Color(124, 20, 52));
@@ -227,6 +232,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        siete.setBackground(new java.awt.Color(243, 242, 242));
         siete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/xml.png"))); // NOI18N
         siete.setText("Archivos XML");
         siete.setColorHover(new java.awt.Color(124, 20, 52));
@@ -247,6 +253,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        seis.setBackground(new java.awt.Color(243, 242, 242));
         seis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/txt.png"))); // NOI18N
         seis.setText("Archivos TXT");
         seis.setColorHover(new java.awt.Color(124, 20, 52));
@@ -267,6 +274,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        cuatro.setBackground(new java.awt.Color(243, 242, 242));
         cuatro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/titulo.png"))); // NOI18N
         cuatro.setText("Títulos");
         cuatro.setColorHover(new java.awt.Color(124, 20, 52));
@@ -287,6 +295,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        nueve.setBackground(new java.awt.Color(243, 242, 242));
         nueve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
         nueve.setText("Configuración");
         nueve.setColorHover(new java.awt.Color(124, 20, 52));
@@ -676,12 +685,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_dosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int posicion = pnlMenu.getX();
+      /* int posicion = pnlMenu.getX();
         if(posicion > -1){
             Animacion.Animacion.mover_izquierda(0, -264, 2, 2, pnlMenu);
         }else{
             Animacion.Animacion.mover_derecha(-264, 0, 2, 2, pnlMenu);
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ochoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ochoMousePressed
