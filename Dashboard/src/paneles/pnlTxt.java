@@ -426,7 +426,6 @@ public class pnlTxt extends javax.swing.JPanel {
                             idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
                             tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
                             noCedula = resultadoConsulta.getString("noCedula");
-                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
                             fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
                             fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
                             noRvoe = resultadoConsulta.getString("numeroRvoe");
@@ -441,14 +440,15 @@ public class pnlTxt extends javax.swing.JPanel {
 
                         for (int j = 0; j < 5; j++) {
                             if (firmantes[j] != null) {
-                                if (modalidadTitulacion != "POR TESIS") {
+                                System.out.println("modalidad: " + modalidadTitulacion);
+                                if (modalidadTitulacion.equals("POR TESIS")) {
                                     //String ruta = "/home/genaro/Documentos/" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
                                             + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                             + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
-                                            + modalidadTitulacion + "||" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                            + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                                             + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
                                             + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
                                             + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
@@ -486,7 +486,7 @@ public class pnlTxt extends javax.swing.JPanel {
                                             + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                             + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
-                                            + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                            + modalidadTitulacion + "||" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
                                             + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
                                             + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
                                             + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";

@@ -56,7 +56,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         btnModificar.setEnabled(false);
         btnBorrar.setEnabled(false);
 
-        //tablaProfesionista();
+        tablaProfesionista();
 
         try {
             try {
