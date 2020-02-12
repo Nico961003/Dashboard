@@ -323,8 +323,8 @@ public class pnlTxt extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -442,7 +442,7 @@ public class pnlTxt extends javax.swing.JPanel {
                         for (int j = 0; j < 5; j++) {
                         if(firmantes[j] != null){
                         //String ruta = "/home/genaro/Documentos/" + j + "_TituloElectronico_" + matricula + ".txt";
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".txt";
+                        String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
                         String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
                                 + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                 + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
