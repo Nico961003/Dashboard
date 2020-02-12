@@ -1113,14 +1113,15 @@ public class pnlTitulos extends javax.swing.JPanel {
                     + "idFundamentoLegalServicioSocial,idEntidadFederativa,eFederativa,fundamentoSS,clave,nombreCarrera,\n"
                     + "numeroRvoe,fechaInicioCarrera,fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento, \n"
                     + "institucionProcedencia,idEntidadFederativa2,eFederativa2,fechaAntInicio,fechaAntTermino,\n"
-                    + "idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo) VALUES ('" + folioControl + "','" + fechaExpedicion + "','"
+                    + "idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo0,archivo1,archivo2,archivo3,archivo4) VALUES ('" 
+                    + folioControl + "','" + fechaExpedicion + "','"
                     + idModalidadTitulacion + "','" + modalidadTitulacion + "','" + fechaExamen + "','"
                     + matricula + "','" + nombre + "','" + aPaterno + "','" + aMaterno + "','" + correo + "','"
                     + CURP + "','" + sSocial + "','" + idFundamentoLegalServicioSocial + "','" + idEntidadFederativa + "','" + eFederativa + "','" 
                     + fundamentoSS + "','" + clave + "','" + nombreCarrera + "','" + noRvoe + "','" + fechaInicioCarrera + "','" + fechaFinCarrera + "','"
                     + clave_autorizacion + "','" + autorizacion_reconocimiento + "','" + institucionProcedencia + "','"
                     + idEntidadFederativa2 + "','" + eFederativa2 + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"
-                    + idTipoEstudioAntecedente + "','" + tipodeEstudio + "','" + noCedula + "','A','Pendiente')";
+                    + idTipoEstudioAntecedente + "','" + tipodeEstudio + "','" + noCedula + "','A','Pendiente','Pendiente','Pendiente','Pendiente','Pendiente')";
 
             System.out.println(cadena);
             String salida = conector.registrar(cadena);

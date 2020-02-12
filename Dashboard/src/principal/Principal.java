@@ -82,7 +82,6 @@ public class Principal extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(243, 242, 242));
         pnlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 5, 0, 0, new java.awt.Color(239, 238, 244)));
 
-        uno.setBackground(new java.awt.Color(243, 242, 242));
         uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
         uno.setText("Principal");
         uno.setColorHover(new java.awt.Color(124, 20, 52));
@@ -126,7 +125,6 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        tres.setBackground(new java.awt.Color(243, 242, 242));
         tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Estudiantes.png"))); // NOI18N
         tres.setText("Alumnos");
         tres.setColorHover(new java.awt.Color(124, 20, 52));
@@ -147,7 +145,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        dos.setBackground(new java.awt.Color(243, 242, 242));
         dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrera.png"))); // NOI18N
         dos.setText("Carreras");
         dos.setColorHover(new java.awt.Color(124, 20, 52));
@@ -168,7 +165,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        cinco.setBackground(new java.awt.Color(243, 242, 242));
         cinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Responsable.png"))); // NOI18N
         cinco.setText("Responsables");
         cinco.setColorHover(new java.awt.Color(124, 20, 52));
@@ -211,7 +207,6 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        ocho.setBackground(new java.awt.Color(243, 242, 242));
         ocho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelaciones.png"))); // NOI18N
         ocho.setText("Cancelaciones");
         ocho.setColorHover(new java.awt.Color(124, 20, 52));
@@ -232,7 +227,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        siete.setBackground(new java.awt.Color(243, 242, 242));
         siete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/xml.png"))); // NOI18N
         siete.setText("Archivos XML");
         siete.setColorHover(new java.awt.Color(124, 20, 52));
@@ -253,7 +247,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        seis.setBackground(new java.awt.Color(243, 242, 242));
         seis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/txt.png"))); // NOI18N
         seis.setText("Archivos TXT");
         seis.setColorHover(new java.awt.Color(124, 20, 52));
@@ -274,7 +267,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        cuatro.setBackground(new java.awt.Color(243, 242, 242));
         cuatro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/titulo.png"))); // NOI18N
         cuatro.setText("Títulos");
         cuatro.setColorHover(new java.awt.Color(124, 20, 52));
@@ -295,7 +287,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        nueve.setBackground(new java.awt.Color(243, 242, 242));
         nueve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuracion.png"))); // NOI18N
         nueve.setText("Configuración");
         nueve.setColorHover(new java.awt.Color(124, 20, 52));
@@ -464,10 +455,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 998, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

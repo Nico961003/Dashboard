@@ -44,6 +44,7 @@ public class pnlResponsables extends javax.swing.JPanel {
     String Llave = "";
     String Certificado = "";
     String pass = "";
+    String idResponsable = "";
 
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
@@ -562,7 +563,7 @@ public class pnlResponsables extends javax.swing.JPanel {
                 String sql = "Update Responsable set Clave=" + Clave + ", Nombre='" + Nombre
                         + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
                         + "', CURP='" + CURP + "', Puesto='" + Puesto + "', abrev='" + abr
-                        + "', Llave='" + Llave + "', Certificado='" + Certificado + "', pass='" + pass + "' where Clave='" + Clave + "'";
+                        + "', Llave='" + Llave + "', Certificado='" + Certificado + "', pass='" + pass + "', idResponsable='" + idResponsable + "' where Clave='" + Clave + "'";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
@@ -693,6 +694,22 @@ public class pnlResponsables extends javax.swing.JPanel {
         apellidoMaterno = txtapellidoMaterno.getText().toUpperCase();
         CURP = txtCURP.getText().toUpperCase();
         Puesto = (String) ComboCargo.getSelectedItem();
+        
+        
+         try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT ID_CARGO  FROM cargos where CARGO_FIRMANTE ='" + Puesto + "'");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (resultadoConsulta.next()) {
+                idResponsable= resultadoConsulta.getString("ID_CARGO");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
         abr = (String) ComboAbr.getSelectedItem();
 
         StringBuffer result = new StringBuffer();
@@ -710,8 +727,8 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
 
-            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass) VALUES ('" + Clave + "','" + Nombre + "','" + apellidoPaterno
-                    + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
+            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass, idResponsable) VALUES ('" + Clave + "','" + Nombre + "','" + apellidoPaterno
+                    + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "','" + idResponsable + "')";
 
             System.out.println(sql);
             String salida = conector.registrar(sql);

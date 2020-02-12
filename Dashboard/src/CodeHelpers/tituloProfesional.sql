@@ -72,7 +72,11 @@ create table txt(
     noCedula  						varchar(50),
 
     estatus							varchar(1),
-    archivo							text(65535)
+    archivo0						text(65535),
+    archivo1						text(65535),
+    archivo2						text(65535),
+    archivo3						text(65535),
+    archivo4						text(65535)
     
 )
 
@@ -110,11 +114,9 @@ create table Responsable(
     abrev						varchar(50),
 	Llave 						varchar(500),
 	Certificado 				varchar(500),
-    pass						varchar(100)
+    pass						varchar(100),
+	idResponsable               varchar(30)
 )
-
-
-
 
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8

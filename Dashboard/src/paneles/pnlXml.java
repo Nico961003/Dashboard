@@ -382,8 +382,6 @@ public class pnlXml extends javax.swing.JPanel {
                     seleccionado[i] = ((String) model.getValueAt(i, 0));
                 }
 
-                //System.out.println(seleccionado[i]);
-                // if (seleccionado[i] != null || seleccionado[i] != "") {
                 try {
                     try {
                         resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
@@ -432,8 +430,8 @@ public class pnlXml extends javax.swing.JPanel {
                         tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
                         noCedula = resultadoConsulta.getString("noCedula");
                         idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
-                        archivo = resultadoConsulta.getString("archivo");
-                        archivo2 = resultadoConsulta.getString("archivo");
+                        archivo = resultadoConsulta.getString("archivo0");
+                        archivo2 = resultadoConsulta.getString("archivo1");
                         fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
                         fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
                         noRvoe = resultadoConsulta.getString("numeroRvoe");
@@ -461,6 +459,9 @@ public class pnlXml extends javax.swing.JPanel {
                     Certificado = resultadoConsulta.getString("Certificado");
                     pass = resultadoConsulta.getString("pass");
 
+                    Llave = sign(Llave, pass, archivo);
+                    Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+
                 }
 
                 try {
@@ -480,33 +481,21 @@ public class pnlXml extends javax.swing.JPanel {
                     Certificado2 = resultadoConsulta.getString("Certificado");
                     pass2 = resultadoConsulta.getString("pass");
 
-                }
-
-                try {
-                    Llave = sign(Llave, pass, archivo);
-                    Certificado = Base64.encodeBase64String(toByteArray(Certificado));
-                    System.out.println("llave " + Llave);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    Llave2 = sign(Llave2, pass2, archivo2);
+                    Llave2 = sign2(Llave2, pass2, archivo2);
                     System.out.println("llave2 " + Llave2);
-                    Certificado2 = Base64.encodeBase64String(toByteArray(Certificado2));
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
+
                 }
 
                 try {
 
-                    String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                    //String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
+                    //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                    String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
                     String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                             + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                             + "  <FirmaResponsables>\n"
                             + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"1\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                            + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000100164040\"/>\n"
+                            + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
                             + "  </FirmaResponsables>\n"
                             + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                             + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -535,8 +524,8 @@ public class pnlXml extends javax.swing.JPanel {
             }
         }
         JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
-        abrirarchivo("/home/genaro/Documentos/");
-         //abrirarchivo("C:\\Users\\JLIMON\\Documents");
+        //abrirarchivo("/home/genaro/Documentos/");
+        abrirarchivo("C:\\Users\\JLIMON\\Documents");
         tablaTxtB();
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 
@@ -630,6 +619,32 @@ public class pnlXml extends javax.swing.JPanel {
         } catch (IOException ex) {
             // System.out.println(ex);
         }
+    }
+
+    public static String sign2(String keyPath2, String password2, String toSign2) throws Exception {
+        System.out.println("filepath : " + keyPath2);
+        final PKCS8Key pkcs8Key2 = new PKCS8Key(toByteArray2(keyPath2), password2.toCharArray());
+        final PrivateKey privateKey2 = pkcs8Key2.getPrivateKey();
+        System.out.println("private " + privateKey2);
+        final Signature signature2 = Signature.getInstance("SHA256withRSA");
+        signature2.initSign(privateKey2);
+        signature2.update(toSign2.getBytes("UTF-8"));
+
+        return Base64.encodeBase64String(signature2.sign());
+    }
+
+    private static byte[] toByteArray2(String filePath2) throws Exception {
+
+        File f2 = new File(filePath2);
+
+        FileInputStream fis2 = new FileInputStream(f2);
+
+        byte[] fbytes2 = new byte[(int) f2.length()];
+
+        fis2.read(fbytes2);
+        fis2.close();
+
+        return fbytes2;
     }
 
 }
