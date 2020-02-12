@@ -489,7 +489,7 @@ public class pnlXml extends javax.swing.JPanel {
 
                 try {
 
-                    if (modalidadTitulacion != "POR TESIS") {
+                    if (modalidadTitulacion.equals("POR TESIS")) {
                         //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
                         String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -501,7 +501,7 @@ public class pnlXml extends javax.swing.JPanel {
                                 + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
                                 + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
-                                + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
+                                + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
                                 + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
                                 + "</TituloElectronico>";
 
@@ -528,7 +528,7 @@ public class pnlXml extends javax.swing.JPanel {
                                 + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
                                 + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
-                                + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
+                                + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
                                 + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
                                 + "</TituloElectronico>";
 
