@@ -31,6 +31,7 @@ public class CambiaPanel {
         this.container.add(this.content);
         this.container.revalidate();
         this.container.repaint();
+        
     }
 
 }//--> fin clase

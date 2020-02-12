@@ -9,12 +9,12 @@ package paneles;
  *
  * @author RojeruSan
  */
-public class pnlPrincipal extends javax.swing.JPanel {
+public class pnlConfiguracion extends javax.swing.JPanel {
 
     /**
      * Creates new form pnlHome
      */
-    public pnlPrincipal() {
+    public pnlConfiguracion() {
         initComponents();
     }
 
@@ -37,8 +37,8 @@ public class pnlPrincipal extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/home.png"))); // NOI18N
-        jLabel7.setText("PRINCIPAL");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/configuracion.png"))); // NOI18N
+        jLabel7.setText("CONFIGURACIÓN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,7 +57,7 @@ public class pnlPrincipal extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

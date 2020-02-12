@@ -390,4 +390,8 @@ public class pnlCancelaciones extends javax.swing.JPanel {
     private rscomponentshade.RSTextFieldShade txtNombre;
     private rscomponentshade.RSTextFieldShade txtapellidoMaterno;
     // End of variables declaration//GEN-END:variables
+
+    private void setLocationRelativeTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

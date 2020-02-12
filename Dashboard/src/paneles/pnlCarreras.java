@@ -31,7 +31,6 @@ public class pnlCarreras extends javax.swing.JPanel {
 
     public pnlCarreras() {
         initComponents();
-        //this.setLocationRelativeTo(null);
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         btnBuscar.setEnabled(false);
         btnBorrar.setEnabled(false);
@@ -130,7 +129,7 @@ public class pnlCarreras extends javax.swing.JPanel {
         jPanel8.setBackground(new java.awt.Color(243, 242, 242));
 
         jPanel1.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Carrera"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Datos de Carrera.", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 14))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Clave de Carrera:");
@@ -144,18 +143,18 @@ public class pnlCarreras extends javax.swing.JPanel {
         txtNombreCarrera.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtNombreCarrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNombreCarrera.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNombreCarrera.setPlaceholder("Nombre de Carrera");
+        txtNombreCarrera.setPlaceholder("Numero de RVOE.");
         txtNombreCarrera.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         txtNoRvoe.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtNoRvoe.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNoRvoe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNoRvoe.setPlaceholder("Numéro de RVOE");
+        txtNoRvoe.setPlaceholder("Nombre de la Carrera.");
 
         txtClavearrera.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtClavearrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtClavearrera.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtClavearrera.setPlaceholder("Clave de Carrera");
+        txtClavearrera.setPlaceholder("Clave de la Carrera.");
         txtClavearrera.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -163,38 +162,33 @@ public class pnlCarreras extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtNoRvoe, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(5, 5, 5)
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtClavearrera, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(19, 591, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNoRvoe, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClavearrera, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtClavearrera, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(txtNombreCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(txtNoRvoe, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNoRvoe, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
+                    .addComponent(txtNombreCarrera, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
         );
 
         jPanel9.setBackground(new java.awt.Color(243, 242, 242));
@@ -235,6 +229,10 @@ public class pnlCarreras extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         txtBuscar.setPlaceholder("Buscar . . .");
         txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
@@ -355,7 +353,7 @@ public class pnlCarreras extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -369,7 +367,7 @@ public class pnlCarreras extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -531,6 +529,10 @@ public void limpiar() {
         }
         JOptionPane.showMessageDialog(null, "Los datos se han registrado bien  ");
         tablaCarreras();
+    }
+
+    private void setLocationRelativeTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
