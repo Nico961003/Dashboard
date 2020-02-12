@@ -261,11 +261,11 @@ public class pnlResponsables extends javax.swing.JPanel {
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jTable1.setSelectionBackground(new java.awt.Color(124, 20, 52));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -637,7 +637,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT Clave, Llave, Certificado  FROM Responsable where CURP='" + String.valueOf(jTable1.getValueAt(seleccionada, 4)) + "'");
+                resultadoConsulta = conector.consulta("SELECT Clave, Llave, Certificado,  FROM Responsable where CURP='" + String.valueOf(jTable1.getValueAt(seleccionada, 4)) + "'");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
             }

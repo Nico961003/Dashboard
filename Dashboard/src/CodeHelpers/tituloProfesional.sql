@@ -117,7 +117,7 @@ create table Responsable(
     pass						varchar(100),
 	idResponsable               varchar(30)
 )
-
+select * from Responsable
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8
 create user genaro@localhost identified by'Supervi$or_123'

@@ -436,57 +436,96 @@ public class pnlTxt extends javax.swing.JPanel {
                     }
 
                     try {
-                      
+
                         obtenFirmantes();
 
                         for (int j = 0; j < 5; j++) {
-                        if(firmantes[j] != null){
-                        //String ruta = "/home/genaro/Documentos/" + j + "_TituloElectronico_" + matricula + ".txt";
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
-                        String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
-                                + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
-                                + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
-                                + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
-                                + modalidadTitulacion + "||" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
-                                + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
-                                + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
-                                + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
+                            if (firmantes[j] != null) {
+                                if (modalidadTitulacion != "POR TESIS") {
+                                    //String ruta = "/home/genaro/Documentos/" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
+                                            + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
+                                            + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
+                                            + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
+                                            + modalidadTitulacion + "||" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                            + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
+                                            + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
+                                            + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
+                                    //System.out.println(contenido);
+                                    try {
+                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
+                                    } catch (ClassNotFoundException ex) {
+                                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    File file = new File(ruta);
+                                    // Si el archivo no existe es creado
+                                    if (!file.exists()) {
+                                        file.createNewFile();
+                                        FileWriter fw = new FileWriter(file);
+                                        BufferedWriter bw = new BufferedWriter(fw);
+                                        bw.write(contenido);
+                                        bw.close();
 
-                        //System.out.println(contenido);
-                        try {
-                            String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                                    } else if (file.exists()) {
+                                        int reply = JOptionPane.showConfirmDialog(null, "El archivo ya existe\n desea sobrescribir?", "TituloElectronico_" + seleccionado[i] + ".txt", JOptionPane.YES_NO_OPTION);
+                                        if (reply == JOptionPane.YES_OPTION) {
+                                            FileWriter fw = new FileWriter(file);
+                                            BufferedWriter bw = new BufferedWriter(fw);
+                                            bw.write(contenido);
+                                            bw.close();
 
-                        File file = new File(ruta);
-                        // Si el archivo no existe es creado
-                        if (!file.exists()) {
-                            file.createNewFile();
-                            FileWriter fw = new FileWriter(file);
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            bw.write(contenido);
-                            bw.close();
+                                        } else if (reply == JOptionPane.NO_OPTION) {
 
-                        } else if (file.exists()) {
-                            int reply = JOptionPane.showConfirmDialog(null, "El archivo ya existe\n desea sobrescribir?", "TituloElectronico_" + seleccionado[i] + ".txt", JOptionPane.YES_NO_OPTION);
-                            if (reply == JOptionPane.YES_OPTION) {
-                                FileWriter fw = new FileWriter(file);
-                                BufferedWriter bw = new BufferedWriter(fw);
-                                bw.write(contenido);
-                                bw.close();
+                                        }
 
-                            } else if (reply == JOptionPane.NO_OPTION) {
+                                    }
+                                } else {
+                                    String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
+                                            + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
+                                            + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
+                                            + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
+                                            + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
+                                            + fundamentoSS + "|" + idEntidadFederativa + "|" + eFederativa + "|"
+                                            + institucionProcedencia + "|" + idTipoEstudioAntecedente + "|" + tipodeEstudio + "|"
+                                            + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
+                                    //System.out.println(contenido);
+                                    try {
+                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
+                                    } catch (ClassNotFoundException ex) {
+                                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    File file = new File(ruta);
+                                    // Si el archivo no existe es creado
+                                    if (!file.exists()) {
+                                        file.createNewFile();
+                                        FileWriter fw = new FileWriter(file);
+                                        BufferedWriter bw = new BufferedWriter(fw);
+                                        bw.write(contenido);
+                                        bw.close();
+
+                                    } else if (file.exists()) {
+                                        int reply = JOptionPane.showConfirmDialog(null, "El archivo ya existe\n desea sobrescribir?", "TituloElectronico_" + seleccionado[i] + ".txt", JOptionPane.YES_NO_OPTION);
+                                        if (reply == JOptionPane.YES_OPTION) {
+                                            FileWriter fw = new FileWriter(file);
+                                            BufferedWriter bw = new BufferedWriter(fw);
+                                            bw.write(contenido);
+                                            bw.close();
+
+                                        } else if (reply == JOptionPane.NO_OPTION) {
+
+                                        }
+
+                                    }
+                                }
 
                             }
-
-                         }
                         }
-                       }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                   
+
                     try {
                         String cadena = "Update txt set estatus = 'B' where matricula='" + seleccionado[i] + "'";
                         //System.out.println(cadena);
@@ -504,12 +543,12 @@ public class pnlTxt extends javax.swing.JPanel {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            
+
         }
-        
+
         tablaTxtA();
         tablaResponsable();
-        
+
         for (int i = 0; i < 5; i++) {
             firmantes[i] = null;
         }
@@ -569,7 +608,7 @@ public class pnlTxt extends javax.swing.JPanel {
     private rojerusan.RSTableMetro jTable2;
     private rscomponentshade.RSTextFieldShade txtBuscar;
     // End of variables declaration//GEN-END:variables
-    
+
     public void abrirarchivo(String archivo) {
         try {
             File objetofile = new File(archivo);
@@ -620,7 +659,7 @@ public class pnlTxt extends javax.swing.JPanel {
 
             } else {
             }
-        }    
+        }
     }
 
 }
