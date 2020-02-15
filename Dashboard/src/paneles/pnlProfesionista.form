@@ -238,7 +238,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txtProcedencia" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -252,7 +252,7 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="DateAntecInicio" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="DateAntecTermino" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>

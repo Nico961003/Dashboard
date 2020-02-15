@@ -361,7 +361,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtProcedencia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,7 +372,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                                     .addComponent(ComboTipoEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(DateAntecInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(DateAntecTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -666,6 +666,16 @@ public class pnlProfesionista extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimpiaActionPerformed
 
     private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
+
+        if (txtMatricula.getText() == "" || txtNombre.getText() == "" || txtapellidoPaterno.getText() == ""
+                || txtCURP.getText() == "" || txtProcedencia.getText() == "" || txtNoCedula.getText() == ""
+                || DateAntecInicio.getDate() == null || DateAntecTermino.getDate() == null) {
+            btnGuardar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No deben haber campos vacios, termina");
+        } else {
+            btnGuardar.setEnabled(true);
+        }
+
         // Patrón para validar el email
         Pattern pattern = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -688,22 +698,20 @@ public class pnlProfesionista extends javax.swing.JPanel {
             try {
                 resultadoConsulta = conector.consulta("SELECT Matricula FROM Profesionista where Matricula = " + txtMatricula.getText());//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
 
                 if (resultadoConsulta.getString("Matricula") != null || resultadoConsulta.getString("Matricula") != "") {
                     JOptionPane.showMessageDialog(null, "La matricula ya fue registrada\nCorrija y vuelva a intentar");
-                    txtMatricula.setText("");
                     btnGuardar.setEnabled(false);
                 } else {
                     btnGuardar.setEnabled(true);
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("local " + Matricula);
 
 
     }//GEN-LAST:event_btnGuardarMouseMoved

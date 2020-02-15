@@ -59,8 +59,6 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     String idTipoEstudioAntecedente = "";
 
-
-
     public pnlTitulos() {
         initComponents();
         Llamado();
@@ -166,8 +164,8 @@ public class pnlTitulos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         try {
+
+        try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM entidadFederativa");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
@@ -180,7 +178,6 @@ public class pnlTitulos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
         try {
             try {
@@ -533,6 +530,11 @@ public class pnlTitulos extends javax.swing.JPanel {
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salvar.png"))); // NOI18N
         btnAgregar.setBgHover(new java.awt.Color(255, 255, 255));
         btnAgregar.setBgShadeHover(new java.awt.Color(153, 255, 153));
+        btnAgregar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseMoved(evt);
+            }
+        });
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -629,8 +631,8 @@ public class pnlTitulos extends javax.swing.JPanel {
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -647,7 +649,7 @@ public class pnlTitulos extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -743,14 +745,15 @@ public class pnlTitulos extends javax.swing.JPanel {
     private void jPanel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
         try {
             try {
-                String string = (String) ComboProfesionista.getSelectedItem();
-                String[] parts = string.split(" ");
-                String Matricula = parts[0];
+                String cadena = (String) ComboProfesionista.getSelectedItem();
+                String delimitadores = " ";
+                String[] palabrasSeparadas = cadena.split(delimitadores);
+                String Matricula = palabrasSeparadas[0].toString();
+                //System.out.println("palabras " + palabrasSeparadas[0]);
 
-                string = "SELECT * FROM Profesionista where Matricula='" + Matricula + "'";
-                //System.out.println(string);
+                cadena = "SELECT * FROM Profesionista where Matricula='" + Matricula + "'";
 
-                resultadoConsulta = conector.consulta(string);
+                resultadoConsulta = conector.consulta(cadena);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -888,6 +891,34 @@ public class pnlTitulos extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAgregarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseMoved
+
+        try {
+            try {
+                String cadena = "SELECT folioControl FROM txt where folioControl = '" + txtFolio.getText() + "'";
+                resultadoConsulta = conector.consulta(cadena);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            while (resultadoConsulta.next()) {
+                folioControl = resultadoConsulta.getString("folioControl");
+
+                if (folioControl != null || folioControl != "") {
+                    JOptionPane.showMessageDialog(null, "El folio ya fue registrado anteriormente\nCorrija y vuelva a intentar");
+                    btnAgregar.setEnabled(false);
+                } else {
+                    btnAgregar.setEnabled(true);
+                }
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnAgregarMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1041,13 +1072,12 @@ public class pnlTitulos extends javax.swing.JPanel {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                    idEntidadFederativa = resultadoConsulta.getString("id_EntidadF");
+                idEntidadFederativa = resultadoConsulta.getString("id_EntidadF");
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT ID_FUNDAMENTO_LEGAL_SERVICIO_SOCIAL FROM fundamentoSSocial where FUNDAMENTO_LEGAL_SERVICIO_SOCIAL='" + fundamentoSS + "'");//establecimiento de sentencia aejecutar
@@ -1074,8 +1104,7 @@ public class pnlTitulos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT idEntidadFederativa, eFederativa FROM Profesionista where eFederativa='" + eFederativa2 + "'");//establecimiento de sentencia aejecutar
@@ -1083,7 +1112,7 @@ public class pnlTitulos extends javax.swing.JPanel {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
-                    idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa");
+                idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa");
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
@@ -1111,11 +1140,11 @@ public class pnlTitulos extends javax.swing.JPanel {
                     + "idFundamentoLegalServicioSocial,idEntidadFederativa,eFederativa,fundamentoSS,clave,nombreCarrera,\n"
                     + "numeroRvoe,fechaInicioCarrera,fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento, \n"
                     + "institucionProcedencia,idEntidadFederativa2,eFederativa2,fechaAntInicio,fechaAntTermino,\n"
-                    + "idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo0,archivo1,archivo2,archivo3,archivo4) VALUES ('" 
+                    + "idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo0,archivo1,archivo2,archivo3,archivo4) VALUES ('"
                     + folioControl + "','" + fechaExpedicion + "','"
                     + idModalidadTitulacion + "','" + modalidadTitulacion + "','" + fechaExamen + "','"
                     + matricula + "','" + nombre + "','" + aPaterno + "','" + aMaterno + "','" + correo + "','"
-                    + CURP + "','" + sSocial + "','" + idFundamentoLegalServicioSocial + "','" + idEntidadFederativa + "','" + eFederativa + "','" 
+                    + CURP + "','" + sSocial + "','" + idFundamentoLegalServicioSocial + "','" + idEntidadFederativa + "','" + eFederativa + "','"
                     + fundamentoSS + "','" + clave + "','" + nombreCarrera + "','" + noRvoe + "','" + fechaInicioCarrera + "','" + fechaFinCarrera + "','"
                     + clave_autorizacion + "','" + autorizacion_reconocimiento + "','" + institucionProcedencia + "','"
                     + idEntidadFederativa2 + "','" + eFederativa2 + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"
