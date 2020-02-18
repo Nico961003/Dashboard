@@ -324,7 +324,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(siete, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ocho, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nueve, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,7 +410,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jCTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -978,11 +978,61 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void nueveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nueveMousePressed
-        // TODO add your handling code here:
+        this.uno.setSelected(false);
+        this.dos.setSelected(false);
+        this.tres.setSelected(false);
+        this.cuatro.setSelected(false);
+        this.cinco.setSelected(false);
+        this.seis.setSelected(false);
+        this.siete.setSelected(false);
+        this.ocho.setSelected(false);
+        this.nueve.setSelected(true);
     }//GEN-LAST:event_nueveMousePressed
 
     private void nueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueveActionPerformed
-        // TODO add your handling code here:
+        new CambiaPanel(pnlPrincipal, new paneles.pnlConfiguracion());
+         if(this.cuatro.isSelected()){
+            this.uno.setColorNormal(new Color(239,238,244));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+            
+            this.dos.setColorNormal(new Color(239,238,244));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+            
+            this.tres.setColorNormal(new Color(239,238,244));
+            this.tres.setColorHover(new Color(204,204,204));
+            this.tres.setColorPressed(new Color(204,204,204));
+            
+            this.cuatro.setColorNormal(new Color(204,204,204));
+            this.cuatro.setColorHover(new Color(204,204,204));
+            this.cuatro.setColorPressed(new Color(204,204,204));
+            
+            this.cinco.setColorNormal(new Color(239,238,244));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
+            
+            this.seis.setColorNormal(new Color(239,238,244));
+            this.seis.setColorHover(new Color(204,204,204));
+            this.seis.setColorPressed(new Color(204,204,204));
+            
+            this.siete.setColorNormal(new Color(239,238,244));
+            this.siete.setColorHover(new Color(204,204,204));
+            this.siete.setColorPressed(new Color(204,204,204));
+            
+            this.ocho.setColorNormal(new Color(239,238,244));
+            this.ocho.setColorHover(new Color(204,204,204));
+            this.ocho.setColorPressed(new Color(204,204,204));
+            
+            this.nueve.setColorNormal(new Color(239,238,244));
+            this.nueve.setColorHover(new Color(204,204,204));
+            this.nueve.setColorPressed(new Color(204,204,204));
+        }else{
+            this.nueve.setColorNormal(new Color(239,238,244));
+            this.nueve.setColorHover(new Color(204,204,204));
+            this.nueve.setColorPressed(new Color(204,204,204));
+        }
+                               
     }//GEN-LAST:event_nueveActionPerformed
 
     /**

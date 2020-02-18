@@ -78,7 +78,7 @@
                           <Component id="ocho" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
                           <Component id="nueve" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -469,7 +469,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnTitulo" min="-2" pref="918" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCTextField1" pref="283" max="32767" attributes="0"/>
+                      <Component id="jCTextField1" pref="289" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

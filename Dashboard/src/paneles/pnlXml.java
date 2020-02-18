@@ -139,11 +139,11 @@ public class pnlXml extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 1, 40)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/xml.png"))); // NOI18N
-        jLabel7.setText("Archivos XML");
+        jLabel7.setText("DOCUMENTOS XML");
         jLabel7.setIconTextGap(10);
 
         jPanel3.setBackground(new java.awt.Color(243, 242, 242));
@@ -491,7 +491,7 @@ public class pnlXml extends javax.swing.JPanel {
 
                     if (modalidadTitulacion.equals("POR TESIS")) {
                         //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
+                        String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
@@ -518,7 +518,7 @@ public class pnlXml extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     } else {
                         //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                        String ruta = "C:\\Users\\JLIMON\\Documents\\TituloElectronico_" + matricula + ".xml";
+                        String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
@@ -553,7 +553,7 @@ public class pnlXml extends javax.swing.JPanel {
         }
         JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
         //abrirarchivo("/home/genaro/Documentos/");
-        abrirarchivo("C:\\Users\\JLIMON\\Documents");
+        abrirarchivo("C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas");
         tablaTxtB();
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 

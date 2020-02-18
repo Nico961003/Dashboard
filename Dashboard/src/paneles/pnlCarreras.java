@@ -124,7 +124,7 @@ public class pnlCarreras extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(128, 128, 131));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/Carrera_1.png"))); // NOI18N
-        jLabel7.setText("Carreras");
+        jLabel7.setText("CARRERAS");
 
         jPanel8.setBackground(new java.awt.Color(243, 242, 242));
 
