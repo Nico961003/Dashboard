@@ -375,12 +375,13 @@ public class pnlTitulos extends javax.swing.JPanel {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(DateExamenP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(DateExpedicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ComboEFederativa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ComboEFederativa, 0, 270, Short.MAX_VALUE)
                                     .addComponent(txtFolio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CombomodalidadTit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(CombomodalidadTit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(DateExamenP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                        .addComponent(DateExpedicion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 43, Short.MAX_VALUE)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(109, 109, 109)
@@ -408,10 +409,10 @@ public class pnlTitulos extends javax.swing.JPanel {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel22)
                                     .addComponent(jLabel23))
-                                .addGap(51, 51, 51)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DateFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(DateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(DateFechaTermino, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                    .addComponent(DateFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel21)
@@ -456,20 +457,20 @@ public class pnlTitulos extends javax.swing.JPanel {
                                 .addComponent(DateExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ComboEFederativa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel19)))
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel16))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DateExamenP, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboEFederativa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel17)))
+                        .addGap(97, 97, 97)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(ComboSSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ComboFLegal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,13 +487,15 @@ public class pnlTitulos extends javax.swing.JPanel {
                     .addComponent(ComboautReconocimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23)
-                    .addComponent(DateFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(DateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DateFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
 
         jPanel1.setBackground(new java.awt.Color(243, 242, 242));
@@ -670,6 +673,7 @@ public class pnlTitulos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
+        /*
         try {
             try {
                 String string = (String) ComboProfesionista.getSelectedItem();
@@ -697,7 +701,7 @@ public class pnlTitulos extends javax.swing.JPanel {
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_jPanel3MouseMoved
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -743,32 +747,34 @@ public class pnlTitulos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jPanel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
-        try {
+        if ((String) ComboProfesionista.getSelectedItem() != null) {
             try {
-                String cadena = (String) ComboProfesionista.getSelectedItem();
-                String delimitadores = " ";
-                String[] palabrasSeparadas = cadena.split(delimitadores);
-                String Matricula = palabrasSeparadas[0].toString();
-                //System.out.println("palabras " + palabrasSeparadas[0]);
+                try {
+                    String cadena = (String) ComboProfesionista.getSelectedItem();
+                    String delimitadores = " ";
+                    String[] palabrasSeparadas = cadena.split(delimitadores);
+                    String Matricula = palabrasSeparadas[0].toString();
+                    //System.out.println("palabras " + palabrasSeparadas[0]);
 
-                cadena = "SELECT * FROM Profesionista where Matricula='" + Matricula + "'";
+                    cadena = "SELECT * FROM Profesionista where Matricula='" + Matricula + "'";
 
-                resultadoConsulta = conector.consulta(cadena);
-            } catch (ClassNotFoundException ex) {
+                    resultadoConsulta = conector.consulta(cadena);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                while (resultadoConsulta.next()) {
+                    matricula = resultadoConsulta.getString("Matricula");
+                    txtCURP.setText(resultadoConsulta.getString("CURP"));
+                    txtCorreo.setText(resultadoConsulta.getString("Correo"));
+                    nombre = resultadoConsulta.getString("Nombre");
+                    aPaterno = resultadoConsulta.getString("apellidoPaterno");
+                    aMaterno = resultadoConsulta.getString("apellidoMaterno");
+                    CURP = resultadoConsulta.getString("CURP");
+                    correo = resultadoConsulta.getString("Correo");
+                }
+            } catch (SQLException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            while (resultadoConsulta.next()) {
-                matricula = resultadoConsulta.getString("Matricula");
-                txtCURP.setText(resultadoConsulta.getString("CURP"));
-                txtCorreo.setText(resultadoConsulta.getString("Correo"));
-                nombre = resultadoConsulta.getString("Nombre");
-                aPaterno = resultadoConsulta.getString("apellidoPaterno");
-                aMaterno = resultadoConsulta.getString("apellidoMaterno");
-                CURP = resultadoConsulta.getString("CURP");
-                correo = resultadoConsulta.getString("Correo");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jPanel5MouseMoved
 
@@ -893,31 +899,26 @@ public class pnlTitulos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAgregarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseMoved
-
+           
         try {
             try {
-                String cadena = "SELECT folioControl FROM txt where folioControl = '" + txtFolio.getText() + "'";
-                resultadoConsulta = conector.consulta(cadena);
+                resultadoConsulta = conector.consulta("SELECT folioControl FROM txt where folioControl = '" + txtFolio.getText() + "'");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
             while (resultadoConsulta.next()) {
-                folioControl = resultadoConsulta.getString("folioControl");
 
-                if (folioControl != null || folioControl != "") {
-                    JOptionPane.showMessageDialog(null, "El folio ya fue registrado anteriormente\nCorrija y vuelva a intentar");
-                    btnAgregar.setEnabled(false);
-                } else {
-                    btnAgregar.setEnabled(true);
+                if ( resultadoConsulta.getString("folioControl") != null || resultadoConsulta.getString("folioControl") != "") {
+                    JOptionPane.showMessageDialog(null, "El folio ya fue registrada\nCorrija y vuelva a intentar");
+                    txtFolio.requestFocus();
+                    txtFolio.setText(resultadoConsulta.getString("folioControl"));
                 }
-                
             }
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }//GEN-LAST:event_btnAgregarMouseMoved
 
 
@@ -1170,7 +1171,8 @@ public class pnlTitulos extends javax.swing.JPanel {
         txtFolio.setText("");
         DateExamenP.setDate(null);
         Date fecha3 = DateExpedicion.getDate();
-        txtFolio.setText("");
+        txtCURP.setText("");
+        txtCorreo.setText("");
         DateExpedicion.setDate(null);
         btnDetalles.setEnabled(false);
         btnEliminar.setEnabled(false);

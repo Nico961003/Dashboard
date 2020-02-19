@@ -1,20 +1,6 @@
 create database tituloProfesional;
 use tituloProfesional
 
-   
-create table FirmaResponsable(
-idFirma                    int primary key not null auto_increment,
-nombre                     varchar(50),
-primerApellido             varchar(50),
-segundoApellido            varchar(50),
-curp                       varchar(50),  
-idCargo                    int,
-cargo                      varchar(50),
-abrTitulo                  varchar(50),
-sello                      varchar(200),
-certificadoResponsable     varchar(300),
-noCertificadoResponsable   varchar(50)
-)
 
  create table Profesionista(
     Matricula					int primary key not null,
@@ -76,10 +62,16 @@ create table txt(
     archivo1						text(65535),
     archivo2						text(65535),
     archivo3						text(65535),
-    archivo4						text(65535)
+    archivo4						text(65535),
+    firmante0						varchar(15),
+    firmante1						varchar(15),
+    firmante2						varchar(15),
+    firmante3						varchar(15),
+    firmante4						varchar(15)
     
 )
 
+SELECT * FROM txt 
 
 create table Carreras (
 IdCarrera   int primary key not null,
@@ -117,13 +109,14 @@ create table Responsable(
     pass						varchar(100),
 	idResponsable               varchar(30)
 )
-select * from Responsable
+
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8
 create user genaro@localhost identified by'Supervi$or_123'
 GRANT ALL PRIVILEGES ON tituloProfesional.* TO 'genaro'@'localhost';
 ALTER USER 'genaro'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Supervi$or_123';
-
-
-
-
+-- data long = entrar a terminal al usuario correspondiente en mysql
+-- meter el siguiente comando:
+SET @@global.sql_mode= '';
+-- ademas en el menu Edit/Preferences/Safe mode, es necesario desactivar
+-- y volver a reconectar
