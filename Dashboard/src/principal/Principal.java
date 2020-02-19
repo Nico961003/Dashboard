@@ -145,7 +145,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrera.png"))); // NOI18N
+        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrer.png"))); // NOI18N
         dos.setText("Carreras");
         dos.setColorHover(new java.awt.Color(124, 20, 52));
         dos.setColorNormal(new java.awt.Color(245, 245, 245));
@@ -275,7 +275,7 @@ public class Principal extends javax.swing.JFrame {
         cuatro.setColorTextNormal(new java.awt.Color(124, 20, 52));
         cuatro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cuatro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        cuatro.setIconTextGap(30);
+        cuatro.setIconTextGap(35);
         cuatro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cuatroMousePressed(evt);
@@ -446,6 +446,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setBorder(null);
         pnlPrincipal.setForeground(new java.awt.Color(255, 253, 253));
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(pnlPrincipal);
@@ -991,7 +992,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void nueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nueveActionPerformed
         new CambiaPanel(pnlPrincipal, new paneles.pnlConfiguracion());
-         if(this.cuatro.isSelected()){
+         if(this.nueve.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
             this.uno.setColorPressed(new Color(204,204,204));
@@ -1004,7 +1005,7 @@ public class Principal extends javax.swing.JFrame {
             this.tres.setColorHover(new Color(204,204,204));
             this.tres.setColorPressed(new Color(204,204,204));
             
-            this.cuatro.setColorNormal(new Color(204,204,204));
+            this.cuatro.setColorNormal(new Color(239,238,244));
             this.cuatro.setColorHover(new Color(204,204,204));
             this.cuatro.setColorPressed(new Color(204,204,204));
             
