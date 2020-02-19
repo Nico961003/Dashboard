@@ -59,6 +59,7 @@ public class pnlCancelaciones extends javax.swing.JPanel {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img1/cancelaciones.png"))); // NOI18N
         jLabel7.setText("CANCELACIONES");
         jLabel7.setIconTextGap(10);
+        jLabel7.setPreferredSize(new java.awt.Dimension(357, 96));
 
         jPanel5.setBackground(new java.awt.Color(243, 242, 242));
 
