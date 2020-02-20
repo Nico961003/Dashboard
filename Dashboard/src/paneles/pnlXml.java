@@ -83,6 +83,7 @@ public class pnlXml extends javax.swing.JPanel {
     String archivo2 = "";
 
     ////////////////////////////////////////////////////////////////////
+    String idResponsable = "", idResponsable2 = "";
     String nombreResponsable1 = "", nombreResponsable2 = "";
     String aPaternoResponsable1 = "", aPaternoResponsable2 = "";
     String aMaternoResponsable1 = "", aMaternoResponsable2 = "";
@@ -451,6 +452,7 @@ public class pnlXml extends javax.swing.JPanel {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
                 while (resultadoConsulta.next()) {
+                    idResponsable = resultadoConsulta.getString("idResponsable");
                     nombreResponsable1 = resultadoConsulta.getString("Nombre");
                     aPaternoResponsable1 = resultadoConsulta.getString("apellidoPaterno");
                     aMaternoResponsable1 = resultadoConsulta.getString("apellidoMaterno");
@@ -473,6 +475,7 @@ public class pnlXml extends javax.swing.JPanel {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
                 while (resultadoConsulta.next()) {
+                    idResponsable2 = resultadoConsulta.getString("idResponsable");
                     nombreResponsable2 = resultadoConsulta.getString("Nombre");
                     aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
                     aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
@@ -482,9 +485,8 @@ public class pnlXml extends javax.swing.JPanel {
                     Llave2 = resultadoConsulta.getString("Llave");
                     Certificado2 = resultadoConsulta.getString("Certificado");
                     pass2 = resultadoConsulta.getString("pass");
-
+                    
                     Llave2 = sign2(Llave2, pass2, archivo2);
-                    System.out.println("llave2 " + Llave2);
                     Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
 
                 }
@@ -492,13 +494,13 @@ public class pnlXml extends javax.swing.JPanel {
                 try {
 
                     if (modalidadTitulacion.equals("POR TESIS")) {
-                        //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                        String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
+                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                        //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"1\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
+                                + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
+                                + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
                                 + "  </FirmaResponsables>\n"
                                 + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -519,13 +521,13 @@ public class pnlXml extends javax.swing.JPanel {
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     } else {
-                        //String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
-                        String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
+                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                        //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"1\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"3\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
+                                + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
+                                + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
                                 + "  </FirmaResponsables>\n"
                                 + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -589,10 +591,10 @@ public class pnlXml extends javax.swing.JPanel {
     }
 
     public static String sign(String keyPath, String password, String toSign) throws Exception {
-        System.out.println("filepath : " + keyPath);
+        //System.out.println("filepath : " + keyPath);
         final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
         final PrivateKey privateKey = pkcs8Key.getPrivateKey();
-        System.out.println("private " + privateKey);
+        //System.out.println("private " + privateKey);
         final Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initSign(privateKey);
         signature.update(toSign.getBytes("UTF-8"));
@@ -652,10 +654,10 @@ public class pnlXml extends javax.swing.JPanel {
     }
 
     public static String sign2(String keyPath2, String password2, String toSign2) throws Exception {
-        System.out.println("filepath : " + keyPath2);
+        // System.out.println("filepath : " + keyPath2);
         final PKCS8Key pkcs8Key2 = new PKCS8Key(toByteArray2(keyPath2), password2.toCharArray());
         final PrivateKey privateKey2 = pkcs8Key2.getPrivateKey();
-        System.out.println("private " + privateKey2);
+        // System.out.println("private " + privateKey2);
         final Signature signature2 = Signature.getInstance("SHA256withRSA");
         signature2.initSign(privateKey2);
         signature2.update(toSign2.getBytes("UTF-8"));

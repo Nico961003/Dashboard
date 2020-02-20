@@ -266,11 +266,6 @@ public class pnlTitulos extends javax.swing.JPanel {
         jLabel7.setText("TÍTULOS");
 
         jPanel3.setBackground(new java.awt.Color(243, 242, 242));
-        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jPanel3MouseMoved(evt);
-            }
-        });
 
         jPanel5.setBackground(new java.awt.Color(243, 242, 242));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Datos para Generar Título Electrónico.", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 14))); // NOI18N
@@ -654,7 +649,7 @@ public class pnlTitulos extends javax.swing.JPanel {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -672,38 +667,6 @@ public class pnlTitulos extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-        /*
-        try {
-            try {
-                String string = (String) ComboProfesionista.getSelectedItem();
-                String[] parts = string.split(" ");
-                String Matricula = parts[0];
-
-                string = "SELECT * FROM Profesionista where Matricula='" + Matricula + "'";
-                //System.out.println(string);
-
-                resultadoConsulta = conector.consulta(string);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            while (resultadoConsulta.next()) {
-                matricula = resultadoConsulta.getString("Matricula");
-                txtCURP.setText(resultadoConsulta.getString("CURP"));
-                txtCorreo.setText(resultadoConsulta.getString("Correo"));
-                nombre = resultadoConsulta.getString("Nombre");
-                aPaterno = resultadoConsulta.getString("apellidoPaterno");
-                aMaterno = resultadoConsulta.getString("apellidoMaterno");
-                CURP = resultadoConsulta.getString("CURP");
-                correo = resultadoConsulta.getString("Correo");
-                fechaInicioAntecedente = resultadoConsulta.getString("fechaAntInicio");
-                fechaTerminoAntecedente = resultadoConsulta.getString("fechaAntTermino");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }//GEN-LAST:event_jPanel3MouseMoved
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         capturarDatos();

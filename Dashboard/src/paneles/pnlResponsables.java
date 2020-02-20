@@ -245,7 +245,7 @@ public class pnlResponsables extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Clave", "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "Puesto"
+                "Jerarquia", "Nombre", "Apellido Paterno", "Apellido Materno", "CURP", "Puesto"
             }
         ));
         jTable1.setColorBackgoundHead(new java.awt.Color(124, 20, 52));
@@ -540,7 +540,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,7 +583,17 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAgregarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseMoved
-
+        System.out.println("ok");
+        if(txtCURP.getText() == "" || txtFldCer.getText() == "" || txtFldKey.getText() == "" ||
+                txtNombre.getText() == "" || txtapellidoMaterno.getText() == "" || txtapellidoPaterno.getText() == ""){
+            
+            btnAgregar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
+            
+        } else {
+            btnAgregar.setEnabled(true);
+        } 
+        
     }//GEN-LAST:event_btnAgregarMouseMoved
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -636,7 +646,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT Clave, Llave, Certificado  FROM Responsable where CURP='" + String.valueOf(jTable1.getValueAt(seleccionada, 4)) + "'");
+                resultadoConsulta = conector.consulta("SELECT Clave, Llave, Certificado, abrev  FROM Responsable where CURP='" + String.valueOf(jTable1.getValueAt(seleccionada, 4)) + "'");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -646,7 +656,8 @@ public class pnlResponsables extends javax.swing.JPanel {
                 ComboClave.setSelectedItem(combo);
                 txtFldCer.setText(resultadoConsulta.getString("Certificado"));
                 txtFldKey.setText(resultadoConsulta.getString("Llave"));
-                ComboAbr.setSelectedItem(resultadoConsulta.getString("abr"));
+                ComboAbr.addItem(resultadoConsulta.getString("abrev"));
+                ComboAbr.setSelectedItem(resultadoConsulta.getString("abrev"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);

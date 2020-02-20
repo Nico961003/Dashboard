@@ -63,15 +63,8 @@ create table txt(
     archivo2						text(65535),
     archivo3						text(65535),
     archivo4						text(65535),
-    firmante0						varchar(15),
-    firmante1						varchar(15),
-    firmante2						varchar(15),
-    firmante3						varchar(15),
-    firmante4						varchar(15)
-    
-)
 
-SELECT * FROM txt 
+)
 
 create table Carreras (
 IdCarrera   int primary key not null,
@@ -108,7 +101,13 @@ create table Responsable(
 	Certificado 				varchar(500),
     pass						varchar(100),
 	idResponsable               varchar(30)
-)
+);
+
+create table configuracion{
+claveEscuela 		      varchar(500),
+nombreEscuela			  varchar(500),
+carpeta                   varchar(500)
+}
 
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8

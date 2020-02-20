@@ -146,18 +146,18 @@ public class pnlCarreras extends javax.swing.JPanel {
         txtNombreCarrera.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtNombreCarrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNombreCarrera.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNombreCarrera.setPlaceholder("Numero de RVOE.");
+        txtNombreCarrera.setPlaceholder("Numero de RVOE");
         txtNombreCarrera.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         txtNoRvoe.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtNoRvoe.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNoRvoe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNoRvoe.setPlaceholder("Nombre de la Carrera.");
+        txtNoRvoe.setPlaceholder("Nombre de la Carrera");
 
         txtClavearrera.setBgShadeHover(new java.awt.Color(0, 0, 0));
         txtClavearrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtClavearrera.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtClavearrera.setPlaceholder("Clave de la Carrera.");
+        txtClavearrera.setPlaceholder("Clave de la Carrera");
         txtClavearrera.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -291,6 +291,11 @@ public class pnlCarreras extends javax.swing.JPanel {
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salvar.png"))); // NOI18N
         btnGuardar.setBgHover(new java.awt.Color(255, 255, 255));
         btnGuardar.setBgShadeHover(new java.awt.Color(153, 255, 153));
+        btnGuardar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseMoved(evt);
+            }
+        });
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -479,6 +484,18 @@ public class pnlCarreras extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
+    
+        if(txtClavearrera.getText() == "" || txtNoRvoe.getText() == "" || txtNombreCarrera.getText() == ""){
+            btnGuardar.setEnabled(false);
+        } else{
+             btnGuardar.setEnabled(true);
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnGuardarMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

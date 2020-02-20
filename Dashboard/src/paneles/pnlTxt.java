@@ -234,13 +234,14 @@ public class pnlTxt extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null,  new Boolean(true)},
+                {null, null, null, null,  new Boolean(true)},
+                {null, null, null, null,  new Boolean(true)},
+                {null, null, null, null,  new Boolean(true)},
+                {null, null, null, null,  new Boolean(true)}
             },
             new String [] {
-                "Clave", "Nombre", "A Paterno", "A Materno", "Firma"
+                "Jerarquia", "Nombre", "A Paterno", "A Materno", "Firma"
             }
         ) {
             Class[] types = new Class [] {
@@ -357,7 +358,7 @@ public class pnlTxt extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -453,8 +454,8 @@ public class pnlTxt extends javax.swing.JPanel {
                                             + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
                                     //System.out.println(contenido);
                                     try {
-                                       System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "', firmante" + j + "='" + clave + "' where folioControl='" + folioControl + "'");
-                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "', firmante" + j + "='" + clave + "' where folioControl='" + folioControl + "'");
+                                       System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
+                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
                                     } catch (ClassNotFoundException ex) {
                                         Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -493,8 +494,8 @@ public class pnlTxt extends javax.swing.JPanel {
                                             + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
                                     //System.out.println(contenido);
                                     try {
-                                        System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "', firmante" + j + "='" + clave + "' where folioControl='" + folioControl + "'");
-                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "', firmante" + j + "='" + clave + "' where folioControl='" + folioControl + "'");
+                                        System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
+                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
                                     } catch (ClassNotFoundException ex) {
                                         Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                                     }
