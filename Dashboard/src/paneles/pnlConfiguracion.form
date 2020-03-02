@@ -90,9 +90,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtFldCer2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtFldCer1" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtFldCer" alignment="1" min="-2" pref="260" max="-2" attributes="0"/>
+                                  <Component id="txtCarpeta" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtclaveInstitucion" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtnombreInstitucion" alignment="1" min="-2" pref="260" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton4" min="-2" pref="50" max="-2" attributes="0"/>
@@ -111,18 +111,18 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtFldCer" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtnombreInstitucion" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtFldCer1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtclaveInstitucion" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="txtFldCer2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtCarpeta" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButton4" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
@@ -143,7 +143,7 @@
                 <Property name="text" type="java.lang.String" value="nombre institucion"/>
               </Properties>
             </Component>
-            <Component class="rscomponentshade.RSTextFieldShade" name="txtFldCer">
+            <Component class="rscomponentshade.RSTextFieldShade" name="txtnombreInstitucion">
               <Properties>
                 <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -154,7 +154,7 @@
                 <Property name="placeholder" type="java.lang.String" value="Examinar..."/>
               </Properties>
             </Component>
-            <Component class="rscomponentshade.RSTextFieldShade" name="txtFldCer1">
+            <Component class="rscomponentshade.RSTextFieldShade" name="txtclaveInstitucion">
               <Properties>
                 <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -181,7 +181,7 @@
                 <Property name="text" type="java.lang.String" value="carpeta"/>
               </Properties>
             </Component>
-            <Component class="rscomponentshade.RSTextFieldShade" name="txtFldCer2">
+            <Component class="rscomponentshade.RSTextFieldShade" name="txtCarpeta">
               <Properties>
                 <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>

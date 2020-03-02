@@ -125,8 +125,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNombreCarrera" alignment="0" min="-2" pref="221" max="-2" attributes="0"/>
-                          <Component id="txtNoRvoe" min="-2" pref="460" max="-2" attributes="0"/>
+                          <Component id="txtNoRvoe" alignment="0" min="-2" pref="221" max="-2" attributes="0"/>
+                          <Component id="txtNombreCarrera" min="-2" pref="460" max="-2" attributes="0"/>
                           <Component id="txtClavearrera" min="-2" pref="219" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -144,12 +144,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" pref="25" max="32767" attributes="0"/>
-                          <Component id="txtNoRvoe" alignment="3" pref="25" max="32767" attributes="0"/>
+                          <Component id="txtNombreCarrera" alignment="3" pref="25" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel13" alignment="3" max="32767" attributes="0"/>
-                          <Component id="txtNombreCarrera" alignment="3" pref="25" max="32767" attributes="0"/>
+                          <Component id="txtNoRvoe" alignment="3" pref="25" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -180,7 +180,7 @@
                 <Property name="text" type="java.lang.String" value="Num&#xe9;ro de RVOE:"/>
               </Properties>
             </Component>
-            <Component class="rscomponentshade.RSTextFieldShade" name="txtNombreCarrera">
+            <Component class="rscomponentshade.RSTextFieldShade" name="txtNoRvoe">
               <Properties>
                 <Property name="bgShadeHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -197,7 +197,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="rscomponentshade.RSTextFieldShade" name="txtNoRvoe">
+            <Component class="rscomponentshade.RSTextFieldShade" name="txtNombreCarrera">
               <Properties>
                 <Property name="bgShadeHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>

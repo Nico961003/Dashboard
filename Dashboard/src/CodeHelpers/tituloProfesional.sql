@@ -20,7 +20,6 @@ use tituloProfesional
     estatus						varchar(1)
    )
  
-
 create table txt(
 	folioControl					varchar(50), 
     fechaExpedicion 				varchar(50),
@@ -63,8 +62,15 @@ create table txt(
     archivo2						text(65535),
     archivo3						text(65535),
     archivo4						text(65535),
+    
+    firma0						 	varchar(400),
+    firma1						 	varchar(400),
+    firma2						 	varchar(400),
+    firma3						 	varchar(400),
+    firma4						 	varchar(400)
 
 )
+
 
 create table Carreras (
 IdCarrera   int primary key not null,
@@ -103,11 +109,55 @@ create table Responsable(
 	idResponsable               varchar(30)
 );
 
-create table configuracion{
+
+create table configuracion(
 claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
 carpeta                   varchar(500)
-}
+)
+
+/***************** PROCEDIMIENTOS ALMACENADOS ********************************/
+-- Carreras
+
+-- Visualizar la tabla carreras
+CREATE PROCEDURE `Carreras`()
+SELECT * FROM Carreras
+END
+-- Busqueda en la tabla carreras
+CREATE PROCEDURE Busqueda(IN buscar text)
+SELECT * FROM Carreras WHERE IdCarrera LIKE CONCAT('%', buscar , '%')  
+OR Carrera LIKE CONCAT('%', buscar , '%') 
+OR noRvoe LIKE CONCAT('%', buscar , '%') 
+-- Insercion en tabla carreras
+CREATE PROCEDURE guardaCarrera(
+IN IdCarrera text,
+IN Carrera text,
+IN noRvoe text
+)
+INSERT INTO Carreras(IdCarrera, Carrera, noRvoe) VALUES (IdCarrera, Carrera, noRvoe)
+-- Eliminar un registro en la tabla carreras
+CREATE PROCEDURE eliminaCarrera(IN Carrera text)
+DELETE FROM Carreras WHERE IdCarrera=Carrera
+-- Actualizar registro en tabla carreras
+CREATE PROCEDURE actualizaCarrera(
+IN Carrera text,
+IN noRvoe text,
+IN cveCarrera text
+)
+UPDATE Carreras SET Carrera = Carrera, noRvoe = noRvoe WHERE IdCarrera = cveCarrera
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8

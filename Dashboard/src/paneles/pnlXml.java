@@ -79,8 +79,8 @@ public class pnlXml extends javax.swing.JPanel {
     String Llave = "", Certificado = "", pass = "";
     String Llave2 = "", Certificado2 = "", pass2 = "";
 
-    String archivo = "";
-    String archivo2 = "";
+    String archivo = "", firma0 = "";
+    String archivo2 = "", firma1 = "";
 
     ////////////////////////////////////////////////////////////////////
     String idResponsable = "", idResponsable2 = "";
@@ -90,6 +90,13 @@ public class pnlXml extends javax.swing.JPanel {
     String curpResponsable1 = "", curpResponsable2 = "";
     String puesto1 = "", puesto2 = "";
     String abrev1 = "", abrev2 = "";
+
+    /**
+     * *********************************
+     */
+    String claveEscuela = "";
+    String nombreEscuela = "";
+    String carpeta = "";
 
     public pnlXml() {
         initComponents();
@@ -321,7 +328,10 @@ public class pnlXml extends javax.swing.JPanel {
 
             if (seleccionado[i] != null || seleccionado[i] != "") {
                 try {
-                    String cadena = "Update txt set estatus = 'A' where matricula='" + seleccionado[i] + "'";
+                    String cadena = "Update txt set estatus = 'A', firma0 = null, firma1 = null,"
+                            + " firma2 = null, firma3 = null, firma4 = null,"
+                            + " archivo0 = null, archivo1 = null,"
+                            + " archivo2 = null, archivo3 = null, archivo4 = null where matricula='" + seleccionado[i] + "'";
                     //System.out.println(cadena);
                     String salida = conector.registrar(cadena);
                     System.out.println(salida);
@@ -376,8 +386,27 @@ public class pnlXml extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void rSButtonShade4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade4ActionPerformed
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT * FROM configuracion");
 
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                claveEscuela = resultadoConsulta.getString("claveEscuela");
+                nombreEscuela = resultadoConsulta.getString("nombreEscuela");
+                carpeta = resultadoConsulta.getString("carpeta");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+        /**
+         * ** comienza conteo tabla ***********
+         */
         for (int i = 0; i < jTable1.getRowCount(); i++) {
+
             try {
                 TableModel model = jTable1.getModel();
                 String[] seleccionado = new String[100];
@@ -435,6 +464,8 @@ public class pnlXml extends javax.swing.JPanel {
                         idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
                         archivo = resultadoConsulta.getString("archivo0");
                         archivo2 = resultadoConsulta.getString("archivo1");
+                        firma0 = resultadoConsulta.getString("firma0");
+                        firma1 = resultadoConsulta.getString("firma1");
                         fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
                         fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
                         noRvoe = resultadoConsulta.getString("numeroRvoe");
@@ -444,72 +475,83 @@ public class pnlXml extends javax.swing.JPanel {
                     Logger.getLogger(pnlXml.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                if (firma0 != null) {
+                    try {
+                        resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=1");
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlXml.class
+                                .getName()).log(Level.SEVERE, null, ex);
+                    }
+                    while (resultadoConsulta.next()) {
+                        idResponsable = resultadoConsulta.getString("idResponsable");
+                        nombreResponsable1 = resultadoConsulta.getString("Nombre");
+                        aPaternoResponsable1 = resultadoConsulta.getString("apellidoPaterno");
+                        aMaternoResponsable1 = resultadoConsulta.getString("apellidoMaterno");
+                        curpResponsable1 = resultadoConsulta.getString("CURP");
+                        puesto1 = resultadoConsulta.getString("Puesto");
+                        abrev1 = resultadoConsulta.getString("abrev");
+                        Llave = resultadoConsulta.getString("Llave");
+                        Certificado = resultadoConsulta.getString("Certificado");
+                        pass = resultadoConsulta.getString("pass");
 
-                try {
-                    resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=1");//establecimiento de sentencia aejecutar
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlXml.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                        Llave = sign(Llave, pass, archivo);
+                        Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+
+                    }
+                    firma0 = "<FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n";
+
+                } else{
+                    firma0="";
                 }
-                while (resultadoConsulta.next()) {
-                    idResponsable = resultadoConsulta.getString("idResponsable");
-                    nombreResponsable1 = resultadoConsulta.getString("Nombre");
-                    aPaternoResponsable1 = resultadoConsulta.getString("apellidoPaterno");
-                    aMaternoResponsable1 = resultadoConsulta.getString("apellidoMaterno");
-                    curpResponsable1 = resultadoConsulta.getString("CURP");
-                    puesto1 = resultadoConsulta.getString("Puesto");
-                    abrev1 = resultadoConsulta.getString("abrev");
-                    Llave = resultadoConsulta.getString("Llave");
-                    Certificado = resultadoConsulta.getString("Certificado");
-                    pass = resultadoConsulta.getString("pass");
+                if (firma1 != null) {
+                    try {
+                        resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlXml.class
+                                .getName()).log(Level.SEVERE, null, ex);
+                    }
+                    while (resultadoConsulta.next()) {
+                        idResponsable2 = resultadoConsulta.getString("idResponsable");
+                        nombreResponsable2 = resultadoConsulta.getString("Nombre");
+                        aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
+                        aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
+                        curpResponsable2 = resultadoConsulta.getString("CURP");
+                        puesto2 = resultadoConsulta.getString("Puesto");
+                        abrev2 = resultadoConsulta.getString("abrev");
+                        Llave2 = resultadoConsulta.getString("Llave");
+                        Certificado2 = resultadoConsulta.getString("Certificado");
+                        pass2 = resultadoConsulta.getString("pass");
 
-                    Llave = sign(Llave, pass, archivo);
-                    Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+                        Llave2 = sign2(Llave2, pass2, archivo2);
+                        Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
 
-                }
+                    }
+                     firma1 = "<FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n";
 
-                try {
-                    resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlXml.class
-                            .getName()).log(Level.SEVERE, null, ex);
-                }
-                while (resultadoConsulta.next()) {
-                    idResponsable2 = resultadoConsulta.getString("idResponsable");
-                    nombreResponsable2 = resultadoConsulta.getString("Nombre");
-                    aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
-                    aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
-                    curpResponsable2 = resultadoConsulta.getString("CURP");
-                    puesto2 = resultadoConsulta.getString("Puesto");
-                    abrev2 = resultadoConsulta.getString("abrev");
-                    Llave2 = resultadoConsulta.getString("Llave");
-                    Certificado2 = resultadoConsulta.getString("Certificado");
-                    pass2 = resultadoConsulta.getString("pass");
-                    
-                    Llave2 = sign2(Llave2, pass2, archivo2);
-                    Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
-
+                } else{
+                    firma1="";
                 }
 
                 try {
 
                     if (modalidadTitulacion.equals("POR TESIS")) {
-                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "TituloElectronico_" + matricula + ".xml";
                         //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
+                                + firma0
+                                + firma1
                                 + "  </FirmaResponsables>\n"
-                                + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
+                                + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
                                 + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
                                 + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
                                 + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
                                 + "</TituloElectronico>";
 
-                        //System.out.println(contenido);
+                        System.out.println(contenido);
                         File file = new File(ruta);
                         // Si el archivo no existe es creado
                         if (!file.exists()) {
@@ -521,15 +563,15 @@ public class pnlXml extends javax.swing.JPanel {
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     } else {
-                        String ruta = "/home/genaro/Documentos/TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "TituloElectronico_" + matricula + ".xml";
                         //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n"
-                                + "    <FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n"
+                                + firma0
+                                + firma1
                                 + "  </FirmaResponsables>\n"
-                                + "  <Institucion cveInstitucion=\"" + "090653" + "\" nombreInstitucion=\"" + "UNIVERSIDAD VICTORIA" + "\"/>\n"
+                                + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
                                 + "  <Profesionista curp=\"" + CURP + "\" nombre=\"" + nombre + "\" primerApellido=\"" + aPaterno + "\" segundoApellido=\"" + aMaterno + "\" correoElectronico=\"" + correo + "\"/>"
                                 + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
@@ -554,11 +596,12 @@ public class pnlXml extends javax.swing.JPanel {
             } catch (Exception e) {
                 System.out.println(e);
             }
+
         }
-        JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
-        //abrirarchivo("/home/genaro/Documentos/");
-        abrirarchivo("C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas");
         tablaTxtB();
+        JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
+        abrirarchivo(carpeta);
+        //abrirarchivo("C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas");
     }//GEN-LAST:event_rSButtonShade4ActionPerformed
 
 

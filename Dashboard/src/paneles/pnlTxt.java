@@ -84,6 +84,13 @@ public class pnlTxt extends javax.swing.JPanel {
 
     String idTipoEstudioAntecedente = "";
 
+    /**
+     * *********************************************
+     */
+    String claveEscuela = "";
+    String nombreEscuela = "";
+    String carpeta = "";
+
     public pnlTxt() {
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
@@ -192,7 +199,6 @@ public class pnlTxt extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -322,12 +328,12 @@ public class pnlTxt extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -342,10 +348,9 @@ public class pnlTxt extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
@@ -376,8 +381,7 @@ public class pnlTxt extends javax.swing.JPanel {
             try {
                 TableModel model = jTable1.getModel();
                 String[] seleccionado = new String[100];
-                //System.out.println("prueba " + ((Boolean) model.getValueAt(i, 4) == true));
-                //Si la columna 4 está true añadimos el ID
+
                 if ((Boolean) model.getValueAt(i, 4) == true) {
                     seleccionado[i] = ((String) model.getValueAt(i, 0));
 
@@ -435,6 +439,23 @@ public class pnlTxt extends javax.swing.JPanel {
                     }
 
                     try {
+                        try {
+                            resultadoConsulta = conector.consulta("SELECT * FROM configuracion");//establecimiento de sentencia aejecutar
+
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        while (resultadoConsulta.next()) {
+                            claveEscuela = resultadoConsulta.getString("claveEscuela");
+                            nombreEscuela = resultadoConsulta.getString("nombreEscuela");
+                            carpeta = resultadoConsulta.getString("carpeta");
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println("Error: " + ex);
+                    }
+
+                    try {
 
                         obtenFirmantes();
 
@@ -442,10 +463,10 @@ public class pnlTxt extends javax.swing.JPanel {
                             if (firmantes[j] != null) {
                                 System.out.println("modalidad: " + modalidadTitulacion);
                                 if (modalidadTitulacion.equals("POR TESIS")) {
-                                    String ruta = "/home/genaro/Documentos/" + j + "_TituloElectronico_" + matricula + ".txt";
-                                   // String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    String ruta = carpeta + j + "_TituloElectronico_" + matricula + ".txt";
+                                    // String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
-                                            + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
+                                            + claveEscuela + "|" + nombreEscuela + "|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                             + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                                             + modalidadTitulacion + "|" + fechaExamen + "||" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
@@ -454,8 +475,9 @@ public class pnlTxt extends javax.swing.JPanel {
                                             + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
                                     //System.out.println(contenido);
                                     try {
-                                       System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
-                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
+
+                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "', firma" + j + "='" + firmantes[j] + "' where folioControl='" + folioControl + "'");
+                                        System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "', firma" + j + "='" + firmantes[j] + "' where folioControl='" + folioControl + "'");
                                     } catch (ClassNotFoundException ex) {
                                         Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -482,10 +504,10 @@ public class pnlTxt extends javax.swing.JPanel {
 
                                     }
                                 } else {
-                                     String ruta = "/home/genaro/Documentos/" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    String ruta = carpeta + j + "_TituloElectronico_" + matricula + ".txt";
                                     //String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
-                                            + "090653|UNIVERSIDAD VICTORIA|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
+                                            + claveEscuela + "|" + nombreEscuela + "|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
                                             + nombre + "|" + aPaterno + "|" + aMaterno + "|" + correo + "|" + fechaExpedicion + "|" + idModalidadTitulacion + "|"
                                             + modalidadTitulacion + "||" + fechaExamen + "|" + sSocial + "|" + idFundamentoLegalServicioSocial + "|"
@@ -494,8 +516,9 @@ public class pnlTxt extends javax.swing.JPanel {
                                             + idEntidadFederativa2 + "|" + eFederativa2 + "|" + fechaAntInicio + "|" + fechaAntTermino + "|" + noCedula + "||";
                                     //System.out.println(contenido);
                                     try {
-                                        System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
-                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "' where folioControl='" + folioControl + "'");
+
+                                        String salida = conector.registrar("UPDATE txt set archivo" + j + "='" + contenido + "', firma" + j + "='" + firmantes[j] + "' where folioControl='" + folioControl + "'");
+                                        //System.out.println("UPDATE txt set archivo" + j + "='" + contenido + "', firma" + j + "='" + firmantes[j] + "' where folioControl='" + folioControl + "'");
                                     } catch (ClassNotFoundException ex) {
                                         Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -538,23 +561,24 @@ public class pnlTxt extends javax.swing.JPanel {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
 
-                JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-                abrirarchivo("/home/genaro/Documentos/");
-                //abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
+                } else {
+                    /* ..... */ }
+
             } catch (Exception e) {
                 System.out.println(e);
             }
-
         }
-
         tablaTxtA();
         tablaResponsable();
+        JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
+        abrirarchivo(carpeta);
+        //abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
 
         for (int i = 0; i < 5; i++) {
             firmantes[i] = null;
         }
+
 
     }//GEN-LAST:event_btnGenerarActionPerformed
 
