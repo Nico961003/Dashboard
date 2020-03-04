@@ -188,7 +188,7 @@ public class pnlConfiguracion extends javax.swing.JPanel {
     public void capturarDatos() {
         claveEscuela = txtclaveInstitucion.getText();
         nombreEscuela = txtnombreInstitucion.getText();
-        carpeta = txtCarpeta.getText();
+        carpeta = txtCarpeta.getText().replace("\\", "\\\\");;
     }
 
     public void registrarDatos() {
