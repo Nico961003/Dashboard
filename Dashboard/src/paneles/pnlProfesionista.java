@@ -60,7 +60,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT nombreEntidad FROM entidadFederativa");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call nombreEntidadFederativa");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }

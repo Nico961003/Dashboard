@@ -145,18 +145,13 @@ IN noRvoe text,
 IN cveCarrera text
 )
 UPDATE Carreras SET Carrera = Carrera, noRvoe = noRvoe WHERE IdCarrera = cveCarrera
+-- Verificar si existe la carrera
+CREATE PROCEDURE verificaCveCarrera(IN cveCarrera text)
+SELECT IdCarrera FROM Carreras WHERE IdCarrera = cveCarrera
 
-
-
-
-
-
-
-
-
-
-
-
+-- Profesionista
+CREATE PROCEDURE nombreEntidadFederativa
+SELECT nombreEntidad FROM entidadFederativa
 
 
 

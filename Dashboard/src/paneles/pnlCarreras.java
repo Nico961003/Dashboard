@@ -421,11 +421,11 @@ public class pnlCarreras extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-    int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             capturarDatos();
             try {
-                
+
                 String sql = "call actualizaCarrera('" + nombreCarrera + "', '" + noRvoe + "', '" + cveCarrera + "')";
                 String salida = conector.registrar(sql);
 
@@ -457,9 +457,9 @@ public class pnlCarreras extends javax.swing.JPanel {
         int reply = JOptionPane.showConfirmDialog(null, "¿Eliminar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             try {
-                
+
                 String salida = conector.eliminar("call eliminaCarrera('" + txtClavearrera.getText() + "')");
-                
+
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -470,33 +470,37 @@ public class pnlCarreras extends javax.swing.JPanel {
             btnGuardar.setEnabled(true);
             limpiar();
         } else {
-        /**********/
+            /**
+             * *******
+             */
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
-         try {
-            try {
-                resultadoConsulta = conector.consulta("call Carreras");
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (resultadoConsulta.next()) {
-            //resultadoConsulta.getMessage(); 
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
-        
-
-        if (txtClavearrera.getText() == "" || txtNombreCarrera.getText() == "" || txtNoRvoe.getText() == "") {
+        if (txtClavearrera.getText().equals("") || txtNombreCarrera.getText().equals("") || txtNoRvoe.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
             btnGuardar.setEnabled(false);
         } else {
             btnGuardar.setEnabled(true);
-        }
+            try {
+                try {
+                    resultadoConsulta = conector.consulta("call verificaCveCarrera ('" + txtClavearrera.getText() + "')");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+                while (resultadoConsulta.next()) {
+                    if (resultadoConsulta.getString("IdCarrera") != null) {
+                        JOptionPane.showMessageDialog(null, "La clave de carrera ya existe");
+                        txtClavearrera.requestFocus();
+                    }
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex);
+            }
+
+        }
 
     }//GEN-LAST:event_btnGuardarMouseMoved
 
