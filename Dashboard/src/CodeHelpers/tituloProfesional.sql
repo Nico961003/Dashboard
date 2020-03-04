@@ -109,7 +109,7 @@ create table Responsable(
 	idResponsable               varchar(30)
 );
 
-
+SELECT * FROM configuracion
 create table configuracion(
 claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
@@ -150,8 +150,62 @@ CREATE PROCEDURE verificaCveCarrera(IN cveCarrera text)
 SELECT IdCarrera FROM Carreras WHERE IdCarrera = cveCarrera
 
 -- Profesionista
-CREATE PROCEDURE nombreEntidadFederativa
+
+-- Visualizar entidad federativa
+CREATE PROCEDURE `nombreEntidadFederativa`()
 SELECT nombreEntidad FROM entidadFederativa
+END
+-- Visualizar datos del profesionista
+CREATE PROCEDURE `datosProfesionista`()
+SELECT Matricula, Nombre, apellidoPaterno, apellidoMaterno, CURP, Correo FROM Profesionista
+END
+
+-- Actualizar registro profesionista
+CREATE PROCEDURE actualizaProfesionista(
+IN matriculaActual text,
+IN Nombre text,
+IN apellidoPaterno text,
+IN apellidoMaterno text,
+IN CURP text,
+IN correo text,
+IN institucionProcedencia text,
+IN idEntidadFederativa text,
+IN fechaInicioAntecedente text,
+IN fechaTerminoAntecedente text,
+IN idTipoEstudioAntecedente text,
+IN tipodeEstudio text,
+IN eFederativa text,
+IN noCedula text
+)
+Update Profesionista set Nombre = Nombre, apellidoPaterno = apellidoPaterno, apellidoMaterno= apellidoMaterno
+                        , CURP = CURP , Correo = correo, institucionProcedencia= institucionProcedencia
+                        , idEntidadFederativa=idEntidadFederativa, fechaAntInicio= fechaInicioAntecedente, fechaAntTermino = fechaTerminoAntecedente
+                        , idTipoEstudioAntecedente = idTipoEstudioAntecedente,tipodeEstudio = tipodeEstudio, eFederativa = eFederativa
+                        , noCedula=noCedula WHERE Matricula = matriculaActual
+                        
+-- Varifica matricula 
+CREATE PROCEDURE verificaMatricula(IN InMatricula text)
+SELECT Matricula FROM Profesionista where Matricula = InMatricula
+-- Elimina profesionista
+CREATE PROCEDURE eliminaProfesionista(IN InMatricula text)
+Delete from Profesionista where Matricula = InMatricula
+-- busca profesionista
+CREATE PROCEDURE buscaProfesionista(IN buscar text)
+SELECT * FROM Profesionista WHERE Matricula LIKE CONCAT('%', buscar , '%')  
+OR Nombre LIKE CONCAT('%', buscar , '%') 
+OR apellidoPaterno LIKE CONCAT('%', buscar , '%') 
+OR apellidoMaterno LIKE CONCAT('%', buscar , '%') 
+OR CURP LIKE CONCAT('%', buscar , '%') 
+OR Correo LIKE CONCAT('%', buscar , '%')  
+-- tipo de estudio antecedente
+CREATE PROCEDURE tipoEstudio(IN tipoEstudio text)
+SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente=tipoEstudio
+
+
+
+
+
+
 
 
 

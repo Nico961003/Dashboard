@@ -114,19 +114,19 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
     public void tablaProfesionista() {
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("SELECT Matricula, Nombre, apellidoPaterno, apellidoMaterno, CURP, Correo FROM Profesionista");
+                resultadoConsulta = conector.consulta("call datosProfesionista");
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[6];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[6];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 6; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 6; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1);
                 }
                 modeloTabla.addRow(valores);
@@ -625,16 +625,11 @@ public class pnlProfesionista extends javax.swing.JPanel {
             try {
 
                 capturarDatos();
-                System.out.println("modificar");
+                String sql = "call actualizaProfesionista('" + Matricula + "', '" + Nombre + "','" + apellidoPaterno
+                        + "','" + apellidoMaterno + "','" + CURP + "','" + correo + "','" + institucionProcedencia
+                        + "','" + idEntidadFederativa + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente
+                        + "','" + idTipoEstudioAntecedente + "','" + tipodeEstudio + "','" + eFederativa + "','" + noCedula + "')";
 
-                String sql = "Update Profesionista set Matricula=" + Matricula + ", Nombre='" + Nombre
-                        + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
-                        + "', CURP='" + CURP + "', Correo='" + correo + "', institucionProcedencia='" + institucionProcedencia
-                        + "', idEntidadFederativa='" + idEntidadFederativa + "', fechaAntInicio='" + fechaInicioAntecedente + "', fechaAntTermino='" + fechaTerminoAntecedente
-                        + "', idTipoEstudioAntecedente='" + idTipoEstudioAntecedente + "',tipodeEstudio='" + tipodeEstudio + "', eFederativa='" + eFederativa
-                        + "', noCedula='" + noCedula + "' where Matricula='" + txtMatricula.getText() + "'";
-
-                System.out.println(sql);
                 String salida = conector.registrar(sql);
 
             } catch (Exception e) {
@@ -665,53 +660,46 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
     private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
 
-        if (txtMatricula.getText() == "" || txtNombre.getText() == "" || txtapellidoPaterno.getText() == ""
-                || txtCURP.getText() == "" || txtProcedencia.getText() == "" || txtNoCedula.getText() == ""
-                || DateAntecInicio.getDate() == null || DateAntecTermino.getDate() == null) {
+        if (txtMatricula.getText().equals("") || txtNombre.getText().equals("") || txtapellidoPaterno.getText().equals("")
+                || txtapellidoMaterno.getText().equals("") || txtCURP.getText().equals("") || txtProcedencia.getText().equals("")
+                || txtNoCedula.getText().equals("") || DateAntecInicio.getDate() == null || DateAntecTermino.getDate() == null) {
             btnGuardar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No deben haber campos vacios, termina");
         } else {
-            btnGuardar.setEnabled(true);
-        }
+            // Patrón para validar el email
+            Pattern pattern = Pattern
+                    .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-        // Patrón para validar el email
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            // El email a validar
+            String email = txtCorreo.getText();
 
-        // El email a validar
-        String email = txtCorreo.getText();
+            Matcher mather = pattern.matcher(email);
 
-        Matcher mather = pattern.matcher(email);
+            if (mather.find() == true) {
+                btnGuardar.setEnabled(true);
+                try {
+                    try {
+                        resultadoConsulta = conector.consulta("call verificaMatricula ('" + txtMatricula.getText() + "')");
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    while (resultadoConsulta.next()) {
 
-        if (mather.find() == true) {
-            btnGuardar.setEnabled(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "El email ingresado es inválido\nCorrija y vuelva a intentar");
-            txtCorreo.setText("");
-            btnGuardar.setEnabled(false);
-        }
-
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT Matricula FROM Profesionista where Matricula = " + txtMatricula.getText());//establecimiento de sentencia aejecutar
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            while (resultadoConsulta.next()) {
-
-                if (resultadoConsulta.getString("Matricula") != null || resultadoConsulta.getString("Matricula") != "") {
-                    JOptionPane.showMessageDialog(null, "La matricula ya fue registrada\nCorrija y vuelva a intentar");
-                    btnGuardar.setEnabled(false);
-                } else {
-                    btnGuardar.setEnabled(true);
+                        if (resultadoConsulta.getString("Matricula") != null) {
+                            JOptionPane.showMessageDialog(null, "La matricula ya fue registrada\nCorrija y vuelva a intentar");
+                            btnGuardar.requestFocus();
+                        }
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "El email ingresado es inválido\nCorrija y vuelva a intentar");
+                txtCorreo.setText("");
+                btnGuardar.setEnabled(false);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_btnGuardarMouseMoved
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -719,8 +707,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
         int reply = JOptionPane.showConfirmDialog(null, "¿Eliminar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             try {
-                System.out.println("eliminar");
-                String salida = conector.eliminar("Delete from Profesionista where Matricula ='" + txtMatricula.getText() + "'");
+                String salida = conector.eliminar("call eliminaProfesionista('" + txtMatricula.getText() + "')");
                 System.out.println(salida);
             } catch (Exception e) {
                 System.out.println(e);
@@ -745,13 +732,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("select * from Profesionista where Matricula like '%"
-                        + Buscar + "%' or Nombre like '%"
-                        + Buscar + "%' or apellidoPaterno like '%"
-                        + Buscar + "%' or apellidoMaterno like '%"
-                        + Buscar + "%' or CURP like '%"
-                        + Buscar + "%' or Correo like '%"
-                        + Buscar + "%' ");
+                resultadoConsulta = conector.consulta("call buscaProfesionista ('" + Buscar + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -828,12 +809,13 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente='" + tipodeEstudio + "'");
+                resultadoConsulta = conector.consulta("call tipoEstudio ('" + tipodeEstudio + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
             while (resultadoConsulta.next()) {
                 idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoAntecedente");
+                System.out.println("tipo " + idTipoEstudioAntecedente);
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
