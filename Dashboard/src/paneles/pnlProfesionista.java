@@ -815,7 +815,6 @@ public class pnlProfesionista extends javax.swing.JPanel {
             }
             while (resultadoConsulta.next()) {
                 idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoAntecedente");
-                System.out.println("tipo " + idTipoEstudioAntecedente);
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
@@ -825,7 +824,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call obtenIdEntidad('" + eFederativa + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -833,7 +832,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
                 idEntidadFederativa = resultadoConsulta.getString("id_EntidadF");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlProfesionista.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Date fecha5 = DateAntecInicio.getDate();
@@ -849,10 +848,7 @@ public class pnlProfesionista extends javax.swing.JPanel {
     public void regitroBaseDatos() {
         try {
 
-            String sql = "INSERT INTO Profesionista(Matricula, Nombre, apellidoPaterno, "
-                    + "apellidoMaterno, correo, CURP, institucionProcedencia,idEntidadFederativa,eFederativa,"
-                    + "fechaAntInicio,fechaAntTermino,idTipoEstudioAntecedente,tipodeEstudio,"
-                    + "noCedula,estatus) VALUES ('" + Matricula + "','" + Nombre + "','" + apellidoPaterno + "','"
+            String sql = "call insertaProfesionista('" + Matricula + "','" + Nombre + "','" + apellidoPaterno + "','"
                     + apellidoMaterno + "','" + correo + "','" + CURP + "','"
                     + institucionProcedencia + "','" + idEntidadFederativa + "','"
                     + eFederativa + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"

@@ -73,18 +73,18 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     public void tablaTitulos() {
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount(); 
+            for (int i = 1; i <= filas; i++) { 
+                modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("SELECT folioControl, matricula, nombre, aPaterno, aMaterno FROM txt where estatus='A'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call registrosTxt");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[5];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[5];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 5; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 5; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1);
                 }
                 modeloTabla.addRow(valores);
@@ -97,7 +97,7 @@ public class pnlTitulos extends javax.swing.JPanel {
     public void Llamado() {
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT Matricula, Nombre, apellidoPaterno, apellidoMaterno FROM Profesionista where estatus='A'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call llenaComboProfesionista");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }

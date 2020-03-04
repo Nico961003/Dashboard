@@ -200,12 +200,45 @@ OR Correo LIKE CONCAT('%', buscar , '%')
 -- tipo de estudio antecedente
 CREATE PROCEDURE tipoEstudio(IN tipoEstudio text)
 SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente=tipoEstudio
+-- buscar id Entidad Federativa
+CREATE PROCEDURE obtenIdEntidad(IN entidad)
+SELECT id_EntidadF FROM entidadFederativa where nombreEntidad=entidad
+-- insertar profesionista
+CREATE PROCEDURE insertaProfesionista(
+IN Matricula text, 
+IN Nombre text,  
+IN apellidoPaterno text,  
+IN apellidoMaterno text, 
+IN correo text, 
+IN CURP text, 
+IN institucionProcedencia text, 
+IN idEntidadFederativa text, 
+IN eFederativa text, 
+IN fechaAntInicio text, 
+IN fechaAntTermino text, 
+IN idTipoEstudioAntecedente text, 
+IN tipodeEstudio text, 
+IN noCedula text, 
+IN estatus text
+)
+INSERT INTO Profesionista(Matricula, Nombre, apellidoPaterno, 
+                     apellidoMaterno, correo, CURP, institucionProcedencia,idEntidadFederativa,eFederativa,
+                     fechaAntInicio,fechaAntTermino,idTipoEstudioAntecedente,tipodeEstudio,
+                     noCedula,estatus) VALUES (Matricula, Nombre, apellidoPaterno, 
+                     apellidoMaterno, correo, CURP, institucionProcedencia,idEntidadFederativa,eFederativa,
+                     fechaAntInicio,fechaAntTermino,idTipoEstudioAntecedente,tipodeEstudio,
+                     noCedula,estatus);
 
 
 
+-- Titulos
 
-
-
+-- imprime tabla txt
+CREATE PROCEDURE `registrosTxt`()
+SELECT folioControl, matricula, nombre, aPaterno, aMaterno FROM txt WHERE estatus='A'
+-- llenado de combo profesionista
+CREATE PROCEDURE 
+SELECT Matricula, Nombre, apellidoPaterno, apellidoMaterno FROM Profesionista where estatus='A'
 
 
 
