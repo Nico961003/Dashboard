@@ -229,16 +229,118 @@ INSERT INTO Profesionista(Matricula, Nombre, apellidoPaterno,
                      fechaAntInicio,fechaAntTermino,idTipoEstudioAntecedente,tipodeEstudio,
                      noCedula,estatus);
 
-
-
 -- Titulos
 
 -- imprime tabla txt
 CREATE PROCEDURE `registrosTxt`()
 SELECT folioControl, matricula, nombre, aPaterno, aMaterno FROM txt WHERE estatus='A'
 -- llenado de combo profesionista
-CREATE PROCEDURE 
+CREATE PROCEDURE `llenaComboProfesionista`()
 SELECT Matricula, Nombre, apellidoPaterno, apellidoMaterno FROM Profesionista where estatus='A'
+-- llenado de combo Autorizacion reconocimiento
+CREATE PROCEDURE `llenadoComboAutorizacionRec`()
+SELECT AUTORIZACIÓN_RECONOCIMIENTO FROM autorizacionRec
+-- llenado de combo modalidad titulacion
+CREATE PROCEDURE `llenaComboModalidadTitulacion`()
+SELECT MODALIDAD_TITULACIÓN FROM modalidadTitulacion
+-- llena combo fundamentos del servicio social
+CREATE PROCEDURE `llenaComboFundamentoSS`()
+SELECT FUNDAMENTO_LEGAL_SERVICIO_SOCIAL FROM fundamentoSSocial
+-- Actualiza estatus del profesionista
+CREATE PROCEDURE actulizaEstatusProfesionista (IN InCURP text)
+UPDATE Profesionista set estatus='A' where CURP=InCURP
+-- elmina titulo
+CREATE PROCEDURE eliminaTitulo(IN folio text)
+Delete from txt where folioControl = folio
+-- visualiza informacion a detalle de un titulo
+CREATE PROCEDURE visualizaDetalles (IN folio text)
+SELECT modalidadTitulacion,correo, nombreCarrera, fechaExpedicion, fechaExamen,
+       fechaExamen, sSocial, fundamentoSS, autorizacion_reconocimiento,
+       institucionProcedencia, fechaAntInicio, fechaAntTermino FROM txt where folioControl = folio
+-- busca titulo
+CREATE PROCEDURE buscaTitulo (IN buscar text)
+SELECT folioControl, matricula, nombre, aPaterno, aMaterno
+FROM txt WHERE folioControl  LIKE CONCAT('%', buscar , '%')  
+OR matricula LIKE CONCAT('%', buscar , '%') 
+OR nombre LIKE CONCAT('%', buscar , '%') 
+OR aPaterno LIKE CONCAT('%', buscar , '%') 
+OR aMaterno LIKE CONCAT('%', buscar , '%') 
+ -- obten id modalidad titulacion
+ CREATE PROCEDURE obtenIdModalidadTitulacion(IN modalidadTitulacion text)
+ SELECT CLAVE FROM modalidadTitulacion where MODALIDAD_TITULACIÓN=modalidadTitulacion
+-- obten id autorizacion reconocimiento
+CREATE PROCEDURE obtenIdAutorizacionRec(IN autRec text)
+SELECT ID_AUTORIZACION_RECONOCIMIENTO FROM autorizacionRec where AUTORIZACIÓN_RECONOCIMIENTO=autRec
+-- obten id enteidad federativa
+CREATE PROCEDURE obtenIdEntidadFed (IN nombreE text)
+SELECT id_EntidadF FROM entidadFederativa where nombreEntidad=nombreE
+-- obten fundamento servicio social
+CREATE PROCEDURE obtenIdFundamentoSS(IN fundamento text)
+SELECT ID_FUNDAMENTO_LEGAL_SERVICIO_SOCIAL FROM fundamentoSSocial where FUNDAMENTO_LEGAL_SERVICIO_SOCIAL=fundamento
+-- obten el id del tipo de antecedente
+CREATE PROCEDURE obtenIdTipoAntecedente(IN tipo text)
+SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente=tipo
+-- inserta un titulo a la BD
+CREATE PROCEDURE insertaTitulo(
+IN folioControl text,
+IN fechaExpedicion text,
+IN idModalidadTitulacion text,
+IN modalidadTitulacion text,
+IN fechaExamen text,
+IN matricula text,
+IN nombre text,
+IN aPaterno text,
+IN aMaterno text,
+IN correo text,
+IN CURP text,
+IN sSocial text,
+IN idFundamentoLegalServicioSocial text,
+IN idEntidadFederativa text,
+IN eFederativa text,
+IN fundamentoSS text,
+IN clave text,
+IN nombreCarrera text,
+IN numeroRvoe text,
+IN fechaInicioCarrera text,
+IN fechaFinCarrera text,
+IN clave_autorizacion text,
+IN autorizacion_reconocimiento text,
+IN institucionProcedencia text,
+IN idEntidadFederativa2 text,
+IN eFederativa2 text,
+IN fechaAntInicio text,
+IN fechaAntTermino text,
+IN idTipoEstudioAntecedente text,
+IN tipodeEstudio text,
+IN noCedula text,
+IN estatus text,
+IN archivo0 text,
+IN archivo1 text,
+IN archivo2 text,
+IN archivo3 text,
+IN archivo4 text
+)
+INSERT INTO txt(folioControl,fechaExpedicion,idModalidadTitulacion,
+					modalidadTitulacion,fechaExamen,matricula,nombre,aPaterno,aMaterno,correo,CURP,sSocial,
+                    idFundamentoLegalServicioSocial,idEntidadFederativa,eFederativa,fundamentoSS,clave,nombreCarrera,
+                    numeroRvoe,fechaInicioCarrera,fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento,
+                    institucionProcedencia,idEntidadFederativa2,eFederativa2,fechaAntInicio,fechaAntTermino,
+                    idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo0,archivo1,archivo2,archivo3,archivo4) VALUES (
+					folioControl,fechaExpedicion,idModalidadTitulacion,
+					modalidadTitulacion,fechaExamen,matricula,nombre,aPaterno,aMaterno,correo,CURP,sSocial,
+                    idFundamentoLegalServicioSocial,idEntidadFederativa,eFederativa,fundamentoSS,clave,nombreCarrera,
+                    numeroRvoe,fechaInicioCarrera,fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento,
+                    institucionProcedencia,idEntidadFederativa2,eFederativa2,fechaAntInicio,fechaAntTermino,
+                    idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo0,archivo1,archivo2,archivo3,archivo4)
+-- Actualiza estatus del profesionista a baja 
+CREATE PROCEDURE actulizaBajaProfesionista (IN InMatricula text)
+UPDATE Profesionista set estatus='B' where Matricula=InMatricula
+
+
+
+
+
+
 
 
 

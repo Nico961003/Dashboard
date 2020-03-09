@@ -73,8 +73,8 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     public void tablaTitulos() {
         try {
-            int filas = jTable1.getRowCount(); 
-            for (int i = 1; i <= filas; i++) { 
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
                 modeloTabla.removeRow(0);
             }
             try {
@@ -111,49 +111,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM autorizacionRec");//establecimiento de sentencia aejecutar
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (resultadoConsulta.next()) {
-                ComboautReconocimiento.addItem(resultadoConsulta.getString("AUTORIZACIÓN_RECONOCIMIENTO"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT * FROM entidadFederativa");//establecimiento de sentencia aejecutar
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (resultadoConsulta.next()) {
-                //  ComboEFederativa.addItem(resultadoConsulta.getString("nombreEntidad"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT * FROM estudioAntecedente");//establecimiento de sentencia aejecutar
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (resultadoConsulta.next()) {
-                //   ComboTipoEstudio.addItem(resultadoConsulta.getString("tipoEstudioAntecedente"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT * FROM modalidadTitulacion");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call llenaComboModalidadTitulacion");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -167,7 +125,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM entidadFederativa");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call nombreEntidadFederativa");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -181,7 +139,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM fundamentoSSocial");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call llenaComboFundamentoSS");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -195,7 +153,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT * FROM Carreras");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call Carreras");//establecimiento de sentencia aejecutar
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -206,6 +164,21 @@ public class pnlTitulos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+            try {
+                resultadoConsulta = conector.consulta("call llenadoComboAutorizacionRec");//establecimiento de sentencia aejecutar
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                ComboautReconocimiento.addItem(resultadoConsulta.getString("AUTORIZACIÓN_RECONOCIMIENTO"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -683,21 +656,20 @@ public class pnlTitulos extends javax.swing.JPanel {
         if (reply == JOptionPane.YES_OPTION) {
 
             try {
-                String salida = conector.registrar("UPDATE Profesionista set estatus='A' where CURP='" + txtCURP.getText() + "'");
+                String salida = conector.registrar("call actulizaEstatusProfesionista('" + txtCURP.getText() + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             try {
                 System.out.println("eliminar");
-                String salida = conector.eliminar("Delete from txt where folioControl ='" + txtFolio.getText() + "'");
+                String salida = conector.eliminar("call eliminaTitulo('" + txtFolio.getText() + "')");
                 System.out.println(salida);
             } catch (Exception e) {
                 System.out.println(e);
             }
             JOptionPane.showMessageDialog(null, "Registro eliminado :( ");
             btnEliminar.setEnabled(false);
-            //btnModificar.setEnabled(false);
             btnAgregar.setEnabled(true);
             limpiar();
         } else {
@@ -716,7 +688,6 @@ public class pnlTitulos extends javax.swing.JPanel {
                     String delimitadores = " ";
                     String[] palabrasSeparadas = cadena.split(delimitadores);
                     String Matricula = palabrasSeparadas[0].toString();
-                    //System.out.println("palabras " + palabrasSeparadas[0]);
 
                     cadena = "SELECT * FROM Profesionista where Matricula='" + Matricula + "'";
 
@@ -744,10 +715,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT modalidadTitulacion,"
-                        + " correo, nombreCarrera, fechaExpedicion, fechaExamen,"
-                        + " fechaExamen, sSocial, fundamentoSS, autorizacion_reconocimiento,"
-                        + " institucionProcedencia, fechaAntInicio, fechaAntTermino FROM txt where folioControl='" + txtFolio.getText() + "'");
+                resultadoConsulta = conector.consulta("call visualizaDetalles('" + txtFolio.getText() + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -774,10 +742,8 @@ public class pnlTitulos extends javax.swing.JPanel {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnAgregar.setEnabled(false);
-
     }//GEN-LAST:event_btnDetallesActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -830,22 +796,21 @@ public class pnlTitulos extends javax.swing.JPanel {
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("select * from Carreras where IdCarrera like '%" + Buscar + "%' or noRvoe like '%" + Buscar + "%' or Carrera like '%" + Buscar + "%' ");
+                resultadoConsulta = conector.consulta("call buscaTitulo('" + Buscar + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[3];//Crea un arreglo de objetos un objeto puede
+            Object[] valores = new Object[5];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 3; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 5; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
-                modeloTabla.addRow(valores);//añade una nueva fila con los datos que
-                //esten en cada psocion del arreglo de objetos
+                modeloTabla.addRow(valores);
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
@@ -861,26 +826,33 @@ public class pnlTitulos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAgregarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseMoved
-           
-        try {
+
+        if (txtFolio.getText().equals("") || txtCURP.getText().equals("") || DateExamenP.getDate() == null
+                || DateExpedicion.getDate() == null || DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null) {
+            btnAgregar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No deben haber campos vacios");
+        } else {
+            btnAgregar.setEnabled(true);
             try {
-                resultadoConsulta = conector.consulta("SELECT folioControl FROM txt where folioControl = '" + txtFolio.getText() + "'");
-            } catch (ClassNotFoundException ex) {
+                try {
+                    resultadoConsulta = conector.consulta("SELECT folioControl FROM txt where folioControl = '" + txtFolio.getText() + "'");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                while (resultadoConsulta.next()) {
+
+                    if (resultadoConsulta.getString("folioControl") != null || resultadoConsulta.getString("folioControl") != "") {
+                        JOptionPane.showMessageDialog(null, "El folio ya fue registrada\nCorrija y vuelva a intentar");
+                        txtFolio.requestFocus();
+                        txtFolio.setText(resultadoConsulta.getString("folioControl"));
+                    }
+                }
+
+            } catch (SQLException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            while (resultadoConsulta.next()) {
-
-                if ( resultadoConsulta.getString("folioControl") != null || resultadoConsulta.getString("folioControl") != "") {
-                    JOptionPane.showMessageDialog(null, "El folio ya fue registrada\nCorrija y vuelva a intentar");
-                    txtFolio.requestFocus();
-                    txtFolio.setText(resultadoConsulta.getString("folioControl"));
-                }
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnAgregarMouseMoved
 
 
@@ -1001,7 +973,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT CLAVE FROM modalidadTitulacion where MODALIDAD_TITULACIÓN='" + modalidadTitulacion + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call obtenIdModalidadTitulacion('" + modalidadTitulacion + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1017,7 +989,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT ID_AUTORIZACION_RECONOCIMIENTO FROM autorizacionRec where AUTORIZACIÓN_RECONOCIMIENTO='" + autorizacion_reconocimiento + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call obtenIdAutorizacionRec('" + autorizacion_reconocimiento + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1030,7 +1002,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT id_EntidadF FROM entidadFederativa where nombreEntidad='" + eFederativa + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call obtenIdEntidadFed('" + eFederativa + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1043,7 +1015,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT ID_FUNDAMENTO_LEGAL_SERVICIO_SOCIAL FROM fundamentoSSocial where FUNDAMENTO_LEGAL_SERVICIO_SOCIAL='" + fundamentoSS + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call obtenIdFundamentoSS('" + fundamentoSS + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1070,7 +1042,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT idEntidadFederativa, eFederativa FROM Profesionista where eFederativa='" + eFederativa2 + "'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT idEntidadFederativa FROM Profesionista where eFederativa=('" + eFederativa2 + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1083,7 +1055,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente='" + tipodeEstudio + "'");
+                resultadoConsulta = conector.consulta("call obtenIdTipoAntecedente('" + tipodeEstudio + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1098,12 +1070,7 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     public void regitroBaseDatos() {
         try {
-            String cadena = "INSERT INTO txt(folioControl,fechaExpedicion,idModalidadTitulacion, \n"
-                    + "modalidadTitulacion,fechaExamen,matricula,nombre,aPaterno,aMaterno,correo,CURP,sSocial, \n"
-                    + "idFundamentoLegalServicioSocial,idEntidadFederativa,eFederativa,fundamentoSS,clave,nombreCarrera,\n"
-                    + "numeroRvoe,fechaInicioCarrera,fechaFinCarrera,clave_autorizacion,autorizacion_reconocimiento, \n"
-                    + "institucionProcedencia,idEntidadFederativa2,eFederativa2,fechaAntInicio,fechaAntTermino,\n"
-                    + "idTipoEstudioAntecedente,tipodeEstudio,noCedula,estatus,archivo0,archivo1,archivo2,archivo3,archivo4) VALUES ('"
+            String cadena = "call insertaTitulo('"
                     + folioControl + "','" + fechaExpedicion + "','"
                     + idModalidadTitulacion + "','" + modalidadTitulacion + "','" + fechaExamen + "','"
                     + matricula + "','" + nombre + "','" + aPaterno + "','" + aMaterno + "','" + correo + "','"
@@ -1117,7 +1084,7 @@ public class pnlTitulos extends javax.swing.JPanel {
             String salida = conector.registrar(cadena);
             System.out.println(salida);
 
-            salida = conector.registrar("UPDATE Profesionista set estatus='B' where Matricula='" + matricula + "'");
+            salida = conector.registrar("call actulizaBajaProfesionista('" + matricula + "')");
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
