@@ -336,13 +336,48 @@ INSERT INTO txt(folioControl,fechaExpedicion,idModalidadTitulacion,
 CREATE PROCEDURE actulizaBajaProfesionista (IN InMatricula text)
 UPDATE Profesionista set estatus='B' where Matricula=InMatricula
 
+-- Responsables
+
+-- imprime tabla responsables
+CREATE PROCEDURE `registroResponsable`()
+SELECT Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto  FROM Responsable
+-- actualizar datos responsable
+CREATE PROCEDURE actualizaResponsable(
+IN Nombre text,
+IN apellidoPaterno text,
+IN apellidoMaterno text,
+IN CURP text,
+IN Puesto text,
+IN abr text,
+IN Llave text,
+IN Certificado text,
+IN pass text,
+IN inClave text
+)
+Update Responsable set Nombre= Nombre, apellidoPaterno= apellidoPaterno, apellidoMaterno= apellidoMaterno,
+                       CURP= CURP, Puesto= Puesto, abrev= abr,Llave= Llave, Certificado= Certificado,
+                       pass= pass where Clave= inClave 
+-- llena campos de formulario
+CREATE PROCEDURE llenaCampos(IN inCURP text)
+SELECT Clave, Llave, Certificado, abrev  FROM Responsable where CURP= inCURP
+-- inserta responsable
+CREATE PROCEDURE insertaResponsable(
+IN Clave text,
+IN Nombre text,
+IN apellidoPaterno text,
+IN apellidoMaterno text,
+IN CURP text,
+IN Puesto text,
+IN abrev text,
+IN Llave text,
+IN Certificado text,
+IN pass text
+)
 
 
 
-
-
-
-
+INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass) VALUES ( Clave, Nombre, apellidoPaterno,
+                     apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, pass)
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8
 create user genaro@localhost identified by'Supervi$or_123'

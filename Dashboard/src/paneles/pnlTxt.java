@@ -106,13 +106,13 @@ public class pnlTxt extends javax.swing.JPanel {
                 modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("SELECT matricula, nombre, aPaterno, aMaterno FROM txt where estatus='A'");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("SELECT matricula, nombre, aPaterno, aMaterno FROM txt where estatus='A'");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[4];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[4];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 4; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 4; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1);
                 }
                 modeloTabla.addRow(valores);
@@ -125,9 +125,9 @@ public class pnlTxt extends javax.swing.JPanel {
 
     public void tablaResponsable() {
         try {
-            int filas = jTable2.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla2.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable2.getRowCount();
+            for (int i = 1; i <= filas; i++) { 
+                modeloTabla2.removeRow(0); 
             }
             try {
                 resultadoConsulta = conector.consulta("SELECT Clave, Nombre, apellidoPaterno, apellidoMaterno FROM Responsable");//establecimiento de sentencia aejecutar
@@ -137,7 +137,7 @@ public class pnlTxt extends javax.swing.JPanel {
             }
             Object[] valores = new Object[4];//Crea un arreglo de objetos un objeto puede 
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 4; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 4; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1);
                 }
                 modeloTabla2.addRow(valores);
@@ -464,7 +464,6 @@ public class pnlTxt extends javax.swing.JPanel {
                                 System.out.println("modalidad: " + modalidadTitulacion);
                                 if (modalidadTitulacion.equals("POR TESIS")) {
                                     String ruta = carpeta + j + "_TituloElectronico_" + matricula + ".txt";
-                                    // String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
                                             + claveEscuela + "|" + nombreEscuela + "|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
@@ -505,7 +504,6 @@ public class pnlTxt extends javax.swing.JPanel {
                                     }
                                 } else {
                                     String ruta = carpeta + j + "_TituloElectronico_" + matricula + ".txt";
-                                    //String ruta = "C:\\Users\\JLIMON\\Documents\\" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
                                             + claveEscuela + "|" + nombreEscuela + "|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
@@ -562,8 +560,7 @@ public class pnlTxt extends javax.swing.JPanel {
                         Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                } else {
-                    /* ..... */ }
+                } else { }
 
             } catch (Exception e) {
                 System.out.println(e);
@@ -573,7 +570,6 @@ public class pnlTxt extends javax.swing.JPanel {
         tablaResponsable();
         JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
         abrirarchivo(carpeta);
-        //abrirarchivo("C:\\Users\\JLIMON\\Documents\\");
 
         for (int i = 0; i < 5; i++) {
             firmantes[i] = null;

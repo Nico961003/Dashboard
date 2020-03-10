@@ -60,19 +60,19 @@ public class pnlResponsables extends javax.swing.JPanel {
 
     public void tablaReponsables() {
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0); 
             }
             try {
-                resultadoConsulta = conector.consulta("SELECT Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto  FROM Responsable");//establecimiento de sentencia aejecutar
+                resultadoConsulta = conector.consulta("call registroResponsable");
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[6];//Crea un arreglo de objetos un objeto puede 
+            Object[] valores = new Object[6];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 6; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 6; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1);
                 }
                 modeloTabla.addRow(valores);
@@ -559,10 +559,8 @@ public class pnlResponsables extends javax.swing.JPanel {
 
                 System.out.println("modificar");
 
-                String sql = "Update Responsable set Clave=" + Clave + ", Nombre='" + Nombre
-                        + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno
-                        + "', CURP='" + CURP + "', Puesto='" + Puesto + "', abrev='" + abr
-                        + "', Llave='" + Llave + "', Certificado='" + Certificado + "', pass='" + pass + "' where Clave='" + Clave + "'";
+                String sql = "call actualizaResponsable('" + Clave + Nombre + apellidoPaterno + apellidoMaterno 
+                        + CURP  + Puesto + abr + Llave + Certificado  + pass + Clave + "')";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
@@ -583,9 +581,10 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAgregarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseMoved
-        System.out.println("ok");
-        if(txtCURP.getText() == "" || txtFldCer.getText() == "" || txtFldKey.getText() == "" ||
-                txtNombre.getText() == "" || txtapellidoMaterno.getText() == "" || txtapellidoPaterno.getText() == ""){
+       pass = new String(psswrdFldPass.getPassword());
+        if(txtCURP.getText().equals("") || txtFldCer.getText().equals("") || txtFldKey.getText().equals("") ||
+                txtNombre.getText().equals("") || txtapellidoMaterno.getText().equals("") || 
+                txtapellidoPaterno.getText().equals("") || pass.equals("")){
             
             btnAgregar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
@@ -646,7 +645,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
             try {
-                resultadoConsulta = conector.consulta("SELECT Clave, Llave, Certificado, abrev  FROM Responsable where CURP='" + String.valueOf(jTable1.getValueAt(seleccionada, 4)) + "'");
+                resultadoConsulta = conector.consulta("call llenaCampos('" + String.valueOf(jTable1.getValueAt(seleccionada, 4)) + "')");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -721,8 +720,8 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
 
-            String sql = "INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass) VALUES ('" + Clave + "','" + Nombre + "','" + apellidoPaterno
-                    + "','" + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
+            String sql = "call insertaResponsable('" + Clave + "','" + Nombre + "','" + apellidoPaterno + "','" 
+            + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
 
             System.out.println(sql);
             String salida = conector.registrar(sql);
