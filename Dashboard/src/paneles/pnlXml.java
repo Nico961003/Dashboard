@@ -493,7 +493,7 @@ public class pnlXml extends javax.swing.JPanel {
                         abrev1 = resultadoConsulta.getString("abrev");
                         Llave = resultadoConsulta.getString("Llave");
                         Certificado = resultadoConsulta.getString("Certificado");
-                        pass = resultadoConsulta.getString("pass");
+                        pass = resultadoConsulta.getString("SHA2('" + pass + "',512)");
 
                         Llave = sign(Llave, pass, archivo);
                         Certificado = Base64.encodeBase64String(toByteArray(Certificado));
@@ -506,7 +506,7 @@ public class pnlXml extends javax.swing.JPanel {
                 }
                 if (firma1 != null) {
                     try {
-                        resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
+                        resultadoConsulta = conector.consulta("SELECT SHA2('2019UVictoria',512) FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlXml.class
                                 .getName()).log(Level.SEVERE, null, ex);
