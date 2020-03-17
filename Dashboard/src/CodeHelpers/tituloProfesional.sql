@@ -105,11 +105,12 @@ create table Responsable(
     abrev						varchar(50),
 	Llave 						varchar(500),
 	Certificado 				varchar(500),
-    pass						varchar(100),
+    pass						varchar(9000),
 	idResponsable               varchar(30)
 );
+alter table Responsable 
+modify pass varchar(9000)
 
-SELECT * FROM configuracion
 create table configuracion(
 claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
@@ -201,7 +202,7 @@ OR Correo LIKE CONCAT('%', buscar , '%')
 CREATE PROCEDURE tipoEstudio(IN tipoEstudio text)
 SELECT idTipoAntecedente FROM estudioAntecedente where tipoEstudioAntecedente=tipoEstudio
 -- buscar id Entidad Federativa
-CREATE PROCEDURE obtenIdEntidad(IN entidad)
+CREATE PROCEDURE obtenIdEntidad(IN entidad text)
 SELECT id_EntidadF FROM entidadFederativa where nombreEntidad=entidad
 -- insertar profesionista
 CREATE PROCEDURE insertaProfesionista(
@@ -351,12 +352,12 @@ IN Puesto text,
 IN abr text,
 IN Llave text,
 IN Certificado text,
-IN pass text,
+IN pass varchar(512),
 IN inClave text
 )
 Update Responsable set Nombre= Nombre, apellidoPaterno= apellidoPaterno, apellidoMaterno= apellidoMaterno,
                        CURP= CURP, Puesto= Puesto, abrev= abr,Llave= Llave, Certificado= Certificado,
-                       pass= pass where Clave= inClave 
+                       pass= (SHA2(" + pass + ",512))  where Clave= inClave    
 -- llena campos de formulario
 CREATE PROCEDURE llenaCampos(IN inCURP text)
 SELECT Clave, Llave, Certificado, abrev  FROM Responsable where CURP= inCURP
@@ -374,10 +375,8 @@ IN Certificado text,
 IN pass text
 )
 
-
-
 INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass) VALUES ( Clave, Nombre, apellidoPaterno,
-                     apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, pass)
+                     apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, AES_ENCRYPT('text', UNHEX(SHA2(pass,512))))
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8
 create user genaro@localhost identified by'Supervi$or_123'

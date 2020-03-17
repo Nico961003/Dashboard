@@ -62,7 +62,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         try {
             int filas = jTable1.getRowCount();
             for (int i = 1; i <= filas; i++) {
-                modeloTabla.removeRow(0); 
+                modeloTabla.removeRow(0);
             }
             try {
                 resultadoConsulta = conector.consulta("call registroResponsable");
@@ -121,15 +121,15 @@ public class pnlResponsables extends javax.swing.JPanel {
             }
         }
     }
-    
-    public void prueba(){
+
+    public void prueba() {
         int comparaClave = 0;
         String prueba = (String) ComboClave.getSelectedItem();
 
         for (int i = 0; i < 5; i++) {
             try {
                 try {
-                    resultadoConsulta = conector.consulta("SELECT Clave FROM Responsable where Clave = " + prueba );
+                    resultadoConsulta = conector.consulta("SELECT Clave FROM Responsable where Clave = " + prueba);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(pnlResponsables.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -193,6 +193,11 @@ public class pnlResponsables extends javax.swing.JPanel {
         btnModificar.setBgHover(new java.awt.Color(255, 255, 255));
         btnModificar.setBgShadeHover(new java.awt.Color(51, 51, 255));
         btnModificar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnModificar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnModificarMouseMoved(evt);
+            }
+        });
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
@@ -559,8 +564,9 @@ public class pnlResponsables extends javax.swing.JPanel {
 
                 System.out.println("modificar");
 
-                String sql = "call actualizaResponsable('" + Clave + Nombre + apellidoPaterno + apellidoMaterno 
-                        + CURP  + Puesto + abr + Llave + Certificado  + pass + Clave + "')";
+                String sql = "call actualizaResponsable('" + Nombre + "' , '" + apellidoPaterno + "' , '"
+                        + apellidoMaterno + "' , '" + CURP + "' , '" + Puesto + "' , '" + abr + "' , '"
+                        + Llave + "' , '" + Certificado + "' , '" + pass + "' , '" + Clave + "')";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
@@ -581,18 +587,18 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAgregarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseMoved
-       pass = new String(psswrdFldPass.getPassword());
-        if(txtCURP.getText().equals("") || txtFldCer.getText().equals("") || txtFldKey.getText().equals("") ||
-                txtNombre.getText().equals("") || txtapellidoMaterno.getText().equals("") || 
-                txtapellidoPaterno.getText().equals("") || pass.equals("")){
-            
+        pass = new String(psswrdFldPass.getPassword());
+        if (txtCURP.getText().equals("") || txtFldCer.getText().equals("") || txtFldKey.getText().equals("")
+                || txtNombre.getText().equals("") || txtapellidoMaterno.getText().equals("")
+                || txtapellidoPaterno.getText().equals("") || pass.equals("")) {
+
             btnAgregar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
-            
+
         } else {
             btnAgregar.setEnabled(true);
-        } 
-        
+        }
+
     }//GEN-LAST:event_btnAgregarMouseMoved
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -632,7 +638,6 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-
 
         ComboClave.setEnabled(false);
         int seleccionada = jTable1.rowAtPoint((evt.getPoint()));
@@ -695,6 +700,20 @@ public class pnlResponsables extends javax.swing.JPanel {
         prueba();
     }//GEN-LAST:event_jTable1MousePressed
 
+    private void btnModificarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseMoved
+        pass = new String(psswrdFldPass.getPassword());
+        if (txtCURP.getText().equals("") || txtFldCer.getText().equals("") || txtFldKey.getText().equals("")
+                || txtNombre.getText().equals("") || txtapellidoMaterno.getText().equals("")
+                || txtapellidoPaterno.getText().equals("") || pass.equals("")) {
+
+            btnModificar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
+
+        } else {
+            btnModificar.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnModificarMouseMoved
+
     public void capturarDatos() {
 
         Clave = (String) ComboClave.getSelectedItem();
@@ -720,8 +739,8 @@ public class pnlResponsables extends javax.swing.JPanel {
 
         try {
 
-            String sql = "call insertaResponsable('" + Clave + "','" + Nombre + "','" + apellidoPaterno + "','" 
-            + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
+            String sql = "call insertaResponsable('" + Clave + "','" + Nombre + "','" + apellidoPaterno + "','"
+                    + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
 
             System.out.println(sql);
             String salida = conector.registrar(sql);
