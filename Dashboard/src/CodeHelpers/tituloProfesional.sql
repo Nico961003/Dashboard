@@ -105,12 +105,39 @@ create table Responsable(
     abrev						varchar(50),
 	Llave 						varchar(500),
 	Certificado 				varchar(500),
-    pass						varchar(9000),
+    pass						blob,
 	idResponsable               varchar(30)
 );
-alter table Responsable 
-modify pass varchar(9000)
-
+alter table Responsable
+modify pass blob
+delete from Responsable where Clave=1
+drop table Responsable
+select * from Responsable
+INSERT INTO Responsable VALUES ('1', 'GENARO', 'RODRIGUEZ', 
+'NICOLAS', 'DIRECTOR', 'DIRECTOR', 'ING.', 
+'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/FirmaEncryJBV.key', 
+'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/CertificadoJBV.cer',
+aes_encrypt('2019UVictoria','xyz123'), '1');
+INSERT INTO Responsable VALUES ('2', 'JUANA', 'REYES', 'ROSALES', 
+'REYESOSDFIONH5006', 'RECTOR', 'ING.', 
+'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/FirmaEncryMOR.key', 
+'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/CertificadoMOR.cer',
+aes_encrypt('2019UVictoria','xyz123'), '3');
+delete from Responsable where Clave=1
+select cast(aes_decrypt(pass, 'xyz123') as char) from Responsable where Clave=1
+update Responsable set pass=aes_encrypt('2019UVictoria','xyz123') where Clave=1
+delete from Responsable where Clave = 1
+INSERT INTO Responsable VALUES (1,AES_ENCRYPT('522752','2019UVictoria'));
+create procedure `firmante1`()
+select idResponsable, Nombre, apellidoPaterno, apellidoMaterno,
+CURP, Puesto, abrev, Llave, Certificado, cast(aes_decrypt(pass, 'xyz123') as char) from Responsable
+where Clave=1
+create procedure `firmante2`()
+select idResponsable, Nombre, apellidoPaterno, apellidoMaterno,
+CURP, Puesto, abrev, Llave, Certificado, cast(aes_decrypt(pass, 'xyz123') as char) from Responsable
+where Clave=2
+call firmante2
+call firmante1
 create table configuracion(
 claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
@@ -387,3 +414,7 @@ ALTER USER 'genaro'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Superv
 SET @@global.sql_mode= '';
 -- ademas en el menu Edit/Preferences/Safe mode, es necesario desactivar
 -- y volver a reconectar
+
+
+select * from configuracion
+'090653', 'UNIVERSIDAD VICTORIA', '/home/genaro/Documentos/'

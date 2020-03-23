@@ -1,15 +1,19 @@
-
 package paneles;
 
 import CodeHelpers.ConexionesDB;
+import java.io.File;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import mx.com.mostrotouille.axolotl.swing.util.AxolotlFileFilter;
 
 public class pnlConfiguracion extends javax.swing.JPanel {
 
+    private File currentDirectory;
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
     DefaultTableModel modeloTabla;
@@ -17,11 +21,56 @@ public class pnlConfiguracion extends javax.swing.JPanel {
     String claveEscuela = "";
     String nombreEscuela = "";
     String carpeta = "";
+    int cuenta = 0;
 
     public pnlConfiguracion() {
         initComponents();
+        verificaConfiguracion();
     }
 
+    public void verificaConfiguracion() {
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT count(*) FROM configuracion");
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                cuenta = resultadoConsulta.getInt("count(*)");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+
+        if (cuenta == 1) {
+            try {
+                try {
+                    resultadoConsulta = conector.consulta("SELECT claveEscuela, nombreEscuela, carpeta FROM configuracion");
+
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                while (resultadoConsulta.next()) {
+                    txtclaveInstitucion.setText(resultadoConsulta.getString("claveEscuela"));
+                    txtnombreInstitucion.setText(resultadoConsulta.getString("nombreEscuela"));
+                    txtCarpeta.setText(resultadoConsulta.getString("carpeta"));
+                    btnGuardar.setEnabled(false);
+                    btnModificar.setEnabled(true);
+                }
+
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex);
+            }
+        } else {
+            btnGuardar.setEnabled(true);
+            btnModificar.setEnabled(false);
+        }
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,7 +85,8 @@ public class pnlConfiguracion extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         txtCarpeta = new rscomponentshade.RSTextFieldShade();
         jButton4 = new rscomponentshade.RSButtonShade();
-        jButton5 = new rscomponentshade.RSButtonShade();
+        btnGuardar = new rscomponentshade.RSButtonShade();
+        btnModificar = new rscomponentshade.RSButtonShade();
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -47,7 +97,7 @@ public class pnlConfiguracion extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuración de Archivos"));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel27.setText("nombre institucion");
+        jLabel27.setText("Nombre institución");
 
         txtnombreInstitucion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtnombreInstitucion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -58,10 +108,10 @@ public class pnlConfiguracion extends javax.swing.JPanel {
         txtclaveInstitucion.setPlaceholder("Examinar...");
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel28.setText("clave institucion");
+        jLabel28.setText("Clave institucion");
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel29.setText("carpeta");
+        jLabel29.setText("Carpeta");
 
         txtCarpeta.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCarpeta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -78,14 +128,35 @@ public class pnlConfiguracion extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 153, 102));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/subir.png"))); // NOI18N
-        jButton5.setBgHover(new java.awt.Color(255, 255, 255));
-        jButton5.setBgShadeHover(new java.awt.Color(243, 242, 242));
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(204, 255, 204));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salvar.png"))); // NOI18N
+        btnGuardar.setBgHover(new java.awt.Color(255, 255, 255));
+        btnGuardar.setBgShadeHover(new java.awt.Color(243, 242, 242));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseMoved(evt);
+            }
+        });
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setBackground(new java.awt.Color(204, 204, 255));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/documento.png"))); // NOI18N
+        btnModificar.setBgHover(new java.awt.Color(255, 255, 255));
+        btnModificar.setBgShadeHover(new java.awt.Color(243, 242, 242));
+        btnModificar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnModificar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnModificarMouseMoved(evt);
+            }
+        });
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -109,8 +180,10 @@ public class pnlConfiguracion extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(287, 287, 287)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -131,7 +204,9 @@ public class pnlConfiguracion extends javax.swing.JPanel {
                         .addComponent(jLabel29))
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -177,13 +252,55 @@ public class pnlConfiguracion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int respuesta = fc.showSaveDialog(this);
+
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
+
+            String archivoElegido = fc.getSelectedFile().getAbsolutePath();
+            txtCarpeta.setText(archivoElegido);
+
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         capturarDatos();
         registrarDatos();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        capturarDatos();
+        int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            capturarDatos();
+            try {
+
+                System.out.println("modificar");
+
+                String sql = "update configuracion set carpeta='" + carpeta + "', nombreEscuela='" + nombreEscuela + "',"
+                        + " claveEscuela='" + claveEscuela + "'";
+
+                System.out.println(sql);
+                String salida = conector.registrar(sql);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            JOptionPane.showMessageDialog(null, "Registro modificado ");
+            btnModificar.setEnabled(false);
+            verificaConfiguracion();
+        } else {
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnGuardarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseMoved
+        verificaCampos();
+    }//GEN-LAST:event_btnGuardarMouseMoved
+
+    private void btnModificarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseMoved
+        verificaCampos();
+    }//GEN-LAST:event_btnModificarMouseMoved
 
     public void capturarDatos() {
         claveEscuela = txtclaveInstitucion.getText();
@@ -203,10 +320,15 @@ public class pnlConfiguracion extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Los datos se han registrado bien ");
     }
 
-
+    public void verificaCampos() {
+        if (txtCarpeta.getText().equals("") || txtclaveInstitucion.getText().equals("") || txtnombreInstitucion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacios ");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rscomponentshade.RSButtonShade btnGuardar;
+    private rscomponentshade.RSButtonShade btnModificar;
     private rscomponentshade.RSButtonShade jButton4;
-    private rscomponentshade.RSButtonShade jButton5;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;

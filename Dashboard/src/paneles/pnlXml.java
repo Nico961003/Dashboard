@@ -361,9 +361,9 @@ public class pnlXml extends javax.swing.JPanel {
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
-            int filas = jTable1.getRowCount(); //Obtiene la catidad de filas
-            for (int i = 1; i <= filas; i++) { //For que se ecuta de acuerdo a la cantidad de filas que haya
-                modeloTabla.removeRow(0); //metodo que elimina cada fila
+            int filas = jTable1.getRowCount(); 
+            for (int i = 1; i <= filas; i++) { 
+                modeloTabla.removeRow(0); 
             }
             try {
                 resultadoConsulta = conector.consulta("select * from txt where nombre like '%" + Buscar + "%' or aPaterno like '%"
@@ -478,7 +478,7 @@ public class pnlXml extends javax.swing.JPanel {
                 
                 if (firma0 != null) {
                     try {
-                        resultadoConsulta = conector.consulta("SELECT * FROM Responsable where Clave=1");
+                        resultadoConsulta = conector.consulta("call firmante1");
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlXml.class
                                 .getName()).log(Level.SEVERE, null, ex);
@@ -493,8 +493,9 @@ public class pnlXml extends javax.swing.JPanel {
                         abrev1 = resultadoConsulta.getString("abrev");
                         Llave = resultadoConsulta.getString("Llave");
                         Certificado = resultadoConsulta.getString("Certificado");
-                        pass = resultadoConsulta.getString("SHA2('" + pass + "',512)");
-
+                        pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
+                        System.out.println("pasword 1 : " + pass);
+                        
                         Llave = sign(Llave, pass, archivo);
                         Certificado = Base64.encodeBase64String(toByteArray(Certificado));
 
@@ -506,13 +507,13 @@ public class pnlXml extends javax.swing.JPanel {
                 }
                 if (firma1 != null) {
                     try {
-                        resultadoConsulta = conector.consulta("SELECT SHA2('2019UVictoria',512) FROM Responsable where Clave=2");//establecimiento de sentencia aejecutar
+                        resultadoConsulta = conector.consulta("call firmante2");
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlXml.class
                                 .getName()).log(Level.SEVERE, null, ex);
                     }
                     while (resultadoConsulta.next()) {
-                        idResponsable2 = resultadoConsulta.getString("idResponsable");
+                       idResponsable2 = resultadoConsulta.getString("idResponsable");
                         nombreResponsable2 = resultadoConsulta.getString("Nombre");
                         aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
                         aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
@@ -521,7 +522,8 @@ public class pnlXml extends javax.swing.JPanel {
                         abrev2 = resultadoConsulta.getString("abrev");
                         Llave2 = resultadoConsulta.getString("Llave");
                         Certificado2 = resultadoConsulta.getString("Certificado");
-                        pass2 = resultadoConsulta.getString("pass");
+                        pass2 = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
+                        System.out.println(pass2);
 
                         Llave2 = sign2(Llave2, pass2, archivo2);
                         Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
@@ -536,7 +538,7 @@ public class pnlXml extends javax.swing.JPanel {
                 try {
 
                     if (modalidadTitulacion.equals("POR TESIS")) {
-                        String ruta = carpeta + "TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "\\TituloElectronico_" + matricula + ".xml";
                         //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
@@ -563,7 +565,7 @@ public class pnlXml extends javax.swing.JPanel {
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     } else {
-                        String ruta = carpeta + "TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "\\TituloElectronico_" + matricula + ".xml";
                         //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"

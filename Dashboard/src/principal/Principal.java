@@ -696,7 +696,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_ochoMousePressed
 
     private void ochoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ochoActionPerformed
-        new CambiaPanel(pnlPrincipal, new paneles.pnlCancelaciones());
+     /*   new CambiaPanel(pnlPrincipal, new paneles.pnlCancelaciones());
         if(this.ocho.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
@@ -737,7 +737,7 @@ public class Principal extends javax.swing.JFrame {
             this.ocho.setColorNormal(new Color(239,238,244));
             this.ocho.setColorHover(new Color(204,204,204));
             this.ocho.setColorPressed(new Color(204,204,204));
-        }
+        }*/
     }//GEN-LAST:event_ochoActionPerformed
 
     private void sieteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sieteMousePressed
