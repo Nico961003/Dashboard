@@ -77,19 +77,18 @@ public class pnlXml extends javax.swing.JPanel {
     String idTipoEstudioAntecedente = "";
 
     String Llave = "", Certificado = "", pass = "";
-    String Llave2 = "", Certificado2 = "", pass2 = "";
 
-    String archivo = "", firma0 = "";
-    String archivo2 = "", firma1 = "";
+    String archivo[] = new String[5];
+    String firma[] = new String[5];
 
     ////////////////////////////////////////////////////////////////////
-    String idResponsable = "", idResponsable2 = "";
-    String nombreResponsable1 = "", nombreResponsable2 = "";
-    String aPaternoResponsable1 = "", aPaternoResponsable2 = "";
-    String aMaternoResponsable1 = "", aMaternoResponsable2 = "";
-    String curpResponsable1 = "", curpResponsable2 = "";
-    String puesto1 = "", puesto2 = "";
-    String abrev1 = "", abrev2 = "";
+    String idResponsable = "";
+    String nombreResponsable = "";
+    String aPaternoResponsable = "";
+    String aMaternoResponsable = "";
+    String curpResp = "";
+    String puesto = "";
+    String abrev = "";
 
     /**
      * *********************************
@@ -137,8 +136,8 @@ public class pnlXml extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
-        rSButtonShade4 = new rscomponentshade.RSButtonShade();
-        rSButtonShade5 = new rscomponentshade.RSButtonShade();
+        btnFirmar = new rscomponentshade.RSButtonShade();
+        btnDevolver = new rscomponentshade.RSButtonShade();
         txtBuscar = new rscomponentshade.RSTextFieldShade();
         btnBuscar1 = new rscomponentshade.RSButtonShade();
         jLabel2 = new javax.swing.JLabel();
@@ -197,23 +196,23 @@ public class pnlXml extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        rSButtonShade4.setBackground(new java.awt.Color(124, 20, 52));
-        rSButtonShade4.setText("Firmar");
-        rSButtonShade4.setBgHover(new java.awt.Color(255, 204, 204));
-        rSButtonShade4.setBgShadeHover(new java.awt.Color(124, 20, 52));
-        rSButtonShade4.addActionListener(new java.awt.event.ActionListener() {
+        btnFirmar.setBackground(new java.awt.Color(124, 20, 52));
+        btnFirmar.setText("Firmar");
+        btnFirmar.setBgHover(new java.awt.Color(255, 204, 204));
+        btnFirmar.setBgShadeHover(new java.awt.Color(124, 20, 52));
+        btnFirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade4ActionPerformed(evt);
+                btnFirmarActionPerformed(evt);
             }
         });
 
-        rSButtonShade5.setBackground(new java.awt.Color(124, 20, 52));
-        rSButtonShade5.setText("Devolver");
-        rSButtonShade5.setBgHover(new java.awt.Color(255, 204, 204));
-        rSButtonShade5.setBgShadeHover(new java.awt.Color(124, 20, 52));
-        rSButtonShade5.addActionListener(new java.awt.event.ActionListener() {
+        btnDevolver.setBackground(new java.awt.Color(124, 20, 52));
+        btnDevolver.setText("Devolver");
+        btnDevolver.setBgHover(new java.awt.Color(255, 204, 204));
+        btnDevolver.setBgShadeHover(new java.awt.Color(124, 20, 52));
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShade5ActionPerformed(evt);
+                btnDevolverActionPerformed(evt);
             }
         });
 
@@ -260,9 +259,9 @@ public class pnlXml extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,9 +291,9 @@ public class pnlXml extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSButtonShade4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShade5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -302,7 +301,7 @@ public class pnlXml extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +312,7 @@ public class pnlXml extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSButtonShade5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade5ActionPerformed
+    private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
 
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             try {
@@ -345,9 +344,9 @@ public class pnlXml extends javax.swing.JPanel {
                 System.out.println(e);
             }
         }
-            JOptionPane.showMessageDialog(null, "Logrado");
-            tablaTxtB();
-    }//GEN-LAST:event_rSButtonShade5ActionPerformed
+        JOptionPane.showMessageDialog(null, "Logrado");
+        tablaTxtB();
+    }//GEN-LAST:event_btnDevolverActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -369,26 +368,25 @@ public class pnlXml extends javax.swing.JPanel {
                 modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("select * from txt where nombre like '%" + Buscar + "%' or aPaterno like '%"
-                        + Buscar + "%' or aMaterno like '%" + Buscar + "%' or matricula like '%" + Buscar + "%' where estatus='B'");
+                resultadoConsulta = conector.consulta("call buscaTxt('" + Buscar + "')");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlCarreras.class
-                        .getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Object[] valores = new Object[4];//Crea un arreglo de objetos un objeto puede
+            Object[] valores = new Object[4];
             while (resultadoConsulta.next()) {
-                for (int i = 0; i < 4; i++) {//El numero del for ebe ser igual al de la
+                for (int i = 0; i < 4; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
-                modeloTabla.addRow(valores);//añade una nueva fila con los datos que
-                //esten en cada psocion del arreglo de objetos
+                if(resultadoConsulta.getString("estatus").equals("B")){
+                modeloTabla.addRow(valores);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
         }
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
-    private void rSButtonShade4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade4ActionPerformed
+    private void btnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmarActionPerformed
         try {
             try {
                 resultadoConsulta = conector.consulta("SELECT * FROM configuracion");
@@ -465,13 +463,19 @@ public class pnlXml extends javax.swing.JPanel {
                         tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
                         noCedula = resultadoConsulta.getString("noCedula");
                         idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
-                        archivo = resultadoConsulta.getString("archivo0");
-                        archivo2 = resultadoConsulta.getString("archivo1");
-                        firma0 = resultadoConsulta.getString("firma0");
-                        firma1 = resultadoConsulta.getString("firma1");
-                        fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
                         fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
                         noRvoe = resultadoConsulta.getString("numeroRvoe");
+                        fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
+                        archivo[0] = resultadoConsulta.getString("archivo0");
+                        archivo[1] = resultadoConsulta.getString("archivo1");
+                        archivo[2] = resultadoConsulta.getString("archivo2");
+                        archivo[3] = resultadoConsulta.getString("archivo3");
+                        archivo[4] = resultadoConsulta.getString("archivo4");
+                        firma[0] = resultadoConsulta.getString("firma0");
+                        firma[1] = resultadoConsulta.getString("firma1");
+                        firma[2] = resultadoConsulta.getString("firma2");
+                        firma[3] = resultadoConsulta.getString("firma3");
+                        firma[4] = resultadoConsulta.getString("firma4");
 
                     }
                 } catch (SQLException ex) {
@@ -479,63 +483,36 @@ public class pnlXml extends javax.swing.JPanel {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if (firma0 != null) {
-                    try {
-                        resultadoConsulta = conector.consulta("call firmante1");
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(pnlXml.class
-                                .getName()).log(Level.SEVERE, null, ex);
+                for (i = 0; i < 5; i++) {
+                    if (firma[i] != null) {
+                        try {
+                            resultadoConsulta = conector.consulta("select cast(aes_decrypt(pass, 'xyz123') as char), idResponsable,"
+                                    + "Nombre, apellidoPaterno, apellidoMaterno,"
+                                    + "CURP, Puesto, abrev, Llave, Certificado from Responsable where Clave='" + (i + 1) + "'");
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        while (resultadoConsulta.next()) {
+                            idResponsable = resultadoConsulta.getString("idResponsable");
+                            nombreResponsable = resultadoConsulta.getString("Nombre");
+                            aPaternoResponsable = resultadoConsulta.getString("apellidoPaterno");
+                            aMaternoResponsable = resultadoConsulta.getString("apellidoMaterno");
+                            curpResponsable = resultadoConsulta.getString("CURP");
+                            puesto = resultadoConsulta.getString("Puesto");
+                            abrev = resultadoConsulta.getString("abrev");
+                            Llave = resultadoConsulta.getString("Llave");
+                            Certificado = resultadoConsulta.getString("Certificado");
+                            pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
+                            System.out.println("pasword 1 : " + pass);
+                            System.out.println("CURP " + curpResponsable);
+                            Llave = sign(Llave, pass, archivo[i]);
+                            Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+                            firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n";
+                        }
+
+                    } else {
+                        firma[i] = "";
                     }
-                    while (resultadoConsulta.next()) {
-                        idResponsable = resultadoConsulta.getString("idResponsable");
-                        nombreResponsable1 = resultadoConsulta.getString("Nombre");
-                        aPaternoResponsable1 = resultadoConsulta.getString("apellidoPaterno");
-                        aMaternoResponsable1 = resultadoConsulta.getString("apellidoMaterno");
-                        curpResponsable1 = resultadoConsulta.getString("CURP");
-                        puesto1 = resultadoConsulta.getString("Puesto");
-                        abrev1 = resultadoConsulta.getString("abrev");
-                        Llave = resultadoConsulta.getString("Llave");
-                        Certificado = resultadoConsulta.getString("Certificado");
-                        pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
-                        System.out.println("pasword 1 : " + pass);
-
-                        Llave = sign(Llave, pass, archivo);
-                        Certificado = Base64.encodeBase64String(toByteArray(Certificado));
-
-                    }
-                    firma0 = "<FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n";
-
-                } else {
-                    firma0 = "";
-                }
-                if (firma1 != null) {
-                    try {
-                        resultadoConsulta = conector.consulta("call firmante2");
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(pnlXml.class
-                                .getName()).log(Level.SEVERE, null, ex);
-                    }
-                    while (resultadoConsulta.next()) {
-                        idResponsable2 = resultadoConsulta.getString("idResponsable");
-                        nombreResponsable2 = resultadoConsulta.getString("Nombre");
-                        aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
-                        aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
-                        curpResponsable2 = resultadoConsulta.getString("CURP");
-                        puesto2 = resultadoConsulta.getString("Puesto");
-                        abrev2 = resultadoConsulta.getString("abrev");
-                        Llave2 = resultadoConsulta.getString("Llave");
-                        Certificado2 = resultadoConsulta.getString("Certificado");
-                        pass2 = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
-                        System.out.println(pass2);
-
-                        Llave2 = sign(Llave2, pass2, archivo2);
-                        Certificado2 = Base64.encodeBase64String(toByteArray(Certificado2));
-
-                    }
-                    firma1 = "<FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n";
-
-                } else {
-                    firma1 = "";
                 }
 
                 try {
@@ -545,8 +522,11 @@ public class pnlXml extends javax.swing.JPanel {
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
-                                + firma0
-                                + firma1
+                                + firma[0]
+                                + firma[1]
+                                + firma[2]
+                                + firma[3]
+                                + firma[4]
                                 + "  </FirmaResponsables>\n"
                                 + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -555,7 +535,7 @@ public class pnlXml extends javax.swing.JPanel {
                                 + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
                                 + "</TituloElectronico>";
 
-                        System.out.println(contenido);
+                        //System.out.println(contenido);
                         File file = new File(ruta);
                         // Si el archivo no existe es creado
                         if (!file.exists()) {
@@ -571,8 +551,11 @@ public class pnlXml extends javax.swing.JPanel {
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
-                                + firma0
-                                + firma1
+                                + firma[0]
+                                + firma[1]
+                                + firma[2]
+                                + firma[3]
+                                + firma[4]
                                 + "  </FirmaResponsables>\n"
                                 + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
@@ -602,14 +585,14 @@ public class pnlXml extends javax.swing.JPanel {
 
         }
         tablaTxtB();
-        JOptionPane.showMessageDialog(null, "Archivo xml generado exitosamente");
         abrirarchivo(carpeta);
-        //abrirarchivo("C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas");
-    }//GEN-LAST:event_rSButtonShade4ActionPerformed
+    }//GEN-LAST:event_btnFirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rscomponentshade.RSButtonShade btnBuscar1;
+    private rscomponentshade.RSButtonShade btnDevolver;
+    private rscomponentshade.RSButtonShade btnFirmar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -617,24 +600,8 @@ public class pnlXml extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private rojerusan.RSTableMetro jTable1;
-    private rscomponentshade.RSButtonShade rSButtonShade4;
-    private rscomponentshade.RSButtonShade rSButtonShade5;
     private rscomponentshade.RSTextFieldShade txtBuscar;
     // End of variables declaration//GEN-END:variables
-   private static String parseExtensionArrayToDescriptionMessage(String[] extensionArray) {
-        final StringBuffer result = new StringBuffer();
-        result.append("Archivos (");
-
-        for (int i = 0; i < extensionArray.length; i++) {
-            result.append("*.");
-            result.append(extensionArray[i]);
-            result.append(i < (extensionArray.length - 1) ? ", " : "");
-        }
-
-        result.append(")");
-
-        return result.toString();
-    }
 
     public static String sign(String keyPath, String password, String toSign) throws Exception {
         //System.out.println("filepath : " + keyPath);
@@ -660,34 +627,6 @@ public class pnlXml extends javax.swing.JPanel {
         fis.close();
 
         return fbytes;
-    }
-
-    private void selectFile(JTextField txtfld, String[] extensionArray) {
-        final JFileChooser flchsr = new JFileChooser(currentDirectory);
-        flchsr.setFileFilter(
-                new AxolotlFileFilter(extensionArray, parseExtensionArrayToDescriptionMessage(extensionArray)));
-
-        final int option = flchsr.showOpenDialog(this);
-
-        if (option == JFileChooser.APPROVE_OPTION) {
-            txtfld.setText(flchsr.getSelectedFile().getAbsolutePath());
-
-            currentDirectory = flchsr.getCurrentDirectory();
-        }
-    }
-
-    private void selectFile2(JTextField txtfld, String[] extensionArray) {
-        final JFileChooser flchsr = new JFileChooser(currentDirectory);
-        flchsr.setFileFilter(
-                new AxolotlFileFilter(extensionArray, parseExtensionArrayToDescriptionMessage(extensionArray)));
-
-        final int option = flchsr.showOpenDialog(this);
-
-        if (option == JFileChooser.APPROVE_OPTION) {
-            txtfld.setText(flchsr.getSelectedFile().getAbsolutePath());
-
-            currentDirectory = flchsr.getCurrentDirectory();
-        }
     }
 
     public void abrirarchivo(String archivo) {

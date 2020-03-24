@@ -126,7 +126,7 @@ claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
 carpeta                   varchar(500)
 )
-
+select * from txt
 /***************** PROCEDIMIENTOS ALMACENADOS ********************************/
 -- Carreras
 
@@ -273,6 +273,13 @@ CREATE PROCEDURE buscaTitulo (IN buscar text)
 SELECT folioControl, matricula, nombre, aPaterno, aMaterno
 FROM txt WHERE folioControl  LIKE CONCAT('%', buscar , '%')  
 OR matricula LIKE CONCAT('%', buscar , '%') 
+OR nombre LIKE CONCAT('%', buscar , '%') 
+OR aPaterno LIKE CONCAT('%', buscar , '%') 
+OR aMaterno LIKE CONCAT('%', buscar , '%') 
+-- busca txt Y XML
+CREATE PROCEDURE buscaTxt (IN buscar text)
+SELECT matricula, nombre, aPaterno, aMaterno, estatus FROM txt 
+where matricula LIKE CONCAT('%', buscar , '%') 
 OR nombre LIKE CONCAT('%', buscar , '%') 
 OR aPaterno LIKE CONCAT('%', buscar , '%') 
 OR aMaterno LIKE CONCAT('%', buscar , '%') 

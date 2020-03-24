@@ -126,8 +126,8 @@ public class pnlTxt extends javax.swing.JPanel {
     public void tablaResponsable() {
         try {
             int filas = jTable2.getRowCount();
-            for (int i = 1; i <= filas; i++) { 
-                modeloTabla2.removeRow(0); 
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla2.removeRow(0);
             }
             try {
                 resultadoConsulta = conector.consulta("SELECT Clave, Nombre, apellidoPaterno, apellidoMaterno FROM Responsable");//establecimiento de sentencia aejecutar
@@ -232,6 +232,11 @@ public class pnlTxt extends javax.swing.JPanel {
         btnGenerar.setText("Generar");
         btnGenerar.setBgHover(new java.awt.Color(255, 204, 204));
         btnGenerar.setBgShadeHover(new java.awt.Color(124, 20, 52));
+        btnGenerar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseMoved(evt);
+            }
+        });
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);
@@ -560,8 +565,9 @@ public class pnlTxt extends javax.swing.JPanel {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                } else { }
+                    JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
+                    abrirarchivo(carpeta);
+                } 
 
             } catch (Exception e) {
                 System.out.println(e);
@@ -569,8 +575,6 @@ public class pnlTxt extends javax.swing.JPanel {
         }
         tablaTxtA();
         tablaResponsable();
-        JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
-        abrirarchivo(carpeta);
 
         for (int i = 0; i < 5; i++) {
             firmantes[i] = null;
@@ -589,29 +593,45 @@ public class pnlTxt extends javax.swing.JPanel {
 
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
+        String estatus = "";
         try {
             int filas = jTable1.getRowCount();
             for (int i = 1; i <= filas; i++) {
                 modeloTabla.removeRow(0);
             }
             try {
-                resultadoConsulta = conector.consulta("select * from txt where nombre like '%" + Buscar + "%' or aPaterno like '%"
-                        + Buscar + "%' or aMaterno like '%" + Buscar + "%' or matricula like '%" + Buscar + "%' where estatus='A'");
+                resultadoConsulta = conector.consulta("call buscaTxt('" + Buscar + "')");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlCarreras.class
-                        .getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(pnlCarreras.class.getName()).log(Level.SEVERE, null, ex);
             }
             Object[] valores = new Object[4];
             while (resultadoConsulta.next()) {
                 for (int i = 0; i < 4; i++) {
-                    valores[i] = resultadoConsulta.getObject(i + 1);
+                    valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
+                if(resultadoConsulta.getString("estatus").equals("A")){
                 modeloTabla.addRow(valores);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
         }
     }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
+        int i = 0;
+        TableModel model = jTable2.getModel();
+        if ((Boolean) model.getValueAt(0, 4) != null && (Boolean) model.getValueAt(0, 4) == true
+                || (Boolean) model.getValueAt(1, 4) != null && (Boolean) model.getValueAt(1, 4) == true
+                || (Boolean) model.getValueAt(2, 4) != null && (Boolean) model.getValueAt(2, 4) == true
+                || (Boolean) model.getValueAt(3, 4) != null && (Boolean) model.getValueAt(3, 4) == true
+                || (Boolean) model.getValueAt(4, 4) != null && (Boolean) model.getValueAt(4, 4) == true) {
+            btnGenerar.setEnabled(true);
+        } else {
+            btnGenerar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Seleccione como minimo un firmante");
+        }
+    }//GEN-LAST:event_btnGenerarMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
