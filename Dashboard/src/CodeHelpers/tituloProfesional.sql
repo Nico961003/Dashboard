@@ -110,24 +110,7 @@ create table Responsable(
 );
 alter table Responsable
 modify pass blob
-delete from Responsable where Clave=1
-drop table Responsable
-select * from Responsable
-INSERT INTO Responsable VALUES ('1', 'GENARO', 'RODRIGUEZ', 
-'NICOLAS', 'DIRECTOR', 'DIRECTOR', 'ING.', 
-'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/FirmaEncryJBV.key', 
-'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/CertificadoJBV.cer',
-aes_encrypt('2019UVictoria','xyz123'), '1');
-INSERT INTO Responsable VALUES ('2', 'JUANA', 'REYES', 'ROSALES', 
-'REYESOSDFIONH5006', 'RECTOR', 'ING.', 
-'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/FirmaEncryMOR.key', 
-'/home/genaro/Documentos/Cer_Key_ConPassword(2019UVictoria)/CertificadoMOR.cer',
-aes_encrypt('2019UVictoria','xyz123'), '3');
-delete from Responsable where Clave=1
 select cast(aes_decrypt(pass, 'xyz123') as char) from Responsable where Clave=1
-update Responsable set pass=aes_encrypt('2019UVictoria','xyz123') where Clave=1
-delete from Responsable where Clave = 1
-INSERT INTO Responsable VALUES (1,AES_ENCRYPT('522752','2019UVictoria'));
 create procedure `firmante1`()
 select idResponsable, Nombre, apellidoPaterno, apellidoMaterno,
 CURP, Puesto, abrev, Llave, Certificado, cast(aes_decrypt(pass, 'xyz123') as char) from Responsable
@@ -376,15 +359,16 @@ IN apellidoPaterno text,
 IN apellidoMaterno text,
 IN CURP text,
 IN Puesto text,
-IN abr text,
+IN abrev text,
 IN Llave text,
 IN Certificado text,
-IN pass varchar(512),
+IN pass text,
+IN idResponsable text,
 IN inClave text
 )
 Update Responsable set Nombre= Nombre, apellidoPaterno= apellidoPaterno, apellidoMaterno= apellidoMaterno,
-                       CURP= CURP, Puesto= Puesto, abrev= abr,Llave= Llave, Certificado= Certificado,
-                       pass= (SHA2(" + pass + ",512))  where Clave= inClave    
+                       CURP= CURP, Puesto= Puesto, abrev= abrev,Llave= Llave, Certificado= Certificado,
+                       pass= aes_encrypt(pass,'xyz123'), idResponsable=idResponsable  where Clave= inClave    
 -- llena campos de formulario
 CREATE PROCEDURE llenaCampos(IN inCURP text)
 SELECT Clave, Llave, Certificado, abrev  FROM Responsable where CURP= inCURP
@@ -399,11 +383,12 @@ IN Puesto text,
 IN abrev text,
 IN Llave text,
 IN Certificado text,
-IN pass text
+IN pass text,
+IN idResponsable int
 )
 
-INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass) VALUES ( Clave, Nombre, apellidoPaterno,
-                     apellidoMaterno, CURP, Puesto, abr, Llave, Certificado, AES_ENCRYPT('text', UNHEX(SHA2(pass,512))))
+INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass, idResponsable) VALUES ( Clave, Nombre, apellidoPaterno,
+                     apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, aes_encrypt(pass,'xyz123'), idResponsable)
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8
 create user genaro@localhost identified by'Supervi$or_123'
@@ -414,7 +399,3 @@ ALTER USER 'genaro'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Superv
 SET @@global.sql_mode= '';
 -- ademas en el menu Edit/Preferences/Safe mode, es necesario desactivar
 -- y volver a reconectar
-
-
-select * from configuracion
-'090653', 'UNIVERSIDAD VICTORIA', '/home/genaro/Documentos/'

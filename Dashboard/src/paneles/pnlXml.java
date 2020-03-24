@@ -314,36 +314,39 @@ public class pnlXml extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rSButtonShade5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShade5ActionPerformed
-        TableModel model2 = jTable1.getModel();
-        String[] seleccionado = new String[100];
 
         for (int i = 0; i < jTable1.getRowCount(); i++) {
-            //System.out.println("prueba " + ((Boolean) model.getValueAt(i, 4) == true));
-            //Si la columna 4 está true añadimos el ID
-            if ((Boolean) model2.getValueAt(i, 4) == true) {
-                seleccionado[i] = ((String) model2.getValueAt(i, 0));
-            }
+            try {
+                TableModel model = jTable1.getModel();
+                String[] seleccionado = new String[100];
+                if ((Boolean) model.getValueAt(i, 4) == true) {
+                    seleccionado[i] = ((String) model.getValueAt(i, 0));
 
-            System.out.println(seleccionado[i]);
+                    System.out.println(seleccionado[i]);
 
-            if (seleccionado[i] != null || seleccionado[i] != "") {
-                try {
-                    String cadena = "Update txt set estatus = 'A', firma0 = null, firma1 = null,"
-                            + " firma2 = null, firma3 = null, firma4 = null,"
-                            + " archivo0 = null, archivo1 = null,"
-                            + " archivo2 = null, archivo3 = null, archivo4 = null where matricula='" + seleccionado[i] + "'";
-                    //System.out.println(cadena);
-                    String salida = conector.registrar(cadena);
-                    System.out.println(salida);
+                    if (seleccionado[i] != null || seleccionado[i] != "") {
+                        try {
+                            String cadena = "Update txt set estatus = 'A', firma0 = null, firma1 = null,"
+                                    + " firma2 = null, firma3 = null, firma4 = null,"
+                                    + " archivo0 = null, archivo1 = null,"
+                                    + " archivo2 = null, archivo3 = null, archivo4 = null where matricula='" + seleccionado[i] + "'";
+                            //System.out.println(cadena);
+                            String salida = conector.registrar(cadena);
+                            System.out.println(salida);
 
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(pnlTitulos.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlTitulos.class
+                                    .getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
+
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
-        JOptionPane.showMessageDialog(null, "Logrado");
-        tablaTxtB();
+            JOptionPane.showMessageDialog(null, "Logrado");
+            tablaTxtB();
     }//GEN-LAST:event_rSButtonShade5ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -361,9 +364,9 @@ public class pnlXml extends javax.swing.JPanel {
     private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
         String Buscar = txtBuscar.getText();
         try {
-            int filas = jTable1.getRowCount(); 
-            for (int i = 1; i <= filas; i++) { 
-                modeloTabla.removeRow(0); 
+            int filas = jTable1.getRowCount();
+            for (int i = 1; i <= filas; i++) {
+                modeloTabla.removeRow(0);
             }
             try {
                 resultadoConsulta = conector.consulta("select * from txt where nombre like '%" + Buscar + "%' or aPaterno like '%"
@@ -475,7 +478,7 @@ public class pnlXml extends javax.swing.JPanel {
                     Logger.getLogger(pnlXml.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 if (firma0 != null) {
                     try {
                         resultadoConsulta = conector.consulta("call firmante1");
@@ -495,15 +498,15 @@ public class pnlXml extends javax.swing.JPanel {
                         Certificado = resultadoConsulta.getString("Certificado");
                         pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
                         System.out.println("pasword 1 : " + pass);
-                        
+
                         Llave = sign(Llave, pass, archivo);
                         Certificado = Base64.encodeBase64String(toByteArray(Certificado));
 
                     }
                     firma0 = "<FirmaResponsable nombre=\"" + nombreResponsable1 + "\" primerApellido=\"" + aPaternoResponsable1 + "\" segundoApellido=\"" + aMaternoResponsable1 + "\" curp=\"" + curpResponsable1 + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto1 + "\" abrTitulo=\"" + abrev1 + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n";
 
-                } else{
-                    firma0="";
+                } else {
+                    firma0 = "";
                 }
                 if (firma1 != null) {
                     try {
@@ -513,7 +516,7 @@ public class pnlXml extends javax.swing.JPanel {
                                 .getName()).log(Level.SEVERE, null, ex);
                     }
                     while (resultadoConsulta.next()) {
-                       idResponsable2 = resultadoConsulta.getString("idResponsable");
+                        idResponsable2 = resultadoConsulta.getString("idResponsable");
                         nombreResponsable2 = resultadoConsulta.getString("Nombre");
                         aPaternoResponsable2 = resultadoConsulta.getString("apellidoPaterno");
                         aMaternoResponsable2 = resultadoConsulta.getString("apellidoMaterno");
@@ -525,21 +528,20 @@ public class pnlXml extends javax.swing.JPanel {
                         pass2 = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
                         System.out.println(pass2);
 
-                        Llave2 = sign2(Llave2, pass2, archivo2);
-                        Certificado2 = Base64.encodeBase64String(toByteArray2(Certificado2));
+                        Llave2 = sign(Llave2, pass2, archivo2);
+                        Certificado2 = Base64.encodeBase64String(toByteArray(Certificado2));
 
                     }
-                     firma1 = "<FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n";
+                    firma1 = "<FirmaResponsable nombre=\"" + nombreResponsable2 + "\" primerApellido=\"" + aPaternoResponsable2 + "\" segundoApellido=\"" + aMaternoResponsable2 + "\" curp=\"" + curpResponsable2 + "\" idCargo=\"" + idResponsable2 + "\" cargo=\"" + puesto2 + "\" abrTitulo=\"" + abrev2 + "\" sello=\"" + Llave2 + "\" certificadoResponsable=\"" + Certificado2 + "\" noCertificadoResponsable=\"00001000000501698897\"/>\n";
 
-                } else{
-                    firma1="";
+                } else {
+                    firma1 = "";
                 }
 
                 try {
 
                     if (modalidadTitulacion.equals("POR TESIS")) {
-                        String ruta = carpeta + "\\TituloElectronico_" + matricula + ".xml";
-                        //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "//TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
@@ -565,8 +567,7 @@ public class pnlXml extends javax.swing.JPanel {
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     } else {
-                        String ruta = carpeta + "\\TituloElectronico_" + matricula + ".xml";
-                        //String ruta = "C:\\Users\\usuario\\Desktop\\Dashboard\\Dashboard\\xml_pruebas\\TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "//TituloElectronico_" + matricula + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
@@ -696,32 +697,6 @@ public class pnlXml extends javax.swing.JPanel {
         } catch (IOException ex) {
             // System.out.println(ex);
         }
-    }
-
-    public static String sign2(String keyPath2, String password2, String toSign2) throws Exception {
-        // System.out.println("filepath : " + keyPath2);
-        final PKCS8Key pkcs8Key2 = new PKCS8Key(toByteArray2(keyPath2), password2.toCharArray());
-        final PrivateKey privateKey2 = pkcs8Key2.getPrivateKey();
-        // System.out.println("private " + privateKey2);
-        final Signature signature2 = Signature.getInstance("SHA256withRSA");
-        signature2.initSign(privateKey2);
-        signature2.update(toSign2.getBytes("UTF-8"));
-
-        return Base64.encodeBase64String(signature2.sign());
-    }
-
-    private static byte[] toByteArray2(String filePath2) throws Exception {
-
-        File f2 = new File(filePath2);
-
-        FileInputStream fis2 = new FileInputStream(f2);
-
-        byte[] fbytes2 = new byte[(int) f2.length()];
-
-        fis2.read(fbytes2);
-        fis2.close();
-
-        return fbytes2;
     }
 
 }

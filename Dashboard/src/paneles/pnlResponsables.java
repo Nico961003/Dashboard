@@ -44,6 +44,7 @@ public class pnlResponsables extends javax.swing.JPanel {
     String Llave = "";
     String Certificado = "";
     String pass = "";
+    String idResponsable = "";
 
     ConexionesDB conector = new ConexionesDB();
     ResultSet resultadoConsulta;
@@ -566,7 +567,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
                 String sql = "call actualizaResponsable('" + Nombre + "' , '" + apellidoPaterno + "' , '"
                         + apellidoMaterno + "' , '" + CURP + "' , '" + Puesto + "' , '" + abr + "' , '"
-                        + Llave + "' , '" + Certificado + "' , '" + pass + "' , '" + Clave + "')";
+                        + Llave + "' , '" + Certificado + "' , '" + pass + "' , '" + idResponsable + "' , '" + Clave + "')";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
@@ -590,7 +591,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         pass = new String(psswrdFldPass.getPassword());
         if (txtCURP.getText().equals("") || txtFldCer.getText().equals("") || txtFldKey.getText().equals("")
                 || txtNombre.getText().equals("") || txtapellidoMaterno.getText().equals("")
-                || txtapellidoPaterno.getText().equals("") || pass.equals("")) {
+                || txtapellidoPaterno.getText().equals("") || pass.equals("") || ComboClave.getSelectedItem() == null) {
 
             btnAgregar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
@@ -704,7 +705,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         pass = new String(psswrdFldPass.getPassword());
         if (txtCURP.getText().equals("") || txtFldCer.getText().equals("") || txtFldKey.getText().equals("")
                 || txtNombre.getText().equals("") || txtapellidoMaterno.getText().equals("")
-                || txtapellidoPaterno.getText().equals("") || pass.equals("")) {
+                || txtapellidoPaterno.getText().equals("") || pass.equals("") || ComboClave.getSelectedItem() == null) {
 
             btnModificar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No puede haber campos vacios");
@@ -715,7 +716,22 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarMouseMoved
 
     public void capturarDatos() {
+ 
+         try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT ID_CARGO FROM cargos where CARGO_FIRMANTE='" + (String) ComboCargo.getSelectedItem() + "'");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            while (resultadoConsulta.next()) {
+                idResponsable = resultadoConsulta.getString("ID_CARGO");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+        
         Clave = (String) ComboClave.getSelectedItem();
         Nombre = txtNombre.getText().toUpperCase();
         apellidoPaterno = txtapellidoPaterno.getText().toUpperCase();
@@ -740,7 +756,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         try {
 
             String sql = "call insertaResponsable('" + Clave + "','" + Nombre + "','" + apellidoPaterno + "','"
-                    + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass + "')";
+                    + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass  + "','" + idResponsable + "')";
 
             System.out.println(sql);
             String salida = conector.registrar(sql);

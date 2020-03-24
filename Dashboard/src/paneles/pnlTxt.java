@@ -463,7 +463,8 @@ public class pnlTxt extends javax.swing.JPanel {
                             if (firmantes[j] != null) {
                                 System.out.println("modalidad: " + modalidadTitulacion);
                                 if (modalidadTitulacion.equals("POR TESIS")) {
-                                    String ruta = carpeta + "\\" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    System.out.println(carpeta);
+                                    String ruta = carpeta + "//" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
                                             + claveEscuela + "|" + nombreEscuela + "|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
@@ -503,7 +504,7 @@ public class pnlTxt extends javax.swing.JPanel {
 
                                     }
                                 } else {
-                                    String ruta = carpeta + "\\" + j + "_TituloElectronico_" + matricula + ".txt";
+                                    String ruta = carpeta + "//" + j + "_TituloElectronico_" + matricula + ".txt";
                                     String contenido = "||1.0|" + folioControl + "|" + firmantes[j]
                                             + claveEscuela + "|" + nombreEscuela + "|" + clave + "|" + nombreCarrera + "|" + fechaCarreraInicio + "|"
                                             + fechaCarreraTermino + "|" + clave_autorizacion + "|" + autorizacion_reconocimiento + "|" + noRvoe + "|" + CURP + "|"
