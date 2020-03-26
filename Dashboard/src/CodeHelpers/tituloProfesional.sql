@@ -19,7 +19,7 @@ use tituloProfesional
     noCedula  					varchar(50),
     estatus						varchar(1)
    )
- 
+
 create table txt(
 	folioControl					varchar(50), 
     fechaExpedicion 				varchar(50),
@@ -111,22 +111,12 @@ create table Responsable(
 alter table Responsable
 modify pass blob
 select cast(aes_decrypt(pass, 'xyz123') as char) from Responsable where Clave=1
-create procedure `firmante1`()
-select idResponsable, Nombre, apellidoPaterno, apellidoMaterno,
-CURP, Puesto, abrev, Llave, Certificado, cast(aes_decrypt(pass, 'xyz123') as char) from Responsable
-where Clave=1
-create procedure `firmante2`()
-select idResponsable, Nombre, apellidoPaterno, apellidoMaterno,
-CURP, Puesto, abrev, Llave, Certificado, cast(aes_decrypt(pass, 'xyz123') as char) from Responsable
-where Clave=2
-call firmante2
-call firmante1
+
 create table configuracion(
 claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
 carpeta                   varchar(500)
 )
-select * from txt
 /***************** PROCEDIMIENTOS ALMACENADOS ********************************/
 -- Carreras
 
@@ -283,6 +273,7 @@ where matricula LIKE CONCAT('%', buscar , '%')
 OR nombre LIKE CONCAT('%', buscar , '%') 
 OR aPaterno LIKE CONCAT('%', buscar , '%') 
 OR aMaterno LIKE CONCAT('%', buscar , '%') 
+call buscaTxt(201510019)
  -- obten id modalidad titulacion
  CREATE PROCEDURE obtenIdModalidadTitulacion(IN modalidadTitulacion text)
  SELECT CLAVE FROM modalidadTitulacion where MODALIDAD_TITULACIÓN=modalidadTitulacion
