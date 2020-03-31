@@ -43,6 +43,7 @@ public class pnlResponsables extends javax.swing.JPanel {
     String abr = "";
     String Llave = "";
     String Certificado = "";
+    String numeroSerie = "";
     String pass = "";
     String idResponsable = "";
 
@@ -567,7 +568,7 @@ public class pnlResponsables extends javax.swing.JPanel {
 
                 String sql = "call actualizaResponsable('" + Nombre + "' , '" + apellidoPaterno + "' , '"
                         + apellidoMaterno + "' , '" + CURP + "' , '" + Puesto + "' , '" + abr + "' , '"
-                        + Llave + "' , '" + Certificado + "' , '" + pass + "' , '" + idResponsable + "' , '" + Clave + "')";
+                        + Llave + "' , '" + Certificado + "' , '" + numeroSerie + "' , '" + pass + "' , '" + idResponsable + "' , '" + Clave + "')";
 
                 System.out.println(sql);
                 String salida = conector.registrar(sql);
@@ -716,8 +717,8 @@ public class pnlResponsables extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarMouseMoved
 
     public void capturarDatos() {
- 
-         try {
+
+        try {
             try {
                 resultadoConsulta = conector.consulta("SELECT ID_CARGO FROM cargos where CARGO_FIRMANTE='" + (String) ComboCargo.getSelectedItem() + "'");
             } catch (ClassNotFoundException ex) {
@@ -730,8 +731,7 @@ public class pnlResponsables extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(pnlTitulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-  
-        
+
         Clave = (String) ComboClave.getSelectedItem();
         Nombre = txtNombre.getText().toUpperCase();
         apellidoPaterno = txtapellidoPaterno.getText().toUpperCase();
@@ -748,6 +748,20 @@ public class pnlResponsables extends javax.swing.JPanel {
         Llave = Llave.replace("\\", "\\\\");
         System.out.println("Certificado " + Certificado);
         System.out.println("Llave " + Llave);
+        
+        try {
+            InputStream is = new FileInputStream(Certificado);
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            X509Certificate certificado = (X509Certificate) cf.generateCertificate(is);
+
+            byte[] byteArray = certificado.getSerialNumber().toByteArray();
+
+            String Noserie = new String(byteArray);
+            System.out.println(Noserie);
+            numeroSerie= Noserie;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -756,7 +770,8 @@ public class pnlResponsables extends javax.swing.JPanel {
         try {
 
             String sql = "call insertaResponsable('" + Clave + "','" + Nombre + "','" + apellidoPaterno + "','"
-                    + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" + Certificado + "','" + pass  + "','" + idResponsable + "')";
+                    + apellidoMaterno + "','" + CURP + "','" + Puesto + "','" + abr + "','" + Llave + "','" 
+                    + Certificado + "','" + numeroSerie + "','" + pass + "','" + idResponsable + "')";
 
             System.out.println(sql);
             String salida = conector.registrar(sql);

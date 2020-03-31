@@ -105,10 +105,13 @@ create table Responsable(
     abrev						varchar(50),
 	Llave 						varchar(500),
 	Certificado 				varchar(500),
+    numeroSerie					varchar(100),
     pass						blob,
 	idResponsable               varchar(30)
 );
+select * from Responsable
 alter table Responsable
+add numeroSerie varchar(100)
 modify pass blob
 select cast(aes_decrypt(pass, 'xyz123') as char) from Responsable where Clave=1
 
@@ -360,12 +363,13 @@ IN Puesto text,
 IN abrev text,
 IN Llave text,
 IN Certificado text,
+IN numeroSerie text,
 IN pass text,
 IN idResponsable text,
 IN inClave text
 )
 Update Responsable set Nombre= Nombre, apellidoPaterno= apellidoPaterno, apellidoMaterno= apellidoMaterno,
-                       CURP= CURP, Puesto= Puesto, abrev= abrev,Llave= Llave, Certificado= Certificado,
+                       CURP= CURP, Puesto= Puesto, abrev= abrev,Llave= Llave, Certificado= Certificado, numeroSerie= numeroSerie,
                        pass= aes_encrypt(pass,'xyz123'), idResponsable=idResponsable  where Clave= inClave    
 -- llena campos de formulario
 CREATE PROCEDURE llenaCampos(IN inCURP text)
@@ -381,12 +385,13 @@ IN Puesto text,
 IN abrev text,
 IN Llave text,
 IN Certificado text,
+IN numeroSerie text,
 IN pass text,
 IN idResponsable int
 )
 
-INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, pass, idResponsable) VALUES ( Clave, Nombre, apellidoPaterno,
-                     apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, aes_encrypt(pass,'xyz123'), idResponsable)
+INSERT INTO Responsable(Clave, Nombre, apellidoPaterno, apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, numeroSerie, pass, idResponsable) VALUES ( Clave, Nombre, apellidoPaterno,
+                     apellidoMaterno, CURP, Puesto, abrev, Llave, Certificado, numeroSerie, aes_encrypt(pass,'xyz123'), idResponsable)
 
 -- Correccion de Posibles errores de autenticacion de Java con MySQL8
 create user genaro@localhost identified by'Supervi$or_123'

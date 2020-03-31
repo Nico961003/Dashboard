@@ -78,7 +78,7 @@ public class pnlXml extends javax.swing.JPanel {
 
     String idTipoEstudioAntecedente = "";
 
-    String Llave = "", Certificado = "", pass = "";
+    String Llave = "", Certificado = "", numeroSerie = "",  pass = "";
 
     String archivo[] = new String[5];
     String firma[] = new String[5];
@@ -504,20 +504,12 @@ public class pnlXml extends javax.swing.JPanel {
                             abrev = resultadoConsulta.getString("abrev");
                             Llave = resultadoConsulta.getString("Llave");
                             Certificado = resultadoConsulta.getString("Certificado");
+                            numeroSerie = resultadoConsulta.getString("numeroSerie"); 
                             pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
 
                             Llave = sign(Llave, pass, archivo[i]);
-                            //Certificado = Base64.encodeBase64String(toByteArray(Certificado));
-                            firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n";
-                            InputStream is = new FileInputStream(Certificado);
-                            CertificateFactory cf = CertificateFactory.getInstance("X.509");
-                            X509Certificate certificado = (X509Certificate) cf.generateCertificate(is);
-
-                            BigInteger Noserie = certificado.getSerialNumber();
-                            BigDecimal bd = BigDecimal.valueOf(Noserie.intValue());
-                            
-                            System.out.println("num: " + bd);
-                        
+                            Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+                            firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\" " + numeroSerie + " \"/>\n";
                         }
 
                     } else {
