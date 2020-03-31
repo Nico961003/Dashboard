@@ -490,7 +490,7 @@ public class pnlXml extends javax.swing.JPanel {
                         try {
                             resultadoConsulta = conector.consulta("select cast(aes_decrypt(pass, 'xyz123') as char), idResponsable,"
                                     + "Nombre, apellidoPaterno, apellidoMaterno,"
-                                    + "CURP, Puesto, abrev, Llave, Certificado from Responsable where Clave='" + (i + 1) + "'");
+                                    + "CURP, Puesto, abrev, Llave, Certificado, numeroSerie from Responsable where Clave='" + (i + 1) + "'");
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -509,7 +509,7 @@ public class pnlXml extends javax.swing.JPanel {
 
                             Llave = sign(Llave, pass, archivo[i]);
                             Certificado = Base64.encodeBase64String(toByteArray(Certificado));
-                            firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\" " + numeroSerie + " \"/>\n";
+                            firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"" + numeroSerie + "\"/>\n";
                         }
 
                     } else {
