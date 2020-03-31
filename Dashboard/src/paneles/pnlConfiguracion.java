@@ -101,11 +101,11 @@ public class pnlConfiguracion extends javax.swing.JPanel {
 
         txtnombreInstitucion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtnombreInstitucion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtnombreInstitucion.setPlaceholder("Examinar...");
+        txtnombreInstitucion.setPlaceholder("Nombre de la institución");
 
         txtclaveInstitucion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtclaveInstitucion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtclaveInstitucion.setPlaceholder("Examinar...");
+        txtclaveInstitucion.setPlaceholder("Clave de la institución");
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setText("Clave institucion");

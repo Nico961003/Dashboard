@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.security.PrivateKey;
 import java.security.Signature;
 import java.security.cert.Certificate;
@@ -377,8 +379,8 @@ public class pnlXml extends javax.swing.JPanel {
                 for (int i = 0; i < 4; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
-                if(resultadoConsulta.getString("estatus").equals("B")){
-                modeloTabla.addRow(valores);
+                if (resultadoConsulta.getString("estatus").equals("B")) {
+                    modeloTabla.addRow(valores);
                 }
             }
         } catch (SQLException ex) {
@@ -503,11 +505,19 @@ public class pnlXml extends javax.swing.JPanel {
                             Llave = resultadoConsulta.getString("Llave");
                             Certificado = resultadoConsulta.getString("Certificado");
                             pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
-                            System.out.println("pasword 1 : " + pass);
-                            System.out.println("CURP " + curpResponsable);
+
                             Llave = sign(Llave, pass, archivo[i]);
-                            Certificado = Base64.encodeBase64String(toByteArray(Certificado));
+                            //Certificado = Base64.encodeBase64String(toByteArray(Certificado));
                             firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"00001000000412846216\"/>\n";
+                            InputStream is = new FileInputStream(Certificado);
+                            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+                            X509Certificate certificado = (X509Certificate) cf.generateCertificate(is);
+
+                            BigInteger Noserie = certificado.getSerialNumber();
+                            BigDecimal bd = BigDecimal.valueOf(Noserie.intValue());
+                            
+                            System.out.println("num: " + bd);
+                        
                         }
 
                     } else {
@@ -530,7 +540,7 @@ public class pnlXml extends javax.swing.JPanel {
                                 + "  </FirmaResponsables>\n"
                                 + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
-                                + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno  + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
+                                + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
                                 + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
                                 + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
                                 + "</TituloElectronico>";
@@ -559,7 +569,7 @@ public class pnlXml extends javax.swing.JPanel {
                                 + "  </FirmaResponsables>\n"
                                 + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
                                 + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
-                                + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno  + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre+ "\" correoElectronico=\"" + correo + "\"/>"
+                                + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
                                 + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
                                 + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
                                 + "</TituloElectronico>";
