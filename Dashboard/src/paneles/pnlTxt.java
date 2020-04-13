@@ -622,10 +622,7 @@ public class pnlTxt extends javax.swing.JPanel {
         int i = 0;
         TableModel model = jTable2.getModel();
         if ((Boolean) model.getValueAt(0, 4) != null && (Boolean) model.getValueAt(0, 4) == true
-                || (Boolean) model.getValueAt(1, 4) != null && (Boolean) model.getValueAt(1, 4) == true
-                || (Boolean) model.getValueAt(2, 4) != null && (Boolean) model.getValueAt(2, 4) == true
-                || (Boolean) model.getValueAt(3, 4) != null && (Boolean) model.getValueAt(3, 4) == true
-                || (Boolean) model.getValueAt(4, 4) != null && (Boolean) model.getValueAt(4, 4) == true) {
+                || (Boolean) model.getValueAt(1, 4) != null && (Boolean) model.getValueAt(1, 4) == true) {
             btnGenerar.setEnabled(true);
         } else {
             btnGenerar.setEnabled(false);

@@ -10,9 +10,11 @@ import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.PrivateKey;
@@ -544,7 +546,8 @@ public class pnlXml extends javax.swing.JPanel {
                             file.createNewFile();
                         }
                         FileWriter fw = new FileWriter(file);
-                        BufferedWriter bw = new BufferedWriter(fw);
+                        //BufferedWriter bw = new BufferedWriter(fw);
+                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
                         bw.write(contenido);
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
@@ -573,7 +576,8 @@ public class pnlXml extends javax.swing.JPanel {
                             file.createNewFile();
                         }
                         FileWriter fw = new FileWriter(file);
-                        BufferedWriter bw = new BufferedWriter(fw);
+                        //BufferedWriter bw = new BufferedWriter(fw);
+                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
                         bw.write(contenido);
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
