@@ -114,7 +114,7 @@ alter table Responsable
 add numeroSerie varchar(100)
 modify pass blob
 select cast(aes_decrypt(pass, 'xyz123') as char) from Responsable where Clave=1
-
+select * from txt
 create table configuracion(
 claveEscuela 		      varchar(500),
 nombreEscuela			  varchar(500),
@@ -195,7 +195,7 @@ CREATE PROCEDURE eliminaProfesionista(IN InMatricula text)
 Delete from Profesionista where Matricula = InMatricula
 -- busca profesionista
 CREATE PROCEDURE buscaProfesionista(IN buscar text)
-SELECT * FROM Profesionista WHERE Matricula LIKE CONCAT('%', buscar , '%')  
+SELECT Matricula, Nombre, apellidoPaterno, apellidoMaterno, CURP, Correo FROM Profesionista WHERE Matricula LIKE CONCAT('%', buscar , '%')  
 OR Nombre LIKE CONCAT('%', buscar , '%') 
 OR apellidoPaterno LIKE CONCAT('%', buscar , '%') 
 OR apellidoMaterno LIKE CONCAT('%', buscar , '%') 
