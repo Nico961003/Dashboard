@@ -567,7 +567,9 @@ public class pnlTxt extends javax.swing.JPanel {
                     }
                     JOptionPane.showMessageDialog(null, "Archivo txt generado exitosamente");
                     abrirarchivo(carpeta);
-                } 
+                } else{
+                    
+                }
 
             } catch (Exception e) {
                 System.out.println(e);
@@ -609,8 +611,8 @@ public class pnlTxt extends javax.swing.JPanel {
                 for (int i = 0; i < 4; i++) {
                     valores[i] = resultadoConsulta.getObject(i + 1); //
                 }
-                if(resultadoConsulta.getString("estatus").equals("A")){
-                modeloTabla.addRow(valores);
+                if (resultadoConsulta.getString("estatus").equals("A")) {
+                    modeloTabla.addRow(valores);
                 }
             }
         } catch (SQLException ex) {
@@ -619,15 +621,22 @@ public class pnlTxt extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void btnGenerarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseMoved
-        int i = 0;
+        int j = 0;
         TableModel model = jTable2.getModel();
-        if ((Boolean) model.getValueAt(0, 4) != null && (Boolean) model.getValueAt(0, 4) == true
-                || (Boolean) model.getValueAt(1, 4) != null && (Boolean) model.getValueAt(1, 4) == true) {
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            if ((Boolean) model.getValueAt(i, 4) != null && (Boolean) model.getValueAt(i, 4) == true) {
+                j++;
+            }
+        }
+
+        if (j > 0) {
             btnGenerar.setEnabled(true);
         } else {
-            btnGenerar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Seleccione como minimo un firmante");
+            btnGenerar.setEnabled(false);
         }
+
+
     }//GEN-LAST:event_btnGenerarMouseMoved
 
 

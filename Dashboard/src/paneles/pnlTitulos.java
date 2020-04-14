@@ -229,6 +229,7 @@ public class pnlTitulos extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new rojerusan.RSTableMetro();
         jLabel6 = new javax.swing.JLabel();
+        btnModificar = new rscomponentshade.RSButtonShade();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -559,6 +560,21 @@ public class pnlTitulos extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel6.setText("Lista de Títulos Generados.");
 
+        btnModificar.setBackground(new java.awt.Color(204, 204, 255));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/documento.png"))); // NOI18N
+        btnModificar.setBgHover(new java.awt.Color(255, 255, 255));
+        btnModificar.setBgShadeHover(new java.awt.Color(243, 242, 242));
+        btnModificar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnModificarMouseMoved(evt);
+            }
+        });
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -569,6 +585,8 @@ public class pnlTitulos extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -598,7 +616,8 @@ public class pnlTitulos extends javax.swing.JPanel {
                             .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
@@ -770,6 +789,7 @@ public class pnlTitulos extends javax.swing.JPanel {
                 txtCURP.setText(resultadoConsulta.getString("CURP"));
                 txtCorreo.setText(resultadoConsulta.getString("correo"));
                 ComboCarrera.setSelectedItem(resultadoConsulta.getString("nombreCarrera"));
+                ComboEFederativa.setSelectedItem(resultadoConsulta.getString("eFederativa"));
                 DateFechaInicio.setDate(resultadoConsulta.getDate("fechaInicioCarrera"));
                 DateFechaTermino.setDate(resultadoConsulta.getDate("fechaFinCarrera"));
                 DateExpedicion.setDate(resultadoConsulta.getDate("fechaExpedicion"));
@@ -855,6 +875,51 @@ public class pnlTitulos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAgregarMouseMoved
 
+    private void btnModificarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseMoved
+
+        if (txtFolio.getText().equals("") || txtCURP.getText().equals("") || DateExamenP.getDate() == null
+                || DateExpedicion.getDate() == null || DateFechaInicio.getDate() == null || DateFechaTermino.getDate() == null) {
+            btnModificar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No deben haber campos vacios");
+        } else {
+            btnModificar.setEnabled(true);
+
+        }
+
+    }//GEN-LAST:event_btnModificarMouseMoved
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        capturarDatos();
+        int reply = JOptionPane.showConfirmDialog(null, "¿Modificar registro?", "¡¡Advertencia!!", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            capturarDatos();
+            try {
+
+                System.out.println("modificar");
+
+                String sql = "call actualizaTitulo('"
+                        + folioControl + "','" + fechaExpedicion + "','"
+                        + idModalidadTitulacion + "','" + modalidadTitulacion + "','" + fechaExamen + "','"
+                        + matricula + "','" + nombre + "','" + aPaterno + "','" + aMaterno + "','" + correo + "','"
+                        + CURP + "','" + sSocial + "','" + idFundamentoLegalServicioSocial + "','" + idEntidadFederativa + "','" + eFederativa + "','"
+                        + fundamentoSS + "','" + clave + "','" + nombreCarrera + "','" + noRvoe + "','" + fechaInicioCarrera + "','" + fechaFinCarrera + "','"
+                        + clave_autorizacion + "','" + autorizacion_reconocimiento + "','" + institucionProcedencia + "','"
+                        + idEntidadFederativa2 + "','" + eFederativa2 + "','" + fechaInicioAntecedente + "','" + fechaTerminoAntecedente + "','"
+                        + idTipoEstudioAntecedente + "','" + tipodeEstudio + "','" + noCedula + "')";
+
+                System.out.println(sql);
+                String salida = conector.registrar(sql);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            JOptionPane.showMessageDialog(null, "Registro modificado ");
+            btnModificar.setEnabled(false);
+        } else {
+        }
+
+    }//GEN-LAST:event_btnModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboCarrera;
@@ -873,6 +938,7 @@ public class pnlTitulos extends javax.swing.JPanel {
     private rscomponentshade.RSButtonShade btnDetalles;
     private rscomponentshade.RSButtonShade btnEliminar;
     private rscomponentshade.RSButtonShade btnLimpiar;
+    private rscomponentshade.RSButtonShade btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

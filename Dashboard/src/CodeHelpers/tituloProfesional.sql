@@ -185,8 +185,8 @@ Update Profesionista set Nombre = Nombre, apellidoPaterno = apellidoPaterno, ape
                         , CURP = CURP , Correo = correo, institucionProcedencia= institucionProcedencia
                         , idEntidadFederativa=idEntidadFederativa, fechaAntInicio= fechaInicioAntecedente, fechaAntTermino = fechaTerminoAntecedente
                         , idTipoEstudioAntecedente = idTipoEstudioAntecedente,tipodeEstudio = tipodeEstudio, eFederativa = eFederativa
-                        , noCedula=noCedula WHERE Matricula = matriculaActual
-                        
+                        , noCedula=noCedula, estatus = 'A' WHERE Matricula = matriculaActual
+                
 -- Varifica matricula 
 CREATE PROCEDURE verificaMatricula(IN InMatricula text)
 SELECT Matricula FROM Profesionista where Matricula = InMatricula
@@ -269,6 +269,52 @@ OR matricula LIKE CONCAT('%', buscar , '%')
 OR nombre LIKE CONCAT('%', buscar , '%') 
 OR aPaterno LIKE CONCAT('%', buscar , '%') 
 OR aMaterno LIKE CONCAT('%', buscar , '%') 
+-- actualiza Titulo
+CREATE PROCEDURE actualizaTitulo(
+IN inFolioControl text,
+IN fechaExpedicion text,
+IN idModalidadTitulacion text,
+IN modalidadTitulacion text,
+IN fechaExamen text,
+IN matricula text,
+IN nombre text,
+IN aPaterno text,
+IN aMaterno text,
+IN correo text,
+IN CURP text,
+IN sSocial text,
+IN idFundamentoLegalServicioSocial text,
+IN idEntidadFederativa text,
+IN eFederativa text,
+IN fundamentoSS text,
+IN clave text,
+IN nombreCarrera text,
+IN numeroRvoe text,
+IN fechaInicioCarrera text,
+IN fechaFinCarrera text,
+IN clave_autorizacion text,
+IN autorizacion_reconocimiento text,
+IN institucionProcedencia text,
+IN idEntidadFederativa2 text,
+IN eFederativa2 text,
+IN fechaAntInicio text,
+IN fechaAntTermino text,
+IN idTipoEstudioAntecedente text,
+IN tipodeEstudio text,
+IN noCedula text
+)
+UPDATE txt SET  fechaExpedicion=fechaExpedicion,idModalidadTitulacion=idModalidadTitulacion,
+				modalidadTitulacion=modalidadTitulacion,fechaExamen=fechaExamen,matricula=matricula,nombre=nombre,
+				aPaterno=aPaterno,aMaterno=aMaterno,correo=correo,CURP=CURP,sSocial=sSocial,
+				idFundamentoLegalServicioSocial=idFundamentoLegalServicioSocial,idEntidadFederativa=idEntidadFederativa,eFederativa=eFederativa,
+                fundamentoSS=fundamentoSS,clave=clave,nombreCarrera=nombreCarrera,
+				numeroRvoe=numeroRvoe,fechaInicioCarrera=fechaInicioCarrera,fechaFinCarrera=fechaFinCarrera,clave_autorizacion=clave_autorizacion,
+                autorizacion_reconocimiento=autorizacion_reconocimiento,
+				institucionProcedencia=institucionProcedencia,idEntidadFederativa2=idEntidadFederativa2,eFederativa2=eFederativa2,
+                fechaAntInicio=fechaAntInicio,fechaAntTermino=fechaAntTermino,idTipoEstudioAntecedente=idTipoEstudioAntecedente,tipodeEstudio=tipodeEstudio,
+                noCedula=noCedula,estatus='A' WHERE inFolioControl= folioControl
+
+
 -- busca txt Y XML
 CREATE PROCEDURE buscaTxt (IN buscar text)
 SELECT matricula, nombre, aPaterno, aMaterno, estatus FROM txt 

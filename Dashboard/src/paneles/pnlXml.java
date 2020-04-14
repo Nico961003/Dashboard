@@ -414,17 +414,18 @@ public class pnlXml extends javax.swing.JPanel {
 
             try {
                 TableModel model = jTable1.getModel();
-                String[] seleccionado = new String[100];
+                String[] seleccionado = new String[1000];
                 if ((Boolean) model.getValueAt(i, 4) == true) {
                     seleccionado[i] = ((String) model.getValueAt(i, 0));
+                } else{
+                    System.out.println("");
                 }
 
                 try {
                     try {
                         resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(pnlTxt.class
-                                .getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     while (resultadoConsulta.next()) {
 
@@ -483,8 +484,7 @@ public class pnlXml extends javax.swing.JPanel {
 
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(pnlXml.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 for (i = 0; i < 5; i++) {
@@ -586,7 +586,8 @@ public class pnlXml extends javax.swing.JPanel {
                     e.printStackTrace();
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                /*System.out.println(e);
+                e.printStackTrace();*/
             }
 
         }
