@@ -80,7 +80,7 @@ public class pnlXml extends javax.swing.JPanel {
 
     String idTipoEstudioAntecedente = "";
 
-    String Llave = "", Certificado = "", numeroSerie = "",  pass = "";
+    String Llave = "", Certificado = "", numeroSerie = "", pass = "";
 
     String archivo[] = new String[5];
     String firma[] = new String[5];
@@ -100,11 +100,33 @@ public class pnlXml extends javax.swing.JPanel {
     String claveEscuela = "";
     String nombreEscuela = "";
     String carpeta = "";
+    
+    int i=0, j=0;
 
     public pnlXml() {
         initComponents();
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         tablaTxtB();
+        configuracion();
+    }
+
+    public void configuracion() {
+        try {
+            try {
+                resultadoConsulta = conector.consulta("SELECT * FROM configuracion");
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            while (resultadoConsulta.next()) {
+                claveEscuela = resultadoConsulta.getString("claveEscuela");
+                nombreEscuela = resultadoConsulta.getString("nombreEscuela");
+                carpeta = resultadoConsulta.getString("carpeta");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
     }
 
     public void tablaTxtB() {
@@ -391,108 +413,95 @@ public class pnlXml extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarCaretUpdate
 
     private void btnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmarActionPerformed
-        try {
-            try {
-                resultadoConsulta = conector.consulta("SELECT * FROM configuracion");
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            while (resultadoConsulta.next()) {
-                claveEscuela = resultadoConsulta.getString("claveEscuela");
-                nombreEscuela = resultadoConsulta.getString("nombreEscuela");
-                carpeta = resultadoConsulta.getString("carpeta");
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
-        /**
-         * ** comienza conteo tabla ***********
-         */
+        String[] seleccionado = new String[1000];
         for (int i = 0; i < jTable1.getRowCount(); i++) {
 
             try {
                 TableModel model = jTable1.getModel();
-                String[] seleccionado = new String[1000];
                 if ((Boolean) model.getValueAt(i, 4) == true) {
                     seleccionado[i] = ((String) model.getValueAt(i, 0));
-                } else{
-                    System.out.println("");
-                }
+                    System.out.println((String) model.getValueAt(i, 0));
 
-                try {
                     try {
-                        resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    while (resultadoConsulta.next()) {
-
-                        folioControl = resultadoConsulta.getString("folioControl");
-                        fechaExpedicion = resultadoConsulta.getString("fechaExpedicion");
-                        idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
-                        modalidadTitulacion = resultadoConsulta.getString("modalidadTitulacion");
-                        fechaExamen = resultadoConsulta.getString("fechaExamen");
-                        matricula = resultadoConsulta.getString("matricula");
-                        nombre = resultadoConsulta.getString("nombre");
-                        aPaterno = resultadoConsulta.getString("aPaterno");
-                        aMaterno = resultadoConsulta.getString("aMaterno");
-                        correo = resultadoConsulta.getString("correo");
-                        CURP = resultadoConsulta.getString("CURP");
-                        sSocial = resultadoConsulta.getString("sSocial");
-                        idFundamentoLegalServicioSocial = resultadoConsulta.getString("idFundamentoLegalServicioSocial");
-                        fundamentoSS = resultadoConsulta.getString("fundamentoSS");
-                        clave = resultadoConsulta.getString("clave");
-                        nombreCarrera = resultadoConsulta.getString("nombreCarrera");
-                        numeroRvoe = resultadoConsulta.getString("numeroRvoe");
-                        clave_autorizacion = resultadoConsulta.getString("clave_autorizacion");
-                        autorizacion_reconocimiento = resultadoConsulta.getString("autorizacion_reconocimiento");
-                        institucionProcedencia = resultadoConsulta.getString("institucionProcedencia");
-                        if (resultadoConsulta.getInt("idEntidadFederativa") < 10) {
-                            idEntidadFederativa = "0" + resultadoConsulta.getString("idEntidadFederativa");
-                        } else {
-                            idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
+                        try {
+                            resultadoConsulta = conector.consulta("SELECT * FROM txt where matricula='" + seleccionado[i] + "'");//establecimiento de sentencia aejecutar
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(pnlTxt.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        if (resultadoConsulta.getInt("idEntidadFederativa2") < 10) {
-                            idEntidadFederativa2 = "0" + resultadoConsulta.getString("idEntidadFederativa2");
-                        } else {
-                            idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa2");
+                        while (resultadoConsulta.next()) {
+
+                            folioControl = resultadoConsulta.getString("folioControl");
+                            fechaExpedicion = resultadoConsulta.getString("fechaExpedicion");
+                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                            modalidadTitulacion = resultadoConsulta.getString("modalidadTitulacion");
+                            fechaExamen = resultadoConsulta.getString("fechaExamen");
+                            matricula = resultadoConsulta.getString("matricula");
+                            nombre = resultadoConsulta.getString("nombre");
+                            aPaterno = resultadoConsulta.getString("aPaterno");
+                            aMaterno = resultadoConsulta.getString("aMaterno");
+                            correo = resultadoConsulta.getString("correo");
+                            CURP = resultadoConsulta.getString("CURP");
+                            sSocial = resultadoConsulta.getString("sSocial");
+                            idFundamentoLegalServicioSocial = resultadoConsulta.getString("idFundamentoLegalServicioSocial");
+                            fundamentoSS = resultadoConsulta.getString("fundamentoSS");
+                            clave = resultadoConsulta.getString("clave");
+                            nombreCarrera = resultadoConsulta.getString("nombreCarrera");
+                            numeroRvoe = resultadoConsulta.getString("numeroRvoe");
+                            clave_autorizacion = resultadoConsulta.getString("clave_autorizacion");
+                            autorizacion_reconocimiento = resultadoConsulta.getString("autorizacion_reconocimiento");
+                            institucionProcedencia = resultadoConsulta.getString("institucionProcedencia");
+                            if (resultadoConsulta.getInt("idEntidadFederativa") < 10) {
+                                idEntidadFederativa = "0" + resultadoConsulta.getString("idEntidadFederativa");
+                            } else {
+                                idEntidadFederativa = resultadoConsulta.getString("idEntidadFederativa");
+                            }
+                            if (resultadoConsulta.getInt("idEntidadFederativa2") < 10) {
+                                idEntidadFederativa2 = "0" + resultadoConsulta.getString("idEntidadFederativa2");
+                            } else {
+                                idEntidadFederativa2 = resultadoConsulta.getString("idEntidadFederativa2");
+                            }
+                            eFederativa = resultadoConsulta.getString("eFederativa");
+                            eFederativa2 = resultadoConsulta.getString("eFederativa2");
+
+                            fechaAntInicio = resultadoConsulta.getString("fechaAntInicio");
+                            fechaAntTermino = resultadoConsulta.getString("fechaAntTermino");
+                            idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
+                            tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
+                            noCedula = resultadoConsulta.getString("noCedula");
+                            idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
+                            fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
+                            noRvoe = resultadoConsulta.getString("numeroRvoe");
+                            fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
+                            archivo[0] = resultadoConsulta.getString("archivo0");
+                            archivo[1] = resultadoConsulta.getString("archivo1");
+                            archivo[2] = resultadoConsulta.getString("archivo2");
+                            archivo[3] = resultadoConsulta.getString("archivo3");
+                            archivo[4] = resultadoConsulta.getString("archivo4");
+                            firma[0] = resultadoConsulta.getString("firma0");
+                            firma[1] = resultadoConsulta.getString("firma1");
+                            firma[2] = resultadoConsulta.getString("firma2");
+                            firma[3] = resultadoConsulta.getString("firma3");
+                            firma[4] = resultadoConsulta.getString("firma4");
+
                         }
-                        eFederativa = resultadoConsulta.getString("eFederativa");
-                        eFederativa2 = resultadoConsulta.getString("eFederativa2");
-
-                        fechaAntInicio = resultadoConsulta.getString("fechaAntInicio");
-                        fechaAntTermino = resultadoConsulta.getString("fechaAntTermino");
-                        idTipoEstudioAntecedente = resultadoConsulta.getString("idTipoEstudioAntecedente");
-                        tipodeEstudio = resultadoConsulta.getString("tipodeEstudio");
-                        noCedula = resultadoConsulta.getString("noCedula");
-                        idModalidadTitulacion = resultadoConsulta.getString("idModalidadTitulacion");
-                        fechaCarreraTermino = resultadoConsulta.getString("fechaFinCarrera");
-                        noRvoe = resultadoConsulta.getString("numeroRvoe");
-                        fechaCarreraInicio = resultadoConsulta.getString("fechaInicioCarrera");
-                        archivo[0] = resultadoConsulta.getString("archivo0");
-                        archivo[1] = resultadoConsulta.getString("archivo1");
-                        archivo[2] = resultadoConsulta.getString("archivo2");
-                        archivo[3] = resultadoConsulta.getString("archivo3");
-                        archivo[4] = resultadoConsulta.getString("archivo4");
-                        firma[0] = resultadoConsulta.getString("firma0");
-                        firma[1] = resultadoConsulta.getString("firma1");
-                        firma[2] = resultadoConsulta.getString("firma2");
-                        firma[3] = resultadoConsulta.getString("firma3");
-                        firma[4] = resultadoConsulta.getString("firma4");
-
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
-                for (i = 0; i < 5; i++) {
-                    if (firma[i] != null) {
+        try {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                for (j = 0; j < 5; j++) {
+                    if (firma[j] != null) {
                         try {
                             resultadoConsulta = conector.consulta("select cast(aes_decrypt(pass, 'xyz123') as char), idResponsable,"
                                     + "Nombre, apellidoPaterno, apellidoMaterno,"
-                                    + "CURP, Puesto, abrev, Llave, Certificado, numeroSerie from Responsable where Clave='" + (i + 1) + "'");
+                                    + "CURP, Puesto, abrev, Llave, Certificado, numeroSerie from Responsable where Clave='" + (j + 1) + "'");
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(pnlXml.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -506,23 +515,30 @@ public class pnlXml extends javax.swing.JPanel {
                             abrev = resultadoConsulta.getString("abrev");
                             Llave = resultadoConsulta.getString("Llave");
                             Certificado = resultadoConsulta.getString("Certificado");
-                            numeroSerie = resultadoConsulta.getString("numeroSerie"); 
+                            numeroSerie = resultadoConsulta.getString("numeroSerie");
                             pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
 
-                            Llave = sign(Llave, pass, archivo[i]);
+                            Llave = sign(Llave, pass, archivo[j]);
                             Certificado = Base64.encodeBase64String(toByteArray(Certificado));
-                            firma[i] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"" + numeroSerie + "\"/>\n";
+                            firma[j] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"" + numeroSerie + "\"/>\n";
+                            System.out.println(firma[j]);
                         }
 
                     } else {
-                        firma[i] = "";
+                        firma[j] = "";
                     }
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        try {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
                 try {
 
                     if (modalidadTitulacion.equals("POR TESIS")) {
-                        String ruta = carpeta + "//TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
@@ -552,7 +568,7 @@ public class pnlXml extends javax.swing.JPanel {
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     } else {
-                        String ruta = carpeta + "//TituloElectronico_" + matricula + ".xml";
+                        String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
                         String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                 + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
                                 + "  <FirmaResponsables>\n"
@@ -582,15 +598,15 @@ public class pnlXml extends javax.swing.JPanel {
                         bw.close();
                         JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } catch (Exception e) {
-                /*System.out.println(e);
-                e.printStackTrace();*/
-            }
 
+                } catch (Exception e) {
+                e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+                e.printStackTrace();
         }
+
         tablaTxtB();
         abrirarchivo(carpeta);
     }//GEN-LAST:event_btnFirmarActionPerformed
@@ -611,13 +627,11 @@ public class pnlXml extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public static String sign(String keyPath, String password, String toSign) throws Exception {
-        //System.out.println("filepath : " + keyPath);
         final PKCS8Key pkcs8Key = new PKCS8Key(toByteArray(keyPath), password.toCharArray());
         final PrivateKey privateKey = pkcs8Key.getPrivateKey();
-        //System.out.println("private " + privateKey);
         final Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initSign(privateKey);
-        signature.update(toSign.getBytes("UTF-8"));
+//        signature.update(toSign.getBytes("UTF-8"));
 
         return Base64.encodeBase64String(signature.sign());
     }
