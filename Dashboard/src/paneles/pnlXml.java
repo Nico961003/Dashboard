@@ -568,6 +568,7 @@ public class pnlXml extends javax.swing.JPanel {
                             bw.write(contenido);
                             bw.close();
                             JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+                            fw.close();
                         } else {
                             String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
                             String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -598,6 +599,7 @@ public class pnlXml extends javax.swing.JPanel {
                             bw.write(contenido);
                             bw.close();
                             JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+                            fw.close();
                         }
 
                     } catch (Exception e) {

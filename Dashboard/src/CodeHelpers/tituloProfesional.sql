@@ -78,7 +78,8 @@ Carrera     varchar(200),
 noRvoe      int
 )
 
-
+update Carreras set IdCarrera='621303' where Carrera='LICENCIATURA EN ADMINISTRACION DE EMPRESAS'
+update Carreras set IdCarrera='615305' where Carrera='LICENCIATURA EN ADMINISTRACION DE EMPRESAS TURISTICAS'
 insert into Carreras values ('207380','LICENCIATURA EN ENSEÑANZA DE LA LENGUA INGLESA', '2006444');
 insert into Carreras values ('231301','LICENCIATURA EN PSICOLOGIA',	'20081467');
 insert into Carreras values ('622306','LICENCIATURA EN MERCADOTECNIA','20080094');
@@ -90,8 +91,8 @@ insert into Carreras values ('612301','LICENCIATURA EN DERECHO','2006134');
 insert into Carreras values ('607316','LICENCIATURA EN CONTADURIA PUBLICA','2006136');
 insert into Carreras values ('621317','LICENCIATURA EN COMERCIO INTERNACIONAL','20080092');
 insert into Carreras values ('611310','LICENCIATURA EN CIENCIAS DE LA COMUNICACION','20080091');
-insert into Carreras values ('621303','LICENCIATURA EN ADMINISTRACION DE EMPRESAS TURISTICAS','20080158');
-insert into Carreras values ('615305','LICENCIATURA EN ADMINISTRACION DE EMPRESAS',	'2006133');
+insert into Carreras values ('615305','LICENCIATURA EN ADMINISTRACION DE EMPRESAS TURISTICAS','20080158');
+insert into Carreras values ('621303','LICENCIATURA EN ADMINISTRACION DE EMPRESAS',	'2006133');
 insert into Carreras values ('771302','LICENCIATURA EN DISEÑO GRAFICO',	'20080176');
 
 
@@ -185,8 +186,8 @@ Update Profesionista set Nombre = Nombre, apellidoPaterno = apellidoPaterno, ape
                         , CURP = CURP , Correo = correo, institucionProcedencia= institucionProcedencia
                         , idEntidadFederativa=idEntidadFederativa, fechaAntInicio= fechaInicioAntecedente, fechaAntTermino = fechaTerminoAntecedente
                         , idTipoEstudioAntecedente = idTipoEstudioAntecedente,tipodeEstudio = tipodeEstudio, eFederativa = eFederativa
-                        , noCedula=noCedula, estatus = 'A' WHERE Matricula = matriculaActual
-                
+                        , noCedula=noCedula WHERE Matricula = matriculaActual
+                        
 -- Varifica matricula 
 CREATE PROCEDURE verificaMatricula(IN InMatricula text)
 SELECT Matricula FROM Profesionista where Matricula = InMatricula
@@ -269,52 +270,6 @@ OR matricula LIKE CONCAT('%', buscar , '%')
 OR nombre LIKE CONCAT('%', buscar , '%') 
 OR aPaterno LIKE CONCAT('%', buscar , '%') 
 OR aMaterno LIKE CONCAT('%', buscar , '%') 
--- actualiza Titulo
-CREATE PROCEDURE actualizaTitulo(
-IN inFolioControl text,
-IN fechaExpedicion text,
-IN idModalidadTitulacion text,
-IN modalidadTitulacion text,
-IN fechaExamen text,
-IN matricula text,
-IN nombre text,
-IN aPaterno text,
-IN aMaterno text,
-IN correo text,
-IN CURP text,
-IN sSocial text,
-IN idFundamentoLegalServicioSocial text,
-IN idEntidadFederativa text,
-IN eFederativa text,
-IN fundamentoSS text,
-IN clave text,
-IN nombreCarrera text,
-IN numeroRvoe text,
-IN fechaInicioCarrera text,
-IN fechaFinCarrera text,
-IN clave_autorizacion text,
-IN autorizacion_reconocimiento text,
-IN institucionProcedencia text,
-IN idEntidadFederativa2 text,
-IN eFederativa2 text,
-IN fechaAntInicio text,
-IN fechaAntTermino text,
-IN idTipoEstudioAntecedente text,
-IN tipodeEstudio text,
-IN noCedula text
-)
-UPDATE txt SET  fechaExpedicion=fechaExpedicion,idModalidadTitulacion=idModalidadTitulacion,
-				modalidadTitulacion=modalidadTitulacion,fechaExamen=fechaExamen,matricula=matricula,nombre=nombre,
-				aPaterno=aPaterno,aMaterno=aMaterno,correo=correo,CURP=CURP,sSocial=sSocial,
-				idFundamentoLegalServicioSocial=idFundamentoLegalServicioSocial,idEntidadFederativa=idEntidadFederativa,eFederativa=eFederativa,
-                fundamentoSS=fundamentoSS,clave=clave,nombreCarrera=nombreCarrera,
-				numeroRvoe=numeroRvoe,fechaInicioCarrera=fechaInicioCarrera,fechaFinCarrera=fechaFinCarrera,clave_autorizacion=clave_autorizacion,
-                autorizacion_reconocimiento=autorizacion_reconocimiento,
-				institucionProcedencia=institucionProcedencia,idEntidadFederativa2=idEntidadFederativa2,eFederativa2=eFederativa2,
-                fechaAntInicio=fechaAntInicio,fechaAntTermino=fechaAntTermino,idTipoEstudioAntecedente=idTipoEstudioAntecedente,tipodeEstudio=tipodeEstudio,
-                noCedula=noCedula,estatus='A' WHERE inFolioControl= folioControl
-
-
 -- busca txt Y XML
 CREATE PROCEDURE buscaTxt (IN buscar text)
 SELECT matricula, nombre, aPaterno, aMaterno, estatus FROM txt 
