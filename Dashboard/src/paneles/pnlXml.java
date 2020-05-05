@@ -100,8 +100,8 @@ public class pnlXml extends javax.swing.JPanel {
     String claveEscuela = "";
     String nombreEscuela = "";
     String carpeta = "";
-    
-    int i=0, j=0;
+
+    int i = 0, j = 0;
 
     public pnlXml() {
         initComponents();
@@ -535,76 +535,78 @@ public class pnlXml extends javax.swing.JPanel {
 
         try {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                try {
+                if (seleccionado[i] != null) {
+                    try {
 
-                    if (modalidadTitulacion.equals("POR TESIS")) {
-                        String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
-                        String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
-                                + "  <FirmaResponsables>\n"
-                                + firma[0]
-                                + firma[1]
-                                + firma[2]
-                                + firma[3]
-                                + firma[4]
-                                + "  </FirmaResponsables>\n"
-                                + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
-                                + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
-                                + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
-                                + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
-                                + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
-                                + "</TituloElectronico>";
+                        if (modalidadTitulacion.equals("POR TESIS")) {
+                            String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
+                            String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                    + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
+                                    + "  <FirmaResponsables>\n"
+                                    + firma[0]
+                                    + firma[1]
+                                    + firma[2]
+                                    + firma[3]
+                                    + firma[4]
+                                    + "  </FirmaResponsables>\n"
+                                    + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
+                                    + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
+                                    + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
+                                    + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
+                                    + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
+                                    + "</TituloElectronico>";
 
-                        //System.out.println(contenido);
-                        File file = new File(ruta);
-                        // Si el archivo no existe es creado
-                        if (!file.exists()) {
-                            file.createNewFile();
+                            //System.out.println(contenido);
+                            File file = new File(ruta);
+                            // Si el archivo no existe es creado
+                            if (!file.exists()) {
+                                file.createNewFile();
+                            }
+                            FileWriter fw = new FileWriter(file);
+                            //BufferedWriter bw = new BufferedWriter(fw);
+                            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+                            bw.write(contenido);
+                            bw.close();
+                            JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+                        } else {
+                            String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
+                            String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                    + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
+                                    + "  <FirmaResponsables>\n"
+                                    + firma[0]
+                                    + firma[1]
+                                    + firma[2]
+                                    + firma[3]
+                                    + firma[4]
+                                    + "  </FirmaResponsables>\n"
+                                    + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
+                                    + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
+                                    + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
+                                    + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
+                                    + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
+                                    + "</TituloElectronico>";
+
+                            //System.out.println(contenido);
+                            File file = new File(ruta);
+                            // Si el archivo no existe es creado
+                            if (!file.exists()) {
+                                file.createNewFile();
+                            }
+                            FileWriter fw = new FileWriter(file);
+                            //BufferedWriter bw = new BufferedWriter(fw);
+                            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+                            bw.write(contenido);
+                            bw.close();
+                            JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
                         }
-                        FileWriter fw = new FileWriter(file);
-                        //BufferedWriter bw = new BufferedWriter(fw);
-                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-                        bw.write(contenido);
-                        bw.close();
-                        JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
-                    } else {
-                        String ruta = carpeta + "//TituloElectronico_" + seleccionado[i] + ".xml";
-                        String contenido = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                + "<TituloElectronico xmlns=\"https://www.siged.sep.gob.mx/titulos/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\" folioControl=\"" + folioControl + "\" xmlns:dec=\"https://www.siged.sep.gob.mx/titulos/\">\n"
-                                + "  <FirmaResponsables>\n"
-                                + firma[0]
-                                + firma[1]
-                                + firma[2]
-                                + firma[3]
-                                + firma[4]
-                                + "  </FirmaResponsables>\n"
-                                + "  <Institucion cveInstitucion=\"" + claveEscuela + "\" nombreInstitucion=\"" + nombreEscuela + "\"/>\n"
-                                + "  <Carrera cveCarrera=\"" + clave + "\" nombreCarrera=\"" + nombreCarrera + "\" fechaInicio=\"" + fechaCarreraInicio + "\" fechaTerminacion=\"" + fechaCarreraTermino + "\" idAutorizacionReconocimiento=\"" + clave_autorizacion + "\" autorizacionReconocimiento=\"" + autorizacion_reconocimiento + "\" numeroRvoe=\"" + numeroRvoe + "\"/>\n"
-                                + "  <Profesionista curp=\"" + CURP + "\" segundoApellido=\"" + aMaterno + "\" primerApellido=\"" + aPaterno + "\" nombre=\"" + nombre + "\" correoElectronico=\"" + correo + "\"/>"
-                                + "  <Expedicion fechaExpedicion=\"" + fechaExpedicion + "\" idModalidadTitulacion=\"" + idModalidadTitulacion + "\" modalidadTitulacion=\"" + modalidadTitulacion + "\" fechaExencionExamenProfesional=\"" + fechaExamen + "\" cumplioServicioSocial=\"" + sSocial + "\" idFundamentoLegalServicioSocial=\"" + idFundamentoLegalServicioSocial + "\" fundamentoLegalServicioSocial=\"" + fundamentoSS + "\" idEntidadFederativa=\"" + idEntidadFederativa + "\" entidadFederativa=\"" + eFederativa + "\"/>\n"
-                                + "  <Antecedente institucionProcedencia=\"" + institucionProcedencia + "\" idTipoEstudioAntecedente=\"" + idTipoEstudioAntecedente + "\" tipoEstudioAntecedente=\"" + tipodeEstudio + "\" idEntidadFederativa=\"" + idEntidadFederativa2 + "\" entidadFederativa=\"" + eFederativa2 + "\" fechaInicio=\"" + fechaAntInicio + "\" fechaTerminacion=\"" + fechaAntTermino + "\" noCedula=\"" + noCedula + "\"/>\n"
-                                + "</TituloElectronico>";
 
-                        //System.out.println(contenido);
-                        File file = new File(ruta);
-                        // Si el archivo no existe es creado
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-                        FileWriter fw = new FileWriter(file);
-                        //BufferedWriter bw = new BufferedWriter(fw);
-                        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-                        bw.write(contenido);
-                        bw.close();
-                        JOptionPane.showMessageDialog(null, "XML Generado en la ruta : " + ruta);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                } catch (Exception e) {
-                e.printStackTrace();
                 }
             }
         } catch (Exception e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
         tablaTxtB();
