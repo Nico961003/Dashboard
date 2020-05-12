@@ -517,11 +517,13 @@ public class pnlXml extends javax.swing.JPanel {
                             Certificado = resultadoConsulta.getString("Certificado");
                             numeroSerie = resultadoConsulta.getString("numeroSerie");
                             pass = resultadoConsulta.getString("cast(aes_decrypt(pass, 'xyz123') as char)");
-
+                            
+                            System.out.println("archivo " + archivo[j]);
                             Llave = sign(Llave, pass, archivo[j]);
+                            
                             Certificado = Base64.encodeBase64String(toByteArray(Certificado));
                             firma[j] = "<FirmaResponsable nombre=\"" + nombreResponsable + "\" primerApellido=\"" + aPaternoResponsable + "\" segundoApellido=\"" + aMaternoResponsable + "\" curp=\"" + curpResponsable + "\" idCargo=\"" + idResponsable + "\" cargo=\"" + puesto + "\" abrTitulo=\"" + abrev + "\" sello=\"" + Llave + "\" certificadoResponsable=\"" + Certificado + "\" noCertificadoResponsable=\"" + numeroSerie + "\"/>\n";
-                            System.out.println(firma[j]);
+
                         }
 
                     } else {
@@ -635,7 +637,7 @@ public class pnlXml extends javax.swing.JPanel {
         final PrivateKey privateKey = pkcs8Key.getPrivateKey();
         final Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initSign(privateKey);
-//        signature.update(toSign.getBytes("UTF-8"));
+        signature.update(toSign.getBytes("UTF-8"));
 
         return Base64.encodeBase64String(signature.sign());
     }
