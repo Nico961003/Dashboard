@@ -25,7 +25,6 @@ insert into autorizacionRec values('9', 'OTRO');
 
 
 
-
 create table modalidadTitulacion(
 ID_MODALIDAD_TITULACIÓN	int(11) primary key not null,
 CLAVE	int(11),
@@ -41,6 +40,12 @@ insert into modalidadTitulacion values('6', '6', 'OTRO', 'CONSTANCIA DE EXENCIÓ
 insert into modalidadTitulacion values('7', '6', 'SEMINARIO DE TITULACIÓN', 'CONSTANCIA DE EXENCIÓN');
 insert into modalidadTitulacion values('8', '6', 'EXAMEN DE CONOCIMIENTOS GENERALES DE LA LICENCIATURA', 'CONSTANCIA DE EXENCIÓN');
 insert into modalidadTitulacion values('9', '6', 'REPORTE GLOBAL DE SERVICIO SOCIAL', 'CONSTANCIA DE EXENCIÓN');
+
+
+create table estudioAntecedente(
+idTipoEstudioAntecedente int primary key not null,
+tipodeEstudio varchar (100)
+);
 
 
  create table Profesionista(
