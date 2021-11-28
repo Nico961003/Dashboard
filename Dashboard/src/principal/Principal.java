@@ -64,8 +64,8 @@ public class Principal extends javax.swing.JFrame {
         seis = new rsbuttom.RSButtonMetro();
         cuatro = new rsbuttom.RSButtonMetro();
         nueve = new rsbuttom.RSButtonMetro();
+        dos1 = new rsbuttom.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jCTextField1 = new app.bolivia.swing.JCTextField();
         btnTitulo = new javax.swing.JButton();
         pnlCentro = new javax.swing.JPanel();
@@ -82,8 +82,8 @@ public class Principal extends javax.swing.JFrame {
         pnlMenu.setBackground(new java.awt.Color(243, 242, 242));
         pnlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 5, 0, 0, new java.awt.Color(239, 238, 244)));
 
-        uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
-        uno.setText("Principal");
+        uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/collection.png"))); // NOI18N
+        uno.setText("Certificados");
         uno.setColorHover(new java.awt.Color(124, 20, 52));
         uno.setColorNormal(new java.awt.Color(245, 245, 245));
         uno.setColorPressed(new java.awt.Color(255, 204, 204));
@@ -202,7 +202,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
@@ -307,6 +307,26 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        dos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/EditarEstudiante.png"))); // NOI18N
+        dos1.setText("Asignaturas");
+        dos1.setColorHover(new java.awt.Color(124, 20, 52));
+        dos1.setColorNormal(new java.awt.Color(245, 245, 245));
+        dos1.setColorPressed(new java.awt.Color(255, 204, 204));
+        dos1.setColorTextNormal(new java.awt.Color(124, 20, 52));
+        dos1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dos1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        dos1.setIconTextGap(23);
+        dos1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dos1MousePressed(evt);
+            }
+        });
+        dos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dos1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
@@ -323,26 +343,28 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(siete, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ocho, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nueve, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 6, Short.MAX_VALUE))
+                    .addComponent(nueve, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dos1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMenuLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(tres, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(cuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMenuLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dos1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(cuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -376,17 +398,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jCTextField1.setBackground(new java.awt.Color(124, 20, 52));
         jCTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
         jCTextField1.setForeground(new java.awt.Color(255, 255, 255));
@@ -405,9 +416,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(67, 67, 67)
                 .addComponent(btnTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
@@ -419,10 +428,6 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jCTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(btnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -446,7 +451,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnlPrincipal.setBorder(null);
         pnlPrincipal.setForeground(new java.awt.Color(255, 253, 253));
         pnlPrincipal.setLayout(new javax.swing.BoxLayout(pnlPrincipal, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(pnlPrincipal);
@@ -456,7 +460,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel6Layout.setVerticalGroup(
@@ -502,63 +506,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
-        new CambiaPanel(pnlPrincipal, new paneles.pnlPrincipal());
-        if(this.uno.isSelected()){
-            this.uno.setColorNormal(new Color(204,204,204));
-            this.uno.setColorHover(new Color(204,204,204));
-            this.uno.setColorPressed(new Color(204,204,204));
-            
-            this.dos.setColorNormal(new Color(239,238,244));
-            this.dos.setColorHover(new Color(204,204,204));
-            this.dos.setColorPressed(new Color(204,204,204));
-            
-            this.tres.setColorNormal(new Color(239,238,244));
-            this.tres.setColorHover(new Color(204,204,204));
-            this.tres.setColorPressed(new Color(204,204,204));
-            
-            this.cuatro.setColorNormal(new Color(239,238,244));
-            this.cuatro.setColorHover(new Color(204,204,204));
-            this.cuatro.setColorPressed(new Color(204,204,204));
-            
-            this.cinco.setColorNormal(new Color(239,238,244));
-            this.cinco.setColorHover(new Color(204,204,204));
-            this.cinco.setColorPressed(new Color(204,204,204));
-            
-            this.seis.setColorNormal(new Color(239,238,244));
-            this.seis.setColorHover(new Color(204,204,204));
-            this.seis.setColorPressed(new Color(204,204,204));
-            
-            this.siete.setColorNormal(new Color(239,238,244));
-            this.siete.setColorHover(new Color(204,204,204));
-            this.siete.setColorPressed(new Color(204,204,204));
-            
-            this.ocho.setColorNormal(new Color(239,238,244));
-            this.ocho.setColorHover(new Color(204,204,204));
-            this.ocho.setColorPressed(new Color(204,204,204));
-            
-            this.nueve.setColorNormal(new Color(239,238,244));
-            this.nueve.setColorHover(new Color(204,204,204));
-            this.nueve.setColorPressed(new Color(204,204,204));
-        }else{
-            this.uno.setColorNormal(new Color(239,238,244));
-            this.uno.setColorHover(new Color(204,204,204));
-            this.uno.setColorPressed(new Color(204,204,204));
-        }
-    }//GEN-LAST:event_unoActionPerformed
-
-    private void unoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unoMousePressed
-        this.uno.setSelected(true);
-        this.dos.setSelected(false);
-        this.tres.setSelected(false);
-        this.cuatro.setSelected(false);
-        this.cinco.setSelected(false);
-        this.seis.setSelected(false);
-        this.siete.setSelected(false);
-        this.ocho.setSelected(false);
-        this.nueve.setSelected(false);
-    }//GEN-LAST:event_unoMousePressed
 
     private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
         new CambiaPanel(pnlPrincipal, new paneles.pnlProfesionista());
@@ -673,15 +620,6 @@ public class Principal extends javax.swing.JFrame {
             this.dos.setColorPressed(new Color(204,204,204));
         }
     }//GEN-LAST:event_dosActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      /* int posicion = pnlMenu.getX();
-        if(posicion > -1){
-            Animacion.Animacion.mover_izquierda(0, -264, 2, 2, pnlMenu);
-        }else{
-            Animacion.Animacion.mover_derecha(-264, 0, 2, 2, pnlMenu);
-        }*/
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ochoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ochoMousePressed
         this.uno.setSelected(false);
@@ -968,16 +906,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cuatroActionPerformed
 
-    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jPanel2MousePressed
-
-    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
-        Point mueve = MouseInfo.getPointerInfo().getLocation();
-        this.setLocation(mueve.x - x, mueve.y - y);
-    }//GEN-LAST:event_jPanel2MouseDragged
-
     private void nueveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nueveMousePressed
         this.uno.setSelected(false);
         this.dos.setSelected(false);
@@ -1036,6 +964,122 @@ public class Principal extends javax.swing.JFrame {
                                
     }//GEN-LAST:event_nueveActionPerformed
 
+    private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
+        new CambiaPanel(pnlPrincipal, new paneles.pnlPrincipal());
+        if(this.uno.isSelected()){
+            this.uno.setColorNormal(new Color(204,204,204));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+
+            this.dos.setColorNormal(new Color(239,238,244));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+
+            this.tres.setColorNormal(new Color(239,238,244));
+            this.tres.setColorHover(new Color(204,204,204));
+            this.tres.setColorPressed(new Color(204,204,204));
+
+            this.cuatro.setColorNormal(new Color(239,238,244));
+            this.cuatro.setColorHover(new Color(204,204,204));
+            this.cuatro.setColorPressed(new Color(204,204,204));
+
+            this.cinco.setColorNormal(new Color(239,238,244));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
+
+            this.seis.setColorNormal(new Color(239,238,244));
+            this.seis.setColorHover(new Color(204,204,204));
+            this.seis.setColorPressed(new Color(204,204,204));
+
+            this.siete.setColorNormal(new Color(239,238,244));
+            this.siete.setColorHover(new Color(204,204,204));
+            this.siete.setColorPressed(new Color(204,204,204));
+
+            this.ocho.setColorNormal(new Color(239,238,244));
+            this.ocho.setColorHover(new Color(204,204,204));
+            this.ocho.setColorPressed(new Color(204,204,204));
+
+            this.nueve.setColorNormal(new Color(239,238,244));
+            this.nueve.setColorHover(new Color(204,204,204));
+            this.nueve.setColorPressed(new Color(204,204,204));
+        }else{
+            this.uno.setColorNormal(new Color(239,238,244));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_unoActionPerformed
+
+    private void unoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unoMousePressed
+        this.uno.setSelected(true);
+        this.dos.setSelected(false);
+        this.tres.setSelected(false);
+        this.cuatro.setSelected(false);
+        this.cinco.setSelected(false);
+        this.seis.setSelected(false);
+        this.siete.setSelected(false);
+        this.ocho.setSelected(false);
+        this.nueve.setSelected(false);
+    }//GEN-LAST:event_unoMousePressed
+
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
+
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+        Point mueve = MouseInfo.getPointerInfo().getLocation();
+        this.setLocation(mueve.x - x, mueve.y - y);
+    }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void dos1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dos1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dos1MousePressed
+
+    private void dos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dos1ActionPerformed
+        new CambiaPanel(pnlPrincipal, new paneles.pnlAsignaturas());
+        if(this.dos.isSelected()){
+            this.dos.setColorNormal(new Color(204,204,204));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+            
+            this.uno.setColorNormal(new Color(239,238,244));
+            this.uno.setColorHover(new Color(204,204,204));
+            this.uno.setColorPressed(new Color(204,204,204));
+            
+            this.tres.setColorNormal(new Color(239,238,244));
+            this.tres.setColorHover(new Color(204,204,204));
+            this.tres.setColorPressed(new Color(204,204,204));
+            
+            this.cuatro.setColorNormal(new Color(239,238,244));
+            this.cuatro.setColorHover(new Color(204,204,204));
+            this.cuatro.setColorPressed(new Color(204,204,204));
+            
+            this.cinco.setColorNormal(new Color(239,238,244));
+            this.cinco.setColorHover(new Color(204,204,204));
+            this.cinco.setColorPressed(new Color(204,204,204));
+            
+            this.seis.setColorNormal(new Color(239,238,244));
+            this.seis.setColorHover(new Color(204,204,204));
+            this.seis.setColorPressed(new Color(204,204,204));
+            
+            this.siete.setColorNormal(new Color(239,238,244));
+            this.siete.setColorHover(new Color(204,204,204));
+            this.siete.setColorPressed(new Color(204,204,204));
+            
+            this.ocho.setColorNormal(new Color(239,238,244));
+            this.ocho.setColorHover(new Color(204,204,204));
+            this.ocho.setColorPressed(new Color(204,204,204));
+            
+            this.nueve.setColorNormal(new Color(239,238,244));
+            this.nueve.setColorHover(new Color(204,204,204));
+            this.nueve.setColorPressed(new Color(204,204,204));
+        }else{
+            this.dos.setColorNormal(new Color(239,238,244));
+            this.dos.setColorHover(new Color(204,204,204));
+            this.dos.setColorPressed(new Color(204,204,204));
+        }
+    }//GEN-LAST:event_dos1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1081,7 +1125,7 @@ public class Principal extends javax.swing.JFrame {
     private rsbuttom.RSButtonMetro cinco;
     private rsbuttom.RSButtonMetro cuatro;
     private rsbuttom.RSButtonMetro dos;
-    private javax.swing.JButton jButton1;
+    private rsbuttom.RSButtonMetro dos1;
     private app.bolivia.swing.JCTextField jCTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
