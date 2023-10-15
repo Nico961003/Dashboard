@@ -635,7 +635,7 @@ public class pnlXml extends javax.swing.JPanel {
         final PrivateKey privateKey = pkcs8Key.getPrivateKey();
         final Signature signature = Signature.getInstance("SHA256withRSA");
         signature.initSign(privateKey);
-//        signature.update(toSign.getBytes("UTF-8"));
+        signature.update(toSign.getBytes("UTF-8"));
 
         return Base64.encodeBase64String(signature.sign());
     }
