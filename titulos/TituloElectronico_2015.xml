@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TituloElectronico xmlns="https://www.siged.sep.gob.mx/titulos/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" folioControl="1" xmlns:dec="https://www.siged.sep.gob.mx/titulos/">
+  <FirmaResponsables>
+JLIMONSANCHEZ564|1|DIRECTOR|ING.|nullnullnullnull  </FirmaResponsables>
+  <Institucion cveInstitucion="23456" nombreInstitucion="TESE"/>
+  <Carrera cveCarrera="207380" nombreCarrera="LICENCIATURA EN ENSEÑANZA DE LA LENGUA INGLESA" fechaInicio="2020-11-30" fechaTerminacion="2020-11-30" idAutorizacionReconocimiento="1" autorizacionReconocimiento="RVOE FEDERAL" numeroRvoe="2006444"/>
+  <Profesionista curp="ROJNG961003HMCDCN06" segundoApellido="NICOLAS" primerApellido="RODRIGUEZ" nombre="GENARO" correoElectronico="genardzn@gmail.com"/>  <Expedicion fechaExpedicion="2020-11-30" idModalidadTitulacion="1" modalidadTitulacion="POR TESIS" fechaExamenProfesional="2020-11-30" cumplioServicioSocial="0" idFundamentoLegalServicioSocial="3" fundamentoLegalServicioSocial="ART. 91 RLRART. 5 CONST" idEntidadFederativa="15" entidadFederativa="MÉXICO"/>
+  <Antecedente institucionProcedencia="TESE" idTipoEstudioAntecedente="1" tipoEstudioAntecedente="MAESTRÍA" idEntidadFederativa="01" entidadFederativa="AGUASCALIENTES" fechaInicio="2020-11-30" fechaTerminacion="2020-11-30" noCedula="201101947"/>
+</TituloElectronico>
